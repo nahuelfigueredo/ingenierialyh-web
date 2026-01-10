@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Obras | Ingeniería L&H SRL</title>
+  <meta name="description" content="Tipos de proyectos realizados por Ingeniería L&H SRL." />
+  <link rel="icon" href="assets/img/favicon/ChatGPT Image 8 ene 2026, 00_31_26.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+  /* HERO UNIFICADO (Clientes + Obras) — FORZADO */
+  .page-hero.page-hero--image{
+    position: relative !important;
+    height: 620px !important;
+    min-height: 620px !important;
+    padding: 64px 0 70px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center 30% !important;
+  }
+
+  .page-hero.page-hero--image::before{
+    content:"" !important;
+    position:absolute !important;
+    inset:0 !important;
+    background: linear-gradient(
+      180deg,
+      rgba(2,16,39,.90) 0%,
+      rgba(2,16,39,.65) 55%,
+      rgba(2,16,39,.52) 100%
+    ) !important;
+    pointer-events:none !important;
+  }
+
+  .page-hero.page-hero--image > .container{
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  @media (max-width: 520px){
+    .page-hero.page-hero--image{
+      height: 460px !important;
+      min-height: 460px !important;
+      padding: 44px 0 48px !important;
+      background-position: center 25% !important;
+    }
+  }
+</style>
+
+
+  <style>
+    /* ===== GRILLA 2 COLUMNAS PARA OBRAS ===== */
+    .works-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+      margin-top: 14px;
+    }
+    @media (max-width: 980px){
+      .works-grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Card de cada obra */
+    .work{
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      background: rgba(2,16,39,.18);
+      overflow: hidden;
+    }
+
+    .work-head{
+      padding: 16px 16px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .work-head h3{
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+    .work-head p{
+      margin: 0;
+      color: rgba(238,247,255,.78);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    /* ===== SLIDER 1 FOTO + FLECHAS (FORZADO) ===== */
+    .work-slider{ position: relative; padding: 14px 16px 16px; }
+
+    .work-slider .ws-frame{
+      position: relative;
+      width: 100%;
+      height: 220px;              /* ajustable */
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(2,16,39,.25);
+    }
+
+    /* Ocultar todas */
+    .work-slider .ws-img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      display: none;
+      opacity: 0;
+    }
+    /* Mostrar solo la activa */
+    .work-slider .ws-img.is-active{
+      display: block;
+      opacity: 1;
+    }
+
+    /* Flechas */
+    .work-slider .ws-btn{
+      position:absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(2,16,39,.70);
+      color: #fff;
+      font-size: 26px;
+      line-height: 1;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      z-index: 5;
+    }
+    .work-slider .ws-prev{ left: 22px; }
+    .work-slider .ws-next{ right: 22px; }
+
+    .work-slider .ws-meta{
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(238,247,255,.72);
+      display:flex;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 520px){
+      .work-slider .ws-frame{ height: 190px; }
+      .work-slider .ws-prev{ left: 14px; }
+      .work-slider .ws-next{ right: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container wrap">
+      <div>
+        <span class="badge">HSE • Seguridad y cumplimiento</span>
+        <span style="margin-left:10px">Emergencias 24/7</span>
+      </div>
+      <div>
+        <a href="mailto:info@ingenieria.com.ar">Info@ingenieria.com.ar</a>
+        <span style="margin:0 8px">|</span>
+        <a href="https://wa.me/5492214616511" target="_blank" rel="noopener">+54 9 221 461 6511</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container navbar">
+      <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
+        <div class="title">
+          <strong>Ingeniería L&amp;H SRL</strong>
+          <span>Construcciones Industriales</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="empresa.html">La Empresa</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="flota.html">Flota</a>
+        <a href="equipos.html">Equipos</a>
+        <a href="obras.html" class="active">Obras</a>
+        <a href="clientes.html">Clientes</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+
+      <a class="cta" href="contacto.html">Solicitar cotización</a>
+      <button class="burger" data-burger aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+
+    <div class="container mobile-drawer" data-drawer hidden>
+      <a href="empresa.html">La Empresa</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="flota.html">Flota</a>
+      <a href="equipos.html">Equipos</a>
+      <a href="obras.html">Obras</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+  <section class="page-hero page-hero--image page-hero--obras"
+  style="
+    background: url('assets/img/TINGLADO.jpg') center / cover no-repeat;
+  ">
+
+
+  <div class="container hero-top">
+    <div class="breadcrumb">Inicio / Obras</div>
+    <h1>Obras</h1>
+    <p>Proyectos industriales ejecutados con foco en seguridad, planificación y cumplimiento de plazos.</p>
+  </div>
+
+  <!-- BURBUJAS SOBRE LA FOTO -->
+  <div class="hero-bubbles">
+    <div class="container grid-3">
+      <article class="card reveal">
+        <h3>Paradas de planta</h3>
+        <p>Planificación, coordinación de recursos y ejecución segura para continuidad operativa.</p>
+      </article>
+
+      <article class="card reveal">
+        <h3>Montaje de equipos de proceso</h3>
+        <p>Instalación, alineación, pruebas y puesta en servicio con control de calidad.</p>
+      </article>
+
+      <article class="card reveal">
+        <h3>Mantenimiento mayor</h3>
+        <p>Intervenciones integrales con trazabilidad y reportes técnicos.</p>
+      </article>
+    </div>
+  </div>
+
+</section>
+
+
+
+
+
+   
+
+    <!-- GALERÍA -->
+    <section class="section" id="obras">
+      <div class="container">
+        <div class="section-title section-title--stack">
+          <h2>Galería de obras</h2>
+          <p>Explora nuestros proyectos y la calidad de nuestras ejecuciones.</p>
+        </div>
+
+        <!-- ✅ FALTABA ESTE CONTENEDOR -->
+        <div class="works-grid">
+
+          <!-- OBRA 1 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>Parada de planta • Cambio de tubos en Horno H301</h3>
+              <p>Ejecución en parada, coordinación HSE, control de calidad y continuidad operativa.</p>
+            </header>
+
+            <div class="work-slider" data-slider tabindex="0" aria-label="Galería de fotos: Horno H301">
+              <button class="ws-btn ws-prev" type="button" aria-label="Foto anterior" data-prev>‹</button>
+
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/03.jpg" alt="Horno H301 - Foto 1" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/06.png" alt="Horno H301 - Foto 2" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/02.png" alt="Horno H301 - Foto 3" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/03.jpg" alt="Horno H301 - Foto 4" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/01.jpg" alt="Horno H301 - Foto 5" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/05.jpg" alt="Horno H301 - Foto 6" loading="lazy" decoding="async">
+              </div>
+
+              <button class="ws-btn ws-next" type="button" aria-label="Foto siguiente" data-next>›</button>
+
+              <div class="ws-meta" aria-live="polite">
+                <span data-counter>1 / 6</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- OBRA 2 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>Nueva línea • ROFLO desde COKE A a TOPPING C</h3>
+              <p>Montaje de línea, soportación, ajustes y terminación industrial.</p>
+            </header>
+
+            <div class="work-slider" data-slider tabindex="0" aria-label="Galería de fotos: ROFLO">
+              <button class="ws-btn ws-prev" type="button" aria-label="Foto anterior" data-prev>‹</button>
+
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/07.png" alt="ROFLO - Foto 1" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/04.png" alt="ROFLO - Foto 2" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/06.jpg" alt="ROFLO - Foto 3" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/07.png" alt="ROFLO - Foto 4" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/08.jpg" alt="ROFLO - Foto 5" loading="lazy" decoding="async">
+              </div>
+
+              <button class="ws-btn ws-next" type="button" aria-label="Foto siguiente" data-next>›</button>
+
+              <div class="ws-meta" aria-live="polite">
+                <span data-counter>1 / 5</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- OBRA 3 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>Paro • ADECUACION DE TK5004 A NAFTA INFINIA</h3>
+              <p>Intervención en parada, montaje y tareas asociadas con coordinación en campo.</p>
+            </header>
+
+            <div class="work-slider" data-slider tabindex="0" aria-label="Galería de fotos: COKE B">
+              <button class="ws-btn ws-prev" type="button" aria-label="Foto anterior" data-prev>‹</button>
+
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/07.jpg" alt="COKE B - Foto 1" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/01.jpg" alt="COKE B - Foto 2" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/03.jpg" alt="COKE B - Foto 3" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/04.jpg" alt="COKE B - Foto 4" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/05.jpg" alt="COKE B - Foto 5" loading="lazy" decoding="async">
+              </div>
+
+              <button class="ws-btn ws-next" type="button" aria-label="Foto siguiente" data-next>›</button>
+
+              <div class="ws-meta" aria-live="polite">
+                <span data-counter>1 / 5</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- OBRA 4 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>Montaje y soportación</h3>
+              <p>Montaje de estructura, soportes y terminación con estándar industrial.</p>
+            </header>
+
+            <div class="work-slider" data-slider tabindex="0" aria-label="Galería de fotos: Montaje">
+              <button class="ws-btn ws-prev" type="button" aria-label="Foto anterior" data-prev>‹</button>
+
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/03-4.png" alt="Montaje - Foto 1" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/02-4.png" alt="Montaje - Foto 2" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/04-3.png" alt="Montaje - Foto 3" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/05-2.png" alt="Montaje - Foto 4" loading="lazy" decoding="async">
+                <img class="ws-img" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/08-2.png" alt="Montaje - Foto 5" loading="lazy" decoding="async">
+              </div>
+
+              <button class="ws-btn ws-next" type="button" aria-label="Foto siguiente" data-next>›</button>
+
+              <div class="ws-meta" aria-live="polite">
+                <span data-counter>1 / 5</span>
+              </div>
+            </div>
+          </article>
+
+        </div><!-- /works-grid -->
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Ingeniería L&amp;H SRL</strong><br />
+        <span>Construcciones Industriales</span>
+      </div>
+      <div>
+        <div><a href="servicios.html">Servicios</a></div>
+        <div><a href="contacto.html">Contacto</a></div>
+      </div>
+      <div>
+        <div>WhatsApp: +54 9 221 461 6511</div>
+        <div>Email: Info@ingenieria.com.ar</div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-fab" href="https://wa.me/5492216168685" target="_blank" rel="noopener">WhatsApp</a>
+
+  <script src="js/main.js"></script>
+
+  <!-- ✅ JS del slider (si preferís, lo movemos a main.js) -->
+  <script>
+    (function(){
+      const sliders = document.querySelectorAll('[data-slider]');
+
+      sliders.forEach(slider => {
+        const imgs = Array.from(slider.querySelectorAll('.ws-img'));
+        const btnPrev = slider.querySelector('[data-prev]');
+        const btnNext = slider.querySelector('[data-next]');
+        const counter = slider.querySelector('[data-counter]');
+        if (!imgs.length) return;
+
+        let i = 0;
+
+        const update = () => {
+          imgs.forEach((img, idx) => img.classList.toggle('is-active', idx === i));
+          if (counter) counter.textContent = `${i + 1} / ${imgs.length}`;
+        };
+
+        const prev = () => { i = (i - 1 + imgs.length) % imgs.length; update(); };
+        const next = () => { i = (i + 1) % imgs.length; update(); };
+
+        btnPrev && btnPrev.addEventListener('click', prev);
+        btnNext && btnNext.addEventListener('click', next);
+
+        slider.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+          if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+        });
+
+        update();
+      });
+    })();
+  </script>
+</body>
+</html>

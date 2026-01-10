@@ -1,0 +1,4925 @@
+:root{
+  --bg0:#021027;
+  --bg1:#041a3a;
+  --panel:#062a57;
+  --card:#07356f;
+  --text:#eef7ff;
+  --muted:#b9dcff;
+
+  --accent:#1489ff;
+  --accent2:#55c3ff;
+  --line:rgba(255,255,255,.12);
+  --line2:rgba(85,195,255,.22);
+
+  --shadow: 0 18px 55px rgba(0,0,0,.40);
+  --shadow2: 0 10px 28px rgba(0,0,0,.28);
+  --radius: 18px;
+  --max: 1160px;
+
+  --h1: 44px;
+  --h2: 26px;
+  --h3: 15px;
+  --p: 14px;
+
+  --header-h: 78px; /* altura del header */
+  --topbar-h: 40px; /* altura topbar */
+}
+
+
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  line-height:1.55;
+  background:
+    radial-gradient(1200px 680px at 80% -10%, rgba(85,195,255,.32), transparent 60%),
+    radial-gradient(1100px 760px at 10% 0%, rgba(20,137,255,.28), transparent 55%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 70%, #010a18 100%);
+}
+
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+.container{ width:min(var(--max), calc(100% - 42px)); margin:0 auto; }
+
+/* Accessibility */
+.skip-link{
+  position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+}
+.skip-link:focus{
+  left:16px; top:16px; width:auto; height:auto; padding:10px 14px;
+  border-radius:12px; background:rgba(6,42,87,.95);
+  border:1px solid var(--line); z-index:9999;
+}
+
+/* =========================================================
+   TOPBAR (si no existe en HTML, no molesta)
+========================================================= */
+.topbar{
+  position: relative;
+  z-index: 10;
+  background: rgba(2,16,39,.85);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.topbar .wrap{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  padding:8px 0;
+  font-size:12px;
+  color:rgba(238,247,255,.78);
+}
+
+
+.topbar a{ color:rgba(238,247,255,.88); }
+.topbar a:hover{ color:var(--text); text-decoration:underline; }
+.badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 10px; border-radius:999px;
+  border:1px solid rgba(85,195,255,.28);
+  background: rgba(20,137,255,.12);
+  color:rgba(238,247,255,.90);
+}
+
+/* =========================================================
+   HEADER / NAV (base)
+========================================================= */
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background: rgba(4,26,58,.82);
+  border-bottom:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(12px);
+}
+
+.navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-width:220px;
+}
+.brand img{ width:168px; height:44px; object-fit:contain; }
+.brand .title{ display:flex; flex-direction:column; line-height:1.15; }
+.brand .title strong{ font-size:14px; letter-spacing:.35px; }
+.brand .title span{ font-size:12px; color:var(--muted); }
+
+.nav-links{ display:flex; align-items:center; gap:8px; }
+.nav-links a{
+  font-size:16px;              /* ⬅ antes 13px */
+  padding:11px 14px;           /* acompaña el tamaño */
+  border-radius:999px;
+  border:1px solid transparent;
+  color:rgba(238,247,255,.95); /* un poco más legible */
+  letter-spacing:.2px;         /* look más pro */
+  font-weight:500;             /* sin verse pesado */
+}
+
+.nav-links a:hover{
+  border-color: rgba(85,195,255,.35);
+  background: rgba(20,137,255,.12);
+}
+.nav-links a.active{
+  border-color: rgba(85,195,255,.45);
+  background: rgba(20,137,255,.18);
+}
+
+.cta{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:11px 16px;
+  border-radius:999px;
+  border:1px solid rgba(85,195,255,.55);
+  background: linear-gradient(180deg, rgba(20,137,255,.42), rgba(11,99,214,.18));
+  box-shadow: var(--shadow2);
+  font-weight:800;
+  font-size:13px;
+}
+.cta:hover{ border-color: rgba(85,195,255,.92); transform: translateY(-1px); }
+
+/* Mobile menu */
+.burger{
+  display:none;
+  width:44px; height:44px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(6,42,87,.45);
+  color:var(--text);
+  cursor:pointer;
+}
+.burger:hover{ border-color: rgba(85,195,255,.45); }
+
+.mobile-drawer{
+  display:none;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:10px 0 16px;
+}
+.mobile-drawer a{
+  display:block;
+  padding:12px 12px;
+  margin:6px 0;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(6,42,87,.35);
+}
+.mobile-drawer a:hover{
+  border-color: rgba(85,195,255,.45);
+  background: rgba(20,137,255,.12);
+}
+
+/* =========================================================
+   TECHINT: MENÚ SOBRE VIDEO + SIN FRANJA AZUL
+   (esto es lo que pediste)
+========================================================= */
+
+/* 1) header fixed y transparente sobre el video */
+body.has-hero header.site-header{
+  position: fixed;
+  top:0; left:0; right:0;
+  z-index: 999;
+  background: rgba(2,16,39,.18);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(10px);
+  transition: background .25s ease, backdrop-filter .25s ease, box-shadow .25s ease;
+}
+
+/* 2) header sólido al scrollear (tu JS agrega .is-solid) */
+body.has-hero header.site-header.is-solid{
+  background: rgba(4,26,58,.88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+/* 3) compensación del header fixed */
+body.has-hero{
+  padding-top: var(--header-h);
+}
+
+/* 4) clave: el hero sube debajo del header para tapar el fondo */
+body.has-hero .hero{
+  margin-top: calc(var(--header-h) * -1);
+  padding-top: var(--header-h);
+  padding-bottom: 28px;
+}
+
+/* =========================================================
+   HERO (tu layout original)
+========================================================= */
+.hero{ padding:0 0 28px; }
+
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:18px;
+  align-items:stretch;
+}
+
+/* Tu HTML usa hero-card / sidebar */
+.hero-card{
+  border-radius: 24px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: var(--shadow);
+  background:
+    radial-gradient(900px 520px at 75% 0%, rgba(85,195,255,.20), transparent 60%),
+    linear-gradient(180deg, rgba(6,42,87,.55), rgba(2,16,39,.40));
+}
+
+.sidebar{
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.12);
+  background: linear-gradient(180deg, rgba(6,42,87,.76), rgba(2,16,39,.62));
+  box-shadow: var(--shadow2);
+  padding:20px;
+}
+.sidebar h3{ margin:0 0 10px; font-size:16px; letter-spacing:.1px; }
+
+/* Pills dentro del sidebar */
+.pills{ display:flex; flex-wrap:wrap; gap:10px; }
+.pill{
+  font-size:12px;
+  padding:9px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  color: rgba(238,247,255,.86);
+}
+
+/* Cards internas del sidebar (ya las usás) */
+.card{
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.12);
+  background: linear-gradient(180deg, rgba(6,42,87,.55), rgba(2,16,39,.40));
+  box-shadow: 0 14px 34px rgba(0,0,0,.28);
+  padding:18px;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(85,195,255,.40);
+  background: linear-gradient(180deg, rgba(20,137,255,.18), rgba(2,16,39,.40));
+}
+.card h3{ margin:0 0 8px; font-size: var(--h3); }
+.card p{ margin:0; font-size: 13px; color: rgba(238,247,255,.80); }
+
+/* =========================================================
+   HERO VIDEO + TEXTO SOBRE VIDEO
+========================================================= */
+.hero-media.video{
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  background: #021027;
+}
+
+/* videos (fade) */
+.hero-media.video .hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition: opacity .8s ease;
+  transform: scale(1.03);
+  filter: saturate(1.05) contrast(1.05);
+}
+.hero-media.video .hero-video.is-active{ opacity:1; }
+
+/* overlay legibilidad */
+.hero-media.video::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(2,16,39,.88) 0%, rgba(2,16,39,.40) 55%, rgba(2,16,39,.15) 100%),
+    radial-gradient(900px 520px at 70% 0%, rgba(85,195,255,.18), transparent 60%);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* texto encima del video */
+.hero-overlay{
+  position: relative;
+  z-index: 2;
+  padding: 42px 34px;
+  max-width: 720px;
+}
+
+.kicker{
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:12px;
+  color:rgba(238,247,255,.80);
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(85,195,255,.24);
+  background: rgba(20,137,255,.10);
+}
+
+.h1{
+  margin:18px 0 12px;
+  font-size: var(--h1);
+  line-height:1.08;
+  letter-spacing:-.6px;
+}
+
+.lead{
+  margin:0;
+  font-size: 15px;
+  color: rgba(238,247,255,.86);
+  max-width: 64ch;
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:12px 16px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(6,42,87,.35);
+  font-weight:700;
+  font-size:13px;
+}
+.btn:hover{
+  border-color: rgba(85,195,255,.45);
+  background: rgba(20,137,255,.10);
+  transform: translateY(-1px);
+}
+.btn.primary{
+  border:1px solid rgba(85,195,255,.60);
+  background: linear-gradient(180deg, rgba(20,137,255,.40), rgba(11,99,214,.18));
+}
+
+/* KPIs */
+.kpis{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:10px;
+  margin-top:16px;
+}
+.kpi{
+  padding:12px 12px 10px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.12);
+  background: linear-gradient(180deg, rgba(7,53,111,.40), rgba(2,16,39,.25));
+}
+.kpi strong{ display:block; font-size:18px; letter-spacing:.2px; }
+.kpi span{ font-size:12px; color:rgba(238,247,255,.74); }
+
+/* =========================================================
+   SECCIONES PRO
+========================================================= */
+.section{ padding:56px 0; }
+.section.alt{
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.section-title{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:18px;
+}
+.section-title h2{
+  margin:0;
+  font-size: var(--h2);
+  letter-spacing:-.40px;
+}
+.section-title p{
+  margin:0;
+  max-width: 620px;
+  color: rgba(238,247,255,.74);
+  font-size: 13px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:16px;
+}
+
+/* =========================================================
+   PAGE HERO
+========================================================= */
+.page-hero{ padding:46px 0 22px; }
+.breadcrumb{
+  font-size:12px;
+  color:rgba(238,247,255,.70);
+  margin-bottom:10px;
+}
+.page-hero h1{
+  margin:0 0 8px;
+  font-size:34px;
+  letter-spacing:-.35px;
+}
+.page-hero p{
+  margin:0;
+  color: rgba(238,247,255,.82);
+  max-width: 820px;
+  font-size: 13px;
+}
+
+/* =========================================================
+   TABLAS / GALERÍA / FORM
+========================================================= */
+.table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(2,16,39,.25);
+}
+.table th, .table td{
+  padding:12px;
+  font-size:13px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  vertical-align:top;
+}
+.table th{
+  background: rgba(255,255,255,.05);
+  text-align:left;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:12px;
+}
+.gallery figure{
+  margin:0;
+  border-radius: var(--radius);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(2,16,39,.25);
+}
+.gallery figcaption{
+  padding:10px 12px;
+  font-size:12px;
+  color: rgba(238,247,255,.78);
+}
+
+.form{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+}
+.field{ display:flex; flex-direction:column; gap:8px; }
+.field label{ font-size:12px; color: rgba(238,247,255,.78); }
+.field input, .field textarea{
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  padding:12px 12px;
+  background: rgba(2,16,39,.25);
+  color: var(--text);
+  outline:none;
+}
+.field input:focus, .field textarea:focus{ border-color: rgba(85,195,255,.55); }
+.field textarea{ min-height:120px; resize:vertical; }
+.form .full{ grid-column: 1 / -1; }
+
+/* =========================================================
+   FOOTER
+========================================================= */
+.footer{
+  margin-top:30px;
+  border-top:1px solid rgba(255,255,255,.10);
+  background: rgba(2,16,39,.40);
+  padding:26px 0;
+  color: rgba(238,247,255,.74);
+  font-size:12px;
+}
+.footer-grid{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.footer a{ color: rgba(238,247,255,.84); }
+.footer a:hover{ color: var(--text); text-decoration:underline; }
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+.whatsapp-fab{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:60;
+  padding:12px 16px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+  color:#fff;
+  background: linear-gradient(180deg, #25D366, #18b957);
+  box-shadow: 0 18px 40px rgba(0,0,0,.40);
+}
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+.reveal{
+  opacity:0;
+  transform: translateY(12px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 980px){
+  :root{ --h1: 36px; --header-h: 72px; }
+  .hero-grid{ grid-template-columns: 1fr; }
+  .kpis{ grid-template-columns: 1fr 1fr; }
+  .grid-3{ grid-template-columns: 1fr; }
+  .gallery{ grid-template-columns: 1fr 1fr; }
+  .form{ grid-template-columns: 1fr; }
+  .hero-media.video{ min-height: 440px; }
+  .hero-overlay{ padding: 30px 22px; }
+}
+@media (max-width: 860px){
+  .nav-links, .cta{ display:none; }
+  .burger{ display:inline-flex; align-items:center; justify-content:center; }
+  .mobile-drawer{ display:block; }
+  .mobile-drawer[hidden]{ display:none; }
+}
+@media (max-width: 520px){
+  :root{ --h1: 30px; }
+  .kpis{ grid-template-columns: 1fr; }
+  .gallery{ grid-template-columns: 1fr; }
+}
+
+
+/* =========================================================
+   HERO FULL WIDTH (Techint)
+========================================================= */
+
+.hero-full{
+  padding: 0;
+}
+
+/* contenedor de video full-bleed */
+.hero-full-media{
+  width: 100vw;
+  min-height: calc(100vh - var(--header-h));
+  border-radius: 0;        /* full width */
+  overflow: hidden;
+}
+
+/* que el video ocupe toda la pantalla */
+.hero-full-media .hero-video{
+  border-radius: 0;
+}
+
+/* overlay de texto: centrado, pero sobre video */
+.hero-overlay-wide{
+  padding: 110px 0 48px; /* espacio superior para que el texto no choque con el header */
+  max-width: 860px;
+}
+
+/* el gradiente overlay más “Techint” */
+.hero-full-media::after{
+  background:
+    linear-gradient(90deg, rgba(2,16,39,.90) 0%, rgba(2,16,39,.55) 55%, rgba(2,16,39,.22) 100%),
+    radial-gradient(1200px 650px at 70% 0%, rgba(85,195,255,.16), transparent 60%);
+}
+
+/* la grilla de abajo con aire */
+
+
+/* en mobile: altura y padding */
+@media (max-width: 980px){
+  .hero-full-media{
+    min-height: 72vh;
+  }
+  .hero-overlay-wide{
+    padding: 92px 0 34px;
+    max-width: 720px;
+  }
+  .hero-grid-below{ margin-top: -40px; }
+}
+
+/* =========================================================
+   HEADER TRANSPARENTE SOBRE EL VIDEO (TECHINT)
+========================================================= */
+
+
+
+/* Links visibles sobre video */
+body.has-hero header.site-header .nav-links a,
+body.has-hero header.site-header .brand,
+body.has-hero header.site-header .brand strong,
+body.has-hero header.site-header .brand span{
+  color: #eef7ff;
+}
+
+/* Botón */
+body.has-hero header.site-header .cta{
+  background: linear-gradient(180deg, rgba(20,137,255,.45), rgba(11,99,214,.25));
+  border-color: rgba(85,195,255,.55);
+}
+
+
+/* ===== FORCE: header transparente sobre el hero ===== */
+body.has-hero header.site-header{
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(255,255,255,.10) !important;
+}
+
+/* Estado sólido cuando scrolleás (tu JS pone .is-solid) */
+body.has-hero header.site-header.is-solid{
+  background: rgba(4,26,58,.92) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25) !important;
+}
+/* ===== FIX DEFINITIVO: HEADER REALMENTE TRANSPARENTE EN HERO ===== */
+
+
+/* 2) Si algún estilo global de `header{...}` se mete, lo anulamos también */
+body.has-hero header.site-header{
+  background: transparent !important;
+}
+
+/* 3) Solo cuando scrolleás: vuelve sólido */
+body.has-hero header.site-header.is-solid{
+  background: rgba(4,26,58,.92) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25) !important;
+}
+/* ===== Overlay del video: más liviano arriba para que el menú “respire” ===== */
+.hero-media.video::after{
+  background:
+    linear-gradient(180deg, rgba(2,16,39,.35) 0%, rgba(2,16,39,.70) 55%, rgba(2,16,39,.88) 100%),
+    radial-gradient(1200px 650px at 70% 0%, rgba(85,195,255,.14), transparent 60%) !important;
+}
+/* ===== Techint: arriba claro (para el menú), abajo oscuro (para el texto) ===== */
+.hero-media.video::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+
+  /* Top liviano, bottom más oscuro */
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2,16,39,.18) 0%,
+      rgba(2,16,39,.32) 22%,
+      rgba(2,16,39,.62) 55%,
+      rgba(2,16,39,.88) 100%
+    ),
+    radial-gradient(1200px 650px at 70% 0%, rgba(85,195,255,.14), transparent 60%) !important;
+}
+
+/* Header 100% transparente en el hero */
+body.has-hero header.site-header{
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(255,255,255,.08) !important;
+}
+/* Capa sutil SOLO detrás del contenido del navbar (no banda completa) */
+body.has-hero header.site-header .navbar{
+  background: linear-gradient(180deg, rgba(2,16,39,.35), rgba(2,16,39,0)) !important;
+  border-radius: 0 !important;
+}
+/* ===== MENÚ DENTRO DEL VIDEO (ESTILO TECHINT REAL) ===== */
+
+/* Header 100% limpio */
+body.has-hero header.site-header{
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
+
+/* Overlay del hero: CLARO ARRIBA, OSCURO ABAJO */
+.hero-media.video::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2,16,39,.05) 0%,     /* menú: casi nada */
+      rgba(2,16,39,.12) 18%,
+      rgba(2,16,39,.35) 40%,   /* empieza texto */
+      rgba(2,16,39,.65) 65%,
+      rgba(2,16,39,.88) 100%   /* fondo del hero */
+    );
+}
+body.has-hero header.site-header{
+  border: none !important;
+}
+/* ===== FIX DEFINITIVO: SIN FRANJA AZUL, MENÚ SOBRE VIDEO ===== */
+
+/* 1) NO dejes espacio arriba con el body (eso crea la franja azul) */
+body.has-hero{
+  padding-top: 0 !important;
+}
+
+/* 2) Header flotando encima del video (sin fondo) */
+body.has-hero header.site-header{
+  position: fixed !important;
+  top: 0; left: 0; right: 0;
+  z-index: 9999 !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
+
+/* 3) El HERO arranca desde arriba (atrás del header) */
+body.has-hero .hero{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 4) El video pega arriba del todo */
+body.has-hero .hero-media.video{
+  min-height: 100vh !important; /* ocupa pantalla completa */
+}
+
+/* 5) Solo el TEXTO baja para no quedar debajo del header */
+body.has-hero .hero-overlay{
+  padding-top: calc(var(--header-h) + 24px) !important;
+}
+body.has-hero header.site-header.is-solid{
+  background: rgba(4,26,58,.92) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25) !important;
+  border-bottom: 1px solid rgba(255,255,255,.08) !important;
+}
+@media (max-width: 520px){
+  body.has-hero .hero-overlay{
+    padding-top: calc(var(--header-h) + 14px) !important;
+  }
+}
+/* ===== BRAND SOLO TEXTO (SIN LOGO) ===== */
+
+.brand-text{
+  display: flex;
+  align-items: center;
+}
+
+.brand-text .title{
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-text .title strong{
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: .6px;
+  color: #eef7ff;
+}
+
+.brand-text .title span{
+  font-size: 12px;
+  letter-spacing: .4px;
+  color: rgba(238,247,255,.78);
+}
+
+/* En mobile un poco más compacto */
+@media (max-width: 520px){
+  .brand-text .title strong{
+    font-size: 16px;
+  }
+}
+/* =========================================================
+   COLUMNA DERECHA (OPCIÓN A): OBRAS DESTACADAS
+========================================================= */
+
+.hero-grid{
+  /* IMPORTANTE: ahora son 3 columnas */
+  grid-template-columns: 1.2fr .8fr .7fr;
+}
+
+/* Panel derecho */
+.right-rail{
+  padding: 20px;
+  min-height: 520px; /* acompaña el alto del hero */
+}
+
+.right-rail h3{
+  margin: 0 0 12px;
+  font-size: 16px;
+  letter-spacing: .1px;
+}
+
+/* Lista de obras */
+.work-list{
+  display: grid;
+  gap: 12px;
+}
+
+.work-card{
+  display: grid;
+  gap: 6px;
+  padding: 14px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(2,16,39,.22);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.work-card strong{
+  font-size: 13px;
+  letter-spacing: .2px;
+}
+
+.work-card span{
+  font-size: 12px;
+  color: rgba(238,247,255,.74);
+  line-height: 1.35;
+}
+
+.work-card em{
+  font-style: normal;
+  font-size: 12px;
+  color: rgba(85,195,255,.90);
+}
+
+.work-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(85,195,255,.40);
+  background: rgba(20,137,255,.10);
+}
+
+/* CTAs */
+.right-cta{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+/* Nota inferior */
+.right-note{
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(2,16,39,.25);
+}
+
+.right-note strong{
+  display: block;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: rgba(238,247,255,.92);
+}
+
+.right-note span{
+  display: block;
+  font-size: 12px;
+  color: rgba(238,247,255,.74);
+  line-height: 1.35;
+}
+
+/* Responsive: a 2 columnas y luego 1 */
+@media (max-width: 1100px){
+  .hero-grid{
+    grid-template-columns: 1.1fr .9fr;
+  }
+  .right-rail{
+    grid-column: 1 / -1; /* baja debajo */
+    min-height: auto;
+  }
+}
+
+@media (max-width: 980px){
+  .hero-grid{
+    grid-template-columns: 1fr;
+  }
+  .right-rail{
+    grid-column: auto;
+  }
+}
+.side-media{
+  position: relative;
+  min-height: 520px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.side-media .side-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform: scale(1.02);
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.side-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(2,16,39,.18), rgba(2,16,39,.88));
+  z-index:1;
+  pointer-events:none;
+}
+
+.side-media-overlay{
+  position: relative;
+  z-index:2;
+  height:100%;
+  padding: 26px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+
+.side-media-overlay p{
+  margin: 8px 0 14px;
+  color: rgba(238,247,255,.82);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.side-media-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+/* ===== Capabilities list (reemplaza burbujas) ===== */
+.cap-list{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px 14px;
+  margin-top: 12px;
+}
+
+.cap-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(2,16,39,.25);
+  color: rgba(238,247,255,.90);
+  font-size: 13px;
+}
+
+.cap-dot{
+  width:8px;
+  height:8px;
+  border-radius: 50%;
+  background: rgba(85,195,255,.85);
+  box-shadow: 0 0 0 4px rgba(20,137,255,.12);
+  flex: 0 0 auto;
+}
+
+@media (max-width: 520px){
+  .cap-list{ grid-template-columns: 1fr; }
+}
+/* ===============================
+   FIX: Sacar "burbujas" sin tocar HTML
+   (convierte .pills/.pill a lista corporate)
+================================= */
+
+.pills{
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px 14px !important;
+  margin-top: 12px !important;
+}
+
+.pill{
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+
+  padding: 10px 12px !important;
+  border-radius: 14px !important;
+
+  border: 1px solid rgba(255,255,255,.10) !important;
+  background: rgba(2,16,39,.25) !important;
+
+  font-size: 13px !important;
+  color: rgba(238,247,255,.90) !important;
+}
+
+/* punto (bullet) sin modificar HTML */
+.pill::before{
+  content:"";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(85,195,255,.85);
+  box-shadow: 0 0 0 4px rgba(20,137,255,.12);
+  flex: 0 0 auto;
+}
+
+@media (max-width: 520px){
+  .pills{ grid-template-columns: 1fr !important; }
+}
+/* ===============================
+   FIX: Sacar "burbujas" sin tocar HTML
+   (convierte .pills/.pill a lista corporate)
+================================= */
+
+.pills{
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px 14px !important;
+  margin-top: 12px !important;
+}
+
+.pill{
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+
+  padding: 10px 12px !important;
+  border-radius: 14px !important;
+
+  border: 1px solid rgba(255,255,255,.10) !important;
+  background: rgba(2,16,39,.25) !important;
+
+  font-size: 13px !important;
+  color: rgba(238,247,255,.90) !important;
+}
+
+/* punto (bullet) sin modificar HTML */
+.pill::before{
+  content:"";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(85,195,255,.85);
+  box-shadow: 0 0 0 4px rgba(20,137,255,.12);
+  flex: 0 0 auto;
+}
+
+@media (max-width: 520px){
+  .pills{ grid-template-columns: 1fr !important; }
+}
+/* ===== HERO KPIs: sin burbujas ===== */
+.hero .kpi{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.hero .kpi strong{
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.hero .kpi span{
+  font-size: 13px;
+  opacity: .85;
+}
+/* ===== SIDEBAR: Enfoque / Contacto sin burbujas ===== */
+.sidebar .card{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+/* ===== HERO GRID DEBAJO DEL VIDEO: 2 COLUMNAS REALES ===== */
+.hero-grid-below{
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+/* ===== HERO GRID DEBAJO DEL VIDEO: 2 COLUMNAS REALES ===== */
+.hero-grid-below{
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+/* Aire visual en columna derecha */
+.right-rail{
+  margin-top: 16px;
+}
+/* ===== OVERLAY INFERIOR DENTRO DEL VIDEO ===== */
+/* El contenedor del video debe ser relativo */
+.right-rail,
+.work-card{
+  position: relative;
+  overflow: hidden;
+}
+
+
+ 
+
+
+/* Texto dentro del overlay */
+.work-overlay h3{
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.work-overlay p{
+  margin: 0 0 14px;
+  font-size: 13px;
+  opacity: .9;
+}
+
+/* Botones dentro del video */
+.work-overlay .btn{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.35);
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.work-overlay .btn.primary{
+  background: rgba(20,137,255,.85);
+  border-color: rgba(20,137,255,.85);
+}
+/* ===== AVANCES DE OBRA: bajar overlay dentro del video ===== */
+.work-card,
+.right-rail{
+  position: relative;
+  overflow: hidden;
+}
+
+/* el bloque dentro del video */
+.work-overlay{
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  /* 🔧 MÁS ABAJO: subí/bajá este valor */
+  bottom: 24px;
+
+  padding: 18px 20px;
+  z-index: 2;
+
+  /* gradiente solo abajo (no tapa todo el video) */
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,0) 0%,
+    rgba(2,16,39,.55) 55%,
+    rgba(2,16,39,.88) 100%
+  );
+}
+
+/* si querés todavía más abajo: probá bottom: 10px; */
+/* ===== COLUMNA DERECHA: convertir contenido en overlay y bajarlo ===== */
+.right-rail{
+  position: relative;
+  overflow: hidden;
+}
+
+/* Si tenés video o imagen de fondo dentro */
+.right-rail video,
+.right-rail img{
+  width: 100%;
+  height: 420px;          /* ajustable */
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay: agarramos TODO lo que no sea video/imagen y lo mandamos abajo */
+.right-rail > :not(video):not(img){
+  position: absolute;
+  left: 22px;
+  right: 22px;
+
+  /* 🔧 BAJAR MÁS: cambiá este valor */
+  bottom: 22px;
+
+  z-index: 2;
+  color: #eef7ff;
+}
+
+/* Gradiente abajo para legibilidad */
+.right-rail::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,0) 35%,
+    rgba(2,16,39,.55) 65%,
+    rgba(2,16,39,.88) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+/* Si el contenido está dentro de un wrapper, forzamos ese wrapper */
+.right-rail .work-list,
+.right-rail .right-cta,
+.right-rail .right-note,
+.right-rail h3{
+  position: relative;
+  z-index: 2;
+}
+/* =========================================================
+   SIDE MEDIA (Avances de obra) — overlay abajo del video
+========================================================= */
+
+.side-media{
+  position: relative;
+  overflow: hidden;
+}
+
+.side-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .8s ease;
+  filter: brightness(1.05) contrast(1.05) saturate(1.1);
+}
+.side-video.is-active{
+  opacity: 1;
+}
+
+
+/* Overlay DENTRO del video, ABAJO */
+.side-media-overlay{
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  /* 🔴 ESTO ES LO QUE LO BAJA */
+  bottom: 0;
+
+  padding: 20px 22px;
+  z-index: 2;
+
+  /* Gradiente solo inferior */
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,0) 0%,
+    rgba(2,16,39,.55) 45%,
+    rgba(2,16,39,.90) 100%
+  );
+
+  color: #eef7ff;
+}
+
+/* Tipografía */
+.side-media-overlay h3{
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.side-media-overlay{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px 22px;
+  z-index: 2;
+
+  /* ✅ MÁS CLARO + AZUL CORPORATIVO */
+  background: linear-gradient(
+    180deg,
+    rgba(4,26,58,0) 0%,
+    rgba(4,26,58,.35) 40%,
+    rgba(4,26,58,.70) 100%
+  );
+
+  color: #eef7ff;
+}
+.side-video{
+  filter: brightness(1.05) contrast(1.05) saturate(1.08);
+}
+
+
+/* Bordes redondeados abajo (pro) */
+.side-media-overlay{
+  border-radius: 0 0 24px 24px;
+}
+
+/* ===== LIMPIAR OSCURECIMIENTO DEL VIDEO ===== */
+.side-media::after{
+  content: none !important;
+}
+/* ===== LIMPIAR OSCURECIMIENTO DEL VIDEO ===== */
+.side-media::after{
+  content: none !important;
+}
+.side-video{
+  filter: brightness(1.15) contrast(1.08) saturate(1.15);
+}
+/* =========================================================
+   TIPOGRAFÍA — MÁS VOLUMEN (PEGAR AL FINAL DEL CSS)
+   - Aumenta jerarquía de títulos y legibilidad de párrafos
+========================================================= */
+
+/* Título principal de página/sección (ej: "La Empresa") */
+.page-hero h1,
+.section h1{
+  font-size: 46px;
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  text-shadow: 0 6px 30px rgba(0,0,0,.35);
+}
+
+/* Subtítulos / títulos de cards (Misión, Visión, Valores, etc.) */
+.page-hero h2,
+.section h2,
+.card h3,
+.sidebar h3,
+.right-rail h3{
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 750;
+  letter-spacing: -0.2px;
+}
+
+/* Párrafos principales (texto largo) */
+.page-hero p,
+.section p{
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(238,247,255,.88);
+}
+
+/* Texto dentro de cards (misión/visión/valores y similares) */
+.card p,
+.sidebar p,
+.right-rail p{
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(238,247,255,.86);
+}
+
+/* Breadcrumb (Inicio / La Empresa) */
+.breadcrumb{
+  font-size: 13px;
+  letter-spacing: .2px;
+  opacity: .85;
+}
+/* =========================
+   CLIENTES (logos)
+========================= */
+/* =========================================================
+   CLIENTES — Logos limpios, mismo tamaño visual (PRO)
+========================================================= */
+
+/* Grilla */
+.clients-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 28px;
+  align-items: center;
+  margin-top: 26px;
+}
+
+/* Quitamos completamente la "burbuja" */
+.client{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px; /* altura pareja */
+}
+
+/* Normalización REAL de logos */
+.client img{
+  max-width: 190px;     /* 🔴 controla el tamaño visual */
+  max-height: 80px;     /* 🔴 todos entran en esta caja */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+
+  filter: grayscale(1) contrast(1.05) brightness(1.05);
+  opacity: .88;
+
+  transition: filter .2s ease, opacity .2s ease, transform .2s ease;
+}
+
+/* Hover sutil (corporate) */
+.client:hover img{
+  filter: none;
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* Responsive */
+@media (max-width: 720px){
+  .clients-grid{
+    gap: 22px;
+  }
+  .client img{
+    max-width: 140px;
+    max-height: 52px;
+  }
+}
+
+
+.gallery-quote{
+  max-width: 720px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(238,247,255,.78);
+  margin-bottom: 22px;
+}
+.gallery-title{
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.gallery-quote{
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(238,247,255,.78);
+  margin: 0 0 24px 0;
+}
+/* Galería: título + frase uno debajo del otro */
+.section-title.section-title--stack{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.section-title.section-title--stack h2{
+  margin: 0;
+  font-size: 30px;          /* un poco más grande */
+  line-height: 1.1;
+}
+
+.section-title.section-title--stack p{
+  margin: 0 0 18px 0;       /* separa del grid de fotos */
+  max-width: 780px;         /* ancho prolijo */
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(238,247,255,.78);
+  text-align: left;         /* evita centrado */
+}
+/* Galería: título + frase abajo (stack) */
+.section-title.section-title--stack{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start; /* pisa el space-between */
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.section-title.section-title--stack h2{
+  margin: 0;
+  font-size: 30px;     /* más grande */
+  line-height: 1.1;
+}
+
+.section-title.section-title--stack p{
+  margin: 0;
+  max-width: 820px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(238,247,255,.78);
+  text-align: left;
+}
+
+
+/* ===== DEBUG FIX: que el video SI o SI se vea ===== */
+.side-media{
+  min-height: 420px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: #000 !important;
+}
+
+.side-video{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  opacity: 1 !important;        /* <- fuerza visible */
+  z-index: 0 !important;
+   transition: opacity 1s ease-in-out;
+}
+
+/* overlay arriba */
+.side-media-overlay{
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 2 !important;
+}
+/* =========================================================
+   MOBILE FIX — L&H (Hero full + overlay + grid + right media)
+   Pegalo AL FINAL de styles.css
+========================================================= */
+
+/* 1) Evitar overflow horizontal accidental */
+html, body { overflow-x: hidden; }
+
+/* 2) Ajustes generales de tipografías en mobile */
+@media (max-width: 720px){
+  :root{
+    --h1: 30px;
+    --h2: 22px;
+  }
+  body{ line-height: 1.55; }
+}
+
+/* 3) Header fijo: altura real y separación correcta */
+@media (max-width: 860px){
+  :root{ --header-h: 70px; } /* si tu header mide distinto, ajustá */
+  body.has-hero{ padding-top: var(--header-h); }
+
+  /* si estás usando underlap del hero con margin negativo */
+  body.has-hero .hero{
+    margin-top: calc(var(--header-h) * -1);
+    padding-top: var(--header-h);
+  }
+}
+
+/* 4) HERO full-width: alto razonable en mobile */
+@media (max-width: 860px){
+  .hero-full-media{
+    min-height: 72vh;          /* antes suele ser demasiado alto */
+  }
+}
+
+/* 5) Overlay del hero: menos padding, ancho controlado */
+@media (max-width: 860px){
+  .hero-overlay-wide{
+    padding: 92px 0 28px;      /* deja aire bajo header */
+    max-width: 100%;
+  }
+
+  .hero-overlay{
+    padding: 0 18px;           /* importante: contenido no al borde */
+  }
+
+  .hero-overlay .h1{
+    font-size: 30px;
+    line-height: 1.08;
+    letter-spacing: -0.4px;
+  }
+
+  .hero-overlay .lead{
+    font-size: 14px;
+    max-width: 56ch;
+  }
+
+  /* Botones: que no queden 3 en una fila apretados */
+  .hero-actions{
+    gap: 10px;
+  }
+  .hero-actions .btn{
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* 6) KPIs: en mobile 2 columnas o 1 según ancho */
+@media (max-width: 860px){
+  .kpis{
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .kpi strong{ font-size: 16px; }
+  .kpi span{ font-size: 12px; }
+}
+
+@media (max-width: 520px){
+  .kpis{ grid-template-columns: 1fr; }
+}
+
+/* 7) Grilla debajo del hero (sidebar + right rail):
+      en mobile SIEMPRE columna, con buen orden */
+@media (max-width: 980px){
+  .hero-grid-below{
+    margin-top: -34px;         /* mordida más suave en mobile */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  /* Orden recomendado:
+     1) sidebar (capacidades)
+     2) right-rail / side-media (avances de obra) */
+  .hero-grid-below .sidebar{ order: 1; }
+  .hero-grid-below .right-rail,
+  .hero-grid-below .side-media{ order: 2; }
+}
+
+/* 8) Tarjetas grandes: menos padding para que respiren */
+@media (max-width: 520px){
+  .hero-card{ border-radius: 18px; }
+  .sidebar{ padding: 16px; }
+  .card{ padding: 16px; }
+}
+
+/* 9) Side-media (video derecha): altura correcta en mobile */
+@media (max-width: 980px){
+  .side-media{
+    min-height: 320px;         /* evita video gigante */
+  }
+}
+@media (max-width: 520px){
+  .side-media{
+    min-height: 260px;
+  }
+  .side-media-overlay{
+    padding: 14px;
+  }
+  .side-media-overlay h3{
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  .side-media-overlay p{
+    font-size: 13px;
+    margin: 0 0 10px 0;
+  }
+  .side-media-actions .btn{
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* 10) Píldoras: que no queden “burbujas” gigantes en mobile */
+@media (max-width: 520px){
+  .pills{ gap: 8px; }
+  .pill{
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+/* 11) Galería: 2 columnas en tablet / 1 en mobile */
+@media (max-width: 980px){
+  .gallery{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px){
+  .gallery{ grid-template-columns: 1fr; }
+  .gallery figcaption{ font-size: 12px; }
+}
+/* =========================================================
+   GOOGLE MAPS — Profesional / Responsive
+========================================================= */
+
+.section-map{
+  padding-top: 40px;
+}
+
+.map-wrap{
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+  background: #021027;
+}
+
+.map-wrap iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+/* Mobile */
+@media (max-width: 520px){
+  .map-wrap{
+    height: 300px;
+    border-radius: 14px;
+  }
+}
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(6, 18, 40, .65);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.header-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+}
+
+.brand-logo{
+  height: 54px;
+  width: auto;
+  display:block;
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+}
+
+.nav a{
+  color: rgba(255,255,255,.92);
+  text-decoration:none;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  padding: 10px 10px;
+  border-radius: 10px;
+  transition: background .2s ease, transform .2s ease, color .2s ease;
+}
+
+.nav a:hover{
+  background: rgba(255,255,255,.10);
+  color:#fff;
+  transform: translateY(-1px);
+}
+
+/* Mobile: si no querés burger, lo más simple es apilar o bajar tamaño */
+@media (max-width: 900px){
+  .header-inner{
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav{
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .brand-logo{ height: 48px; }
+}
+
+
+/* =========================================================
+   FIX INDEX: evitar que el menú se pise con el topbar
+   (solo pasa en el index por body.has-hero)
+========================================================= */
+
+/* 1) Si en el index el header está fixed, bajalo debajo del topbar */
+body.has-hero header.site-header{
+  top: var(--topbar-h) !important;
+}
+
+/* 2) Como el header bajó, el video/hero debe arrancar desde arriba igual */
+body.has-hero .hero{
+  margin-top: calc(var(--topbar-h) * -1) !important;
+}
+
+/* 3) El texto del hero baja para no quedar debajo del header */
+body.has-hero .hero-overlay{
+  padding-top: calc(var(--topbar-h) + var(--header-h) + 24px) !important;
+}
+
+.page-hero.page-hero--image{
+  position: relative;
+  height: 620px !important;
+  min-height: 620px !important;
+  padding: 64px 0 70px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center 30% !important;
+}
+.page-hero.page-hero--image::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.90) 0%,
+    rgba(2,16,39,.65) 55%,
+    rgba(2,16,39,.52) 100%
+  );
+  pointer-events:none;
+}
+
+.page-hero.page-hero--image > .container{
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 520px){
+  .page-hero.page-hero--image{
+    height: 460px !important;
+    min-height: 460px !important;
+    padding: 44px 0 48px !important;
+    background-position: center 25% !important;
+  }
+}
+
+
+/* =========================================================
+   OBRAS — Cards por obra + mini-galería por obra
+========================================================= */
+
+.works-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.work{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(2,16,39,.22);
+  overflow: hidden;
+}
+
+.work-head{
+  padding: 16px 16px 12px;
+}
+
+.work-head h3{
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.work-head p{
+  margin: 0;
+  font-size: 13px;
+  color: rgba(238,247,255,.76);
+  line-height: 1.5;
+}
+
+/* mini galería: mismo “tamaño actual”, pero más fotos */
+.work-photos{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 (hasta 4 fotos) */
+  gap: 10px;
+  padding: 14px 16px 16px;
+}
+
+.work-photo{
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(2,16,39,.20);
+}
+
+.work-photo img{
+  width: 100%;
+  height: 140px;          /* 🔴 acá controlás el tamaño */
+  object-fit: cover;
+  display: block;
+  transition: transform .2s ease, filter .2s ease, opacity .2s ease;
+  opacity: .95;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.work-photo:hover img{
+  transform: scale(1.04);
+  opacity: 1;
+  filter: saturate(1.1) contrast(1.1);
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .works-grid{ grid-template-columns: 1fr; }
+}
+@media (max-width: 520px){
+  .work-photo img{ height: 120px; }
+}
+/* =========================================================
+   OBRAS — 1 foto visible + scroll horizontal
+========================================================= */
+
+.works-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.work{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(2,16,39,.22);
+  overflow: hidden;
+}
+
+.work-head{
+  padding: 16px 16px 10px;
+}
+
+.work-head h3{
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.work-head p{
+  margin: 0;
+  font-size: 13px;
+  color: rgba(238,247,255,.75);
+  line-height: 1.5;
+}
+
+/* Carrusel */
+.work-carousel{
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px 18px;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.work-carousel img{
+  flex: 0 0 auto;
+
+  width: 240px;     /* 🔧 bajá si querés más chico */
+  height: 140px;    /* 🔧 controla tamaño */
+  object-fit: cover;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(2,16,39,.25);
+
+  scroll-snap-align: start;
+
+  opacity: .95;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.work-carousel img:hover{
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+/* Scrollbar prolija */
+.work-carousel::-webkit-scrollbar{ height: 6px; }
+.work-carousel::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.18);
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .works-grid{ grid-template-columns: 1fr; }
+}
+@media (max-width: 520px){
+  .work-carousel img{
+    width: 210px;
+    height: 130px;
+  }
+}
+/* =========================================================
+   FIX FINAL — Obras en carrusel horizontal REAL
+========================================================= */
+
+/* Card de obra */
+.work{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(2,16,39,.22);
+  overflow: hidden;
+}
+
+/* Cabecera */
+.work-head{
+  padding: 14px 16px 10px;
+}
+
+.work-head h3{
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.work-head p{
+  margin: 0;
+  font-size: 13px;
+  color: rgba(238,247,255,.75);
+}
+
+/* === CARRUSEL HORIZONTAL (CLAVE) === */
+.work-carousel{
+  display: flex !important;          /* 🔴 fuerza flex */
+  flex-direction: row !important;
+  gap: 12px;
+
+  padding: 14px 16px 18px;
+
+  overflow-x: auto !important;       /* 🔴 scroll horizontal */
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 🔴 IMPORTANTE: anulamos grids viejos */
+.work-carousel > *{
+  flex: 0 0 auto !important;
+}
+
+/* IMÁGENES CONTROLADAS */
+.work-carousel img{
+  width: 220px !important;           /* 🔴 tamaño chico */
+  height: 130px !important;          /* 🔴 controla altura */
+  max-width: none !important;
+
+  object-fit: cover;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(2,16,39,.25);
+
+  scroll-snap-align: start;
+
+  opacity: .95;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.work-carousel img:hover{
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+/* Scrollbar visible y prolija */
+.work-carousel::-webkit-scrollbar{
+  height: 6px;
+}
+.work-carousel::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.25);
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 520px){
+  .work-carousel img{
+    width: 190px !important;
+    height: 120px !important;
+  }
+}
+/* ===== Obras: 2 columnas para que entren más ===== */
+.works-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+@media (max-width: 980px){
+  .works-grid{ grid-template-columns: 1fr; }
+}
+
+/* Card obra */
+.work{
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 18px;
+  background: rgba(2,16,39,.18);
+  overflow: hidden;
+}
+.work-head{
+  padding: 16px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.work-head h3{ margin:0 0 8px; font-size:18px; line-height:1.2; }
+.work-head p{ margin:0; color: rgba(238,247,255,.78); font-size:14px; line-height:1.55; }
+
+/* ===== Slider (1 imagen visible) ===== */
+.work-slider{
+  position: relative;
+  padding: 14px 16px 16px;
+  outline: none;
+}
+
+.ws-frame{
+  position: relative;
+  width: 100%;
+  height: 220px;          /* alto del “visor” */
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(2,16,39,.25);
+}
+
+.ws-img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 0;
+  transform: scale(1.01);
+  transition: opacity .25s ease, transform .35s ease;
+  pointer-events: none;
+}
+.ws-img.is-active{
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.ws-btn{
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(2,16,39,.65);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.ws-btn:hover{ background: rgba(2,16,39,.82); }
+.ws-prev{ left: 22px; }
+.ws-next{ right: 22px; }
+
+.ws-meta{
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(238,247,255,.72);
+  display:flex;
+  justify-content: flex-end;
+}
+/* ====== OBRAS: Slider 1 foto visible (FORZADO) ====== */
+.work-slider { position: relative !important; padding: 14px 16px 16px !important; }
+
+.work-slider .ws-frame{
+  position: relative !important;
+  width: 100% !important;
+  height: 220px !important;          /* bajalo si querés */
+  overflow: hidden !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  background: rgba(2,16,39,.25) !important;
+}
+
+/* CLAVE: ocultar todas por defecto */
+.work-slider .ws-img{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+
+  display: none !important;          /* ✅ oculta todas */
+  opacity: 0 !important;
+}
+
+/* CLAVE: mostrar solo la activa */
+.work-slider .ws-img.is-active{
+  display: block !important;         /* ✅ muestra 1 sola */
+  opacity: 1 !important;
+}
+
+/* Flechas */
+.work-slider .ws-btn{
+  position:absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  background: rgba(2,16,39,.70) !important;
+  color: #fff !important;
+  font-size: 26px !important;
+  line-height: 1 !important;
+  display:grid !important;
+  place-items:center !important;
+  cursor:pointer !important;
+  z-index: 5 !important;
+}
+.work-slider .ws-prev{ left: 22px !important; }
+.work-slider .ws-next{ right: 22px !important; }
+
+.work-slider .ws-meta{
+  margin-top: 10px !important;
+  font-size: 13px !important;
+  color: rgba(238,247,255,.72) !important;
+  display:flex !important;
+  justify-content: flex-end !important;
+}
+
+/* =========================================================
+   PAGE HERO UNIFICADO (Clientes / Obras)
+   - MISMO ancho, alto, overlay y encuadre
+========================================================= */
+.page-hero--image{
+  position: relative;
+  height: clamp(380px, 45vw, 560px); /* ⬅ más alto */
+  padding: 48px 0 56px;              /* ⬅ más aire */
+  display: flex;
+  align-items: flex-start;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 35%;
+}
+
+
+
+
+/* overlay uniforme */
+.page-hero--image::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.90) 0%,
+    rgba(2,16,39,.65) 55%,
+    rgba(2,16,39,.52) 100%
+  );
+  pointer-events:none;
+}
+
+/* texto por arriba del overlay */
+.page-hero--image > .container{
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile: compactar un poco */
+@media (max-width: 520px){
+  .page-hero--image{
+    height: clamp(260px, 52vw, 340px);
+    padding: 28px 0 28px;
+    background-position: center 30%;
+  }
+}
+
+/* ===== FORCE HERO HEIGHT (Clientes + Obras) ===== */
+.page-hero.page-hero--image{
+  height: 560px !important;      /* <- foto más larga */
+  min-height: 560px !important;
+  padding: 56px 0 60px !important;
+}
+
+@media (max-width: 520px){
+  .page-hero.page-hero--image{
+    height: 420px !important;
+    min-height: 420px !important;
+    padding: 40px 0 44px !important;
+  }
+}
+/* ===== HERO LARGO UNIFICADO: Clientes + Obras ===== */
+.page-hero.page-hero--image{
+  position: relative;
+  height: 620px !important;        /* <- más largo */
+  min-height: 620px !important;
+  padding: 64px 0 70px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center 30% !important;
+}
+
+/* overlay uniforme (si ya lo tenés, esto lo refuerza) */
+.page-hero.page-hero--image::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.90) 0%,
+    rgba(2,16,39,.65) 55%,
+    rgba(2,16,39,.52) 100%
+  );
+  pointer-events:none;
+}
+
+.page-hero.page-hero--image > .container{
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 520px){
+  .page-hero.page-hero--image{
+    height: 460px !important;
+    min-height: 460px !important;
+    padding: 44px 0 48px !important;
+    background-position: center 25% !important;
+  }
+}
+.hero-obras {
+  position: relative;
+  min-height: 85vh;
+  overflow: hidden;
+  color: #fff;
+}
+/* Asegura capas correctas */
+.page-hero.page-hero--image{ position: relative !important; }
+.page-hero.page-hero--image::before{ z-index: 0 !important; }
+.page-hero.page-hero--image > .container{ z-index: 1 !important; }
+
+/* Contenido superior (título/desc) */
+.page-hero.page-hero--image .hero-top{
+  position: relative;
+  z-index: 2;
+}
+
+/* Burbuja flotante sobre la imagen */
+.hero-bubbles{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 200px;          /* sube/baja las burbujas */
+  z-index: 2;
+}
+
+/* Opcional: look tipo glass para las cards (si tu .card ya lo hace, omitilo) */
+.hero-bubbles .card{
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(12px);
+}
+
+/* Mobile: que no se pisen */
+@media (max-width: 520px){
+  .hero-bubbles{ bottom: 50px; }
+}
+/* Empuja la siguiente sección para que no quede debajo de las burbujas */
+.page-hero.page-hero--image + .section{
+  padding-top: 50px;
+}
+
+@media (max-width: 520px){
+  .page-hero.page-hero--image + .section{
+    padding-top: 70px;
+  }
+}
+/* Hacer las burbujas más grandes */
+.hero-bubbles .card{
+  padding: 32px 34px;        /* antes ~24px */
+  border-radius: 22px;
+}
+
+/* Títulos más protagonistas */
+.hero-bubbles .card h3{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Texto más cómodo de leer */
+.hero-bubbles .card p{
+  font-size: 15px;
+  line-height: 1.65;
+}
+.hero-bubbles .card{
+  padding: 36px 38px;
+}
+
+.hero-bubbles .card h3{
+  font-size: 22px;
+}
+
+.hero-bubbles .card p{
+  font-size: 15.5px;
+}
+
+
+/* FIX MOBILE: que las burbujas no se monten arriba del título */
+@media (max-width: 520px){
+
+  /* Que el hero se adapte a contenido */
+  .page-hero.page-hero--image{
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 22px !important;
+  }
+
+  /* En mobile, las burbujas dejan de flotar */
+  .hero-bubbles{
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin-top: 18px;
+  }
+
+  /* Una debajo de otra (o 2 y 1 si querés) */
+  .hero-bubbles .grid-3{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Tamaño cómodo en mobile */
+  .hero-bubbles .card{
+    padding: 18px 18px;
+    border-radius: 18px;
+  }
+}
+/* MOBILE FIX DEFINITIVO: título y burbujas en columna, sin correrse a la derecha */
+@media (max-width: 520px){
+
+  /* 1) El hero no debe comportarse como fila */
+  .page-hero.page-hero--image{
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 42px 0 18px !important;
+  }
+
+  /* 2) Asegurar contenedor a ancho completo */
+  .page-hero.page-hero--image > .container{
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  /* 3) Burbujas: dejan de flotar y pasan debajo del título */
+  .hero-bubbles{
+    position: relative !important;
+    inset: auto !important;
+    margin-top: 16px !important;
+  }
+
+  /* 4) Forzar la grilla a 1 columna */
+  .hero-bubbles .grid-3{
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin: 0 !important;
+  }
+
+  /* 5) Cards a 100% (evita “columna derecha”) */
+  .hero-bubbles .card{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 18px 18px !important;
+    border-radius: 18px !important;
+  }
+}
+@media (max-width: 520px){
+  .hero-bubbles,
+  .hero-bubbles *{
+    justify-self: stretch !important;
+    justify-content: stretch !important;
+    align-self: stretch !important;
+  }
+}
+/* ===== PAGE HERO (IMAGEN) — versión limpia y estable ===== */
+.page-hero.page-hero--image{
+  position: relative;
+  height: 620px;
+  min-height: 620px;
+  padding: 64px 0 70px;
+  display: block;                 /* clave: NO flex, evita “dos columnas” raras */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 30%;
+  overflow: hidden;
+}
+
+/* Overlay más claro (foto menos oscura) */
+.page-hero.page-hero--image::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.70) 0%,
+    rgba(2,16,39,.48) 55%,
+    rgba(2,16,39,.36) 100%
+  );
+  pointer-events:none;
+  z-index:0;
+}
+
+.page-hero.page-hero--image > .container{
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== CUADRO (tabla) centrado debajo del título ===== */
+.page-hero.page-hero--image .table{
+  margin: 26px auto 0;
+  width: min(820px, 100%);
+}
+
+/* Mobile */
+@media (max-width: 520px){
+  .page-hero.page-hero--image{
+    height: auto;
+    min-height: 0;
+    padding: 42px 0 18px;
+    background-position: center 25%;
+  }
+
+  .page-hero.page-hero--image .table{
+    margin-top: 16px;
+    width: 100%;
+  }
+}
+/* ===== HERO EQUIPOS: CUADRO SOBRE LA FOTO ===== */
+
+.page-hero.page-hero--image{
+  position: relative;
+}
+
+/* Contenedor del cuadro */
+.hero-overlay-box{
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  /* 🔧 ajustá esta altura a gusto */
+  bottom: 90px;
+
+  z-index: 2;
+}
+
+/* Ancho controlado y centrado */
+.hero-overlay-box .container{
+  display: flex;
+  justify-content: center;
+}
+
+.hero-overlay-box .table{
+  width: min(820px, 100%);
+  backdrop-filter: blur(14px);
+  background: rgba(2,16,39,.65);
+}
+@media (max-width: 520px){
+  .hero-overlay-box{
+    position: relative;
+    bottom: auto;
+    margin-top: 18px;
+  }
+
+  .page-hero.page-hero--image{
+    height: auto;
+    min-height: 0;
+    padding-bottom: 24px;
+  }
+}
+/* ===== HERO EQUIPOS: MÁS LUZ EN LA FOTO ===== */
+
+/* Aclara el overlay general */
+.page-hero.page-hero--image::before{
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.55) 0%,   /* antes ~.9 */
+    rgba(2,16,39,.45) 0%,
+    rgba(2,16,39,.35) 0%
+  ) !important;
+}
+
+/* Realza la imagen */
+.page-hero.page-hero--image{
+  filter: brightness(1.12) contrast(1.06) saturate(1.08);
+}
+/* ===== HERO EQUIPOS: ENCUADRE MÁS ALTO ===== */
+.page-hero.page-hero--image{
+  background-position: center 12% !important;
+}
+/* ===== HERO EQUIPOS: ENCUADRE MÁS ALTO ===== */
+.page-hero.page-hero--image{
+  background-position: center 12% !important;
+}
+/* ===== CUADRO: MÁS LIVIANO SOBRE LA FOTO ===== */
+.hero-overlay-box .table{
+  background: rgba(2,16,39,.55) !important;
+  backdrop-filter: blur(0px);
+}
+@media (max-width: 520px){
+  .page-hero.page-hero--image{
+    background-position: center 18% !important;
+  }
+}
+/* FIX: que la foto llegue hasta la línea del footer */
+.footer{
+  margin-top: 0 !important;     /* elimina el corte */
+  padding-top: 30px;            /* mantiene el aire pero dentro del footer */
+}
+/* =====================================
+   OBRAS — HERO MÁS LUMINOSO
+===================================== */
+
+/* Overlay más liviano */
+.page-hero.page-hero--image::before{
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.55) 0%,
+    rgba(2,16,39,.45) 0%,
+    rgba(2,16,39,.35) 0%
+  ) !important;
+}
+
+/* Realce de la imagen */
+.page-hero.page-hero--image{
+  filter: brightness(1.15) contrast(1.07) saturate(1.08);
+}
+/* =====================================
+   OBRAS — BURBUJAS TIPO GLASS (EQUIPOS)
+===================================== */
+
+.hero-bubbles .card{
+  background: rgba(2,16,39,.45) !important;   /* antes muy oscuro */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 18px 40px rgba(0,0,0,.28);
+}
+
+/* Texto más limpio */
+.hero-bubbles .card p{
+  color: rgba(238,247,255,.88);
+}
+/* =====================================
+   OBRAS — FOTO AÚN MÁS LUMINOSA
+===================================== */
+
+.page-hero.page-hero--image{
+  filter: brightness(1.25) contrast(1.05) saturate(1.10);
+}
+
+/* Overlay MUY liviano (como en Equipos) */
+.page-hero.page-hero--image::before{
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.35) 0%,
+    rgba(2,16,39,.28) 45%,
+    rgba(2,16,39,.22) 100%
+  ) !important;
+}
+/* =====================================
+   OBRAS — BURBUJAS SIN FONDO (EQUIPOS STYLE)
+===================================== */
+
+.hero-bubbles .card{
+  background: transparent !important;     /* 🔴 sin fondo */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  border: 1px solid rgba(255,255,255,.35); /* borde fino */
+  box-shadow: none !important;
+
+  padding: 32px 34px;
+}
+
+/* Títulos bien protagonistas */
+.hero-bubbles .card h3{
+  color: #eef7ff;
+  text-shadow: 0 4px 14px rgba(0,0,0,.45);
+}
+
+/* Texto legible sin fondo */
+.hero-bubbles .card p{
+  color: rgba(238,247,255,.92);
+  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+}
+/* =====================================
+   OBRAS — FINISH PRO (hover + encuadre)
+===================================== */
+
+/* 1) Un poco más arriba el encuadre (mostramos más parte superior) */
+.page-hero.page-hero--image{
+  background-position: center 18% !important; /* probá 12% si querés aún más arriba */
+}
+
+/* 2) Hover sutil y corporativo en las burbujas */
+.hero-bubbles .card{
+  transition: border-color .18s ease, transform .18s ease, background .18s ease;
+}
+
+.hero-bubbles .card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(85,195,255,.55); /* acento suave */
+}
+
+/* 3) Opcional: una “línea” suave en el título al hover (muy pro) */
+.hero-bubbles .card h3{
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.hero-bubbles .card h3::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width: 42px;
+  height: 2px;
+  background: rgba(85,195,255,.0);
+  transition: background .18s ease, width .18s ease;
+}
+
+.hero-bubbles .card:hover h3::after{
+  background: rgba(85,195,255,.75);
+  width: 64px;
+}
+
+/* Mobile: sin “saltos” raros */
+@media (max-width: 520px){
+  .hero-bubbles .card:hover{
+    transform: none;
+  }
+  .page-hero.page-hero--image{
+    background-position: center 22% !important;
+  }
+}
+/* =====================================
+   SEPARADOR HERO → GALERÍA (SUTIL)
+===================================== */
+
+.page-hero.page-hero--image::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:120px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,0) 0%,
+    rgba(2,16,39,.45) 45%,
+    rgba(2,16,39,.85) 100%
+  );
+  pointer-events:none;
+  z-index:1;
+}
+/* =====================================
+   CLIENTES — LOGOS DENTRO DEL HERO
+===================================== */
+
+.page-hero.page-hero--image{
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bloque de logos: overlay inferior */
+.hero-logos{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 34px;        /* 🔧 subí/bajá (ej: 50px) */
+  z-index: 3;
+}
+
+/* Transición inferior para que no quede “corte seco” */
+.hero-logos::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-34px;
+  height: 190px;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,0) 0%,
+    rgba(2,16,39,.45) 45%,
+    rgba(2,16,39,.85) 100%
+  );
+  z-index: 1;
+  pointer-events:none;
+}
+
+.hero-logos .container{
+  position: relative;
+  z-index: 2;
+}
+
+/* Ajuste de tamaño para que entren dentro del hero */
+.hero-logos .clients-grid{
+  margin-top: 0;
+  justify-items: center;
+  gap: 22px;
+}
+
+.hero-logos .client{
+  min-height: 84px;
+}
+
+.hero-logos .client img{
+  max-width: 170px;
+  max-height: 68px;
+}
+
+/* MOBILE: los logos dejan de flotar (para no romper) */
+@media (max-width: 720px){
+  .hero-logos{
+    position: relative;
+    bottom: auto;
+    margin-top: 18px;
+    padding-bottom: 12px;
+  }
+  .hero-logos::before{ display:none; }
+
+  .page-hero.page-hero--image{
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 18px !important;
+  }
+
+  .hero-logos .client img{
+    max-width: 140px;
+    max-height: 56px;
+  }
+}
+/* ===============================
+   CLIENTES DENTRO DEL HERO
+================================= */
+
+.clients-grid--hero{
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 42px;
+  align-items: center;
+}
+
+/* Logo sin caja */
+.clients-grid--hero .client{
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: auto;
+}
+
+/* Logos limpios sobre imagen */
+.clients-grid--hero img{
+  max-width: 160px;
+  max-height: 70px;
+  margin: 0 auto;
+
+  filter: grayscale(1) brightness(1.1);
+  opacity: .85;
+
+  transition: opacity .25s ease, transform .25s ease, filter .25s ease;
+}
+
+.clients-grid--hero img:hover{
+  opacity: 1;
+  filter: none;
+  transform: scale(1.05);
+}
+
+
+/* FLOTA — corrección de luz y color */
+.page-hero.page-hero--image{
+  filter: brightness(0.90) contrast(1.10) saturate(0.85);
+}
+/* FLOTA — viñeta */
+.page-hero.page-hero--image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(
+    1200px 520px at 35% 55%,
+    rgba(255,255,255,.05),
+    rgba(2,16,39,.35)
+  );
+  pointer-events:none;
+}
+/* =========================
+   FLOTA — Métricas en hero
+========================= */
+
+.fleet-metrics{
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 26px;
+  align-items: center;
+  max-width: 820px;
+}
+
+.fleet-item{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fleet-item strong{
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: #eef7ff;
+}
+
+.fleet-item span{
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(238,247,255,.78);
+}
+
+/* Tablet */
+@media (max-width: 980px){
+  .fleet-metrics{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 26px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 520px){
+  .fleet-metrics{
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .fleet-item strong{
+    font-size: 22px;
+  }
+}
+/* =========================
+   FLOTA — Métricas dentro del hero (FIX)
+========================= */
+
+/* aseguramos que el texto del hero quede por arriba del overlay */
+.page-hero.page-hero--image > .container{
+  position: relative;
+  z-index: 2;
+}
+
+.fleet-metrics{
+  margin-top: auto;
+  margin-bottom: 28px;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 32px;
+
+  max-width: 900px;
+}
+
+.metric{
+  background: none;
+  border: none;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+
+
+/* cada item: estilo compacto */
+.fleet-item{
+  padding: 10px 12px;
+  border-radius: 14px;
+
+  /* “sin burbuja” pesada: solo un glass MUY leve */
+  background: rgba(2,16,39,.22);
+  border: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(8px);
+}
+
+.fleet-item strong{
+  display:block;
+  font-size: 18px;        /* antes 26px */
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: rgba(238,247,255,.94);
+  line-height: 1.15;
+}
+
+.fleet-item span{
+  display:block;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: rgba(238,247,255,.78);
+}
+
+/* Tablet: 2 columnas */
+@media (max-width: 980px){
+  .fleet-metrics{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 560px;
+  }
+}
+
+/* Mobile: 1 columna */
+@media (max-width: 520px){
+  .fleet-metrics{
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  .fleet-item strong{ font-size: 17px; }
+}
+
+.page-hero--fleet{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 👈 clave */
+}
+
+@media (max-width: 768px){
+  .fleet-metrics{
+    margin-top: 32px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.metric strong{
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.metric span{
+  font-size: 14px;
+  color: rgba(255,255,255,.78);
+  line-height: 1.4;
+}
+/* =========================================================
+   FLOTA — SOLO TEXTO (sin burbujas) + separación prolija
+   Pegalo al FINAL del CSS
+========================================================= */
+
+/* El hero de flota se comporta como columna: arriba título, abajo métricas */
+.page-hero.page-hero--image.page-hero--fleet{
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* El container queda en columna también */
+.page-hero.page-hero--image.page-hero--fleet > .container{
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+/* Las métricas se van abajo, con buen aire */
+.page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+  margin-top: auto !important;
+  margin-bottom: 48px !important;
+  max-width: 980px !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 42px !important;
+
+  align-items: end !important;
+}
+
+/* APAGAR burbuja (tu glass) */
+.page-hero.page-hero--image.page-hero--fleet .fleet-item,
+.page-hero.page-hero--image.page-hero--fleet .metric{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Tipografía: número/título */
+.page-hero.page-hero--image.page-hero--fleet .fleet-item strong,
+.page-hero.page-hero--image.page-hero--fleet .metric strong{
+  display: block !important;
+  font-size: 30px !important;
+  font-weight: 850 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.4px !important;
+  color: rgba(255,255,255,.98) !important;
+  margin: 0 0 8px 0 !important;
+  text-shadow: 0 10px 28px rgba(0,0,0,.35) !important;
+}
+
+/* Texto secundario */
+.page-hero.page-hero--image.page-hero--fleet .fleet-item span,
+.page-hero.page-hero--image.page-hero--fleet .metric span{
+  display: block !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  color: rgba(255,255,255,.78) !important;
+  margin: 0 !important;
+  max-width: 26ch !important;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 26px !important;
+    margin-bottom: 34px !important;
+    max-width: 640px !important;
+  }
+  .page-hero.page-hero--image.page-hero--fleet .fleet-item strong,
+  .page-hero.page-hero--image.page-hero--fleet .metric strong{
+    font-size: 24px !important;
+  }
+}
+
+@media (max-width: 520px){
+  .page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    margin-bottom: 24px !important;
+  }
+  .page-hero.page-hero--image.page-hero--fleet .fleet-item strong,
+  .page-hero.page-hero--image.page-hero--fleet .metric strong{
+    font-size: 22px !important;
+  }
+}
+
+.page-hero--image .fleet-metrics .card,
+.page-hero--image .fleet-metrics .fleet-item,
+.page-hero--image .fleet-metrics .metric{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+/* =========================================================
+   FLOTA — FIX REAL: quitar burbujas (sea cual sea la clase)
+   Pegalo AL FINAL del styles.css
+========================================================= */
+
+/* Asegura que el hero sea columna (título arriba, métricas abajo) */
+.page-hero--image .container{
+  position: relative;
+  z-index: 2;
+}
+
+/* Si existe fleet-metrics: la mandamos abajo y prolija */
+.page-hero--image .fleet-metrics{
+  margin-top: 140px !important;   /* baja al “espacio vacío” */
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 44px !important;
+  align-items: start !important;
+  max-width: 980px !important;
+}
+
+/* Quitar burbuja a TODO lo que esté adentro (funciona aunque sea .card) */
+.page-hero--image .fleet-metrics > *{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Por si adentro 
+/* Tipografía uniforme */
+.page-hero--image .fleet-metrics strong{
+  display: block !important;
+  font-size: 30px !important;
+  font-weight: 850 !important;
+  line-height: 1.05 !important;
+  margin: 0 0 8px 0 !important;
+  color: rgba(255,255,255,.98) !important;
+  text-shadow: 0 10px 28px rgba(0,0,0,.35) !important;
+}
+
+.page-hero--image .fleet-metrics span{
+  display: block !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+  color: rgba(255,255,255,.78) !important;
+  max-width: 28ch !important;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .page-hero--image .fleet-metrics{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 26px !important;
+    margin-top: 90px !important;
+    max-width: 640px !important;
+  }
+  .page-hero--image .fleet-metrics strong{
+    font-size: 24px !important;
+  }
+}
+
+@media (max-width: 520px){
+  .page-hero--image .fleet-metrics{
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    margin-top: 60px !important;
+  }
+  .page-hero--image .fleet-metrics strong{
+    font-size: 22px !important;
+  }
+}
+/* =========================================
+   FLOTA — MÉTRICAS ABAJO (sin burbujas)
+   Requiere: <section class="page-hero page-hero--image page-hero--fleet">
+========================================= */
+
+.page-hero--fleet{
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay: un poco más oscuro abajo para leer métricas */
+.page-hero--fleet::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.30) 0%,
+    rgba(2,16,39,.35) 55%,
+    rgba(2,16,39,.75) 100%
+  );
+  z-index: 0;
+}
+
+/* Todo lo del hero por encima del overlay */
+.page-hero--fleet > .container,
+.page-hero--fleet > .fleet-metrics{
+  position: relative;
+  z-index: 2;
+}
+
+/* MÉTRICAS: clavadas abajo */
+.page-hero--fleet .fleet-metrics{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px; /* <- más abajo. probá 0px si querés al límite */
+
+  width: min(980px, calc(100% - 42px));
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  align-items: end;
+}
+
+/* Sin burbujas (aunque uses .fleet-item o .metric) */
+.page-hero--fleet .fleet-metrics .fleet-item,
+.page-hero--fleet .fleet-metrics .metric{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  min-width: 0;
+}
+
+/* Texto controlado: evita solapes */
+.page-hero--fleet .fleet-metrics strong{
+  display:block;
+  font-size: 30px;
+  font-weight: 850;
+  line-height: 1.05;
+  letter-spacing: -0.6px;
+  color: rgba(238,247,255,.96);
+  text-shadow: 0 8px 26px rgba(0,0,0,.35);
+  white-space: nowrap;
+}
+
+.page-hero--fleet .fleet-metrics span{
+  display:block;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.35;
+  color: rgba(238,247,255,.80);
+  max-width: 18ch;
+  white-space: normal;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .page-hero--fleet .fleet-metrics{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    bottom: 6px;
+  }
+  .page-hero--fleet .fleet-metrics span{ max-width: 24ch; }
+}
+
+@media (max-width: 520px){
+  .page-hero--fleet .fleet-metrics{
+    grid-template-columns: 1fr;
+    bottom: 10px;
+  }
+  .page-hero--fleet .fleet-metrics strong{ font-size: 26px; }
+  .page-hero--fleet .fleet-metrics span{ max-width: 100%; }
+}
+/* =========================
+   FLOTA — POSICIÓN FINAL (FORZADO)
+========================= */
+
+.page-hero.page-hero--image.page-hero--fleet{
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* el overlay no debe tapar el texto */
+.page-hero.page-hero--image.page-hero--fleet > .container{
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* métricas bien abajo */
+.page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  bottom: -8px !important;          /* <- poné -6px si querés “más abajo” aún */
+  padding-bottom: -10px !important; /* aire mínimo */
+
+  width: min(980px, calc(100% - 42px)) !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+  gap: 28px !important;
+  align-items: end !important;
+}
+
+/* sin burbujas */
+.page-hero.page-hero--image.page-hero--fleet .fleet-item{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  padding: 0 !important;
+}
+
+/* evita solapes */
+.page-hero.page-hero--image.page-hero--fleet .fleet-item strong{
+  white-space: nowrap !important;
+}
+
+.page-hero.page-hero--image.page-hero--fleet .fleet-item span{
+  max-width: 18ch !important;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: 18px !important;
+  }
+}
+@media (max-width: 520px){
+  .page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+    grid-template-columns: 1fr !important;
+  }
+  .page-hero.page-hero--image.page-hero--fleet .fleet-item span{
+    max-width: 100% !important;
+  }
+}
+/* ===== FLOTA: métricas abajo del todo (con tu HTML actual) ===== */
+.page-hero.page-hero--image.page-hero--fleet{
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Tu overlay */
+.page-hero.page-hero--image.page-hero--fleet::before{
+  z-index: 0 !important;
+}
+
+/* Texto arriba */
+.page-hero.page-hero--image.page-hero--fleet > .container{
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* MÉTRICAS: están como HIJO DIRECTO del section, por eso uso > */
+.page-hero.page-hero--image.page-hero--fleet > .fleet-metrics{
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  bottom: -6px !important;       /* bajá más: 0 / -6 / -12 */
+  width: min(980px, calc(100% - 42px)) !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+  gap: 28px !important;
+  align-items: end !important;
+
+  z-index: 2 !important;
+}
+
+/* Sin burbujas */
+.page-hero.page-hero--image.page-hero--fleet .fleet-item{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+}
+
+/* Evitar que se pisen */
+.page-hero.page-hero--image.page-hero--fleet .fleet-item strong{
+  white-space: nowrap !important;
+}
+.page-hero.page-hero--image.page-hero--fleet .fleet-item span{
+  max-width: 18ch !important;
+}
+
+@media (max-width: 980px){
+  .page-hero.page-hero--image.page-hero--fleet > .fleet-metrics{
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: 18px !important;
+  }
+}
+@media (max-width: 520px){
+  .page-hero.page-hero--image.page-hero--fleet > .fleet-metrics{
+    grid-template-columns: 1fr !important;
+  }
+  .page-hero.page-hero--image.page-hero--fleet .fleet-item span{
+    max-width: 100% !important;
+  }
+}
+/* ===== FLOTA — métricas bien abajo (dentro del hero) ===== */
+.page-hero.page-hero--image.page-hero--fleet{
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* el container ocupa todo el alto del hero */
+.page-hero.page-hero--image.page-hero--fleet .container.hero-top{
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* empuja métricas al final */
+.page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+  margin-top: auto !important;
+  margin-bottom: -14px !important;   /* bajá más: 0px / -6px / -12px */
+  padding-bottom: 0 !important;
+}
+
+/* evita solapes y mantiene prolijo */
+.page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+  gap: 28px !important;
+  align-items: end !important;
+}
+
+.page-hero.page-hero--image.page-hero--fleet .fleet-item{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.page-hero.page-hero--image.page-hero--fleet .fleet-item strong{
+  white-space: nowrap !important;
+}
+
+.page-hero.page-hero--image.page-hero--fleet .fleet-item span{
+  max-width: 18ch !important;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: 18px !important;
+  }
+  .page-hero.page-hero--image.page-hero--fleet .fleet-item span{
+    max-width: 24ch !important;
+  }
+}
+@media (max-width: 520px){
+  .page-hero.page-hero--image.page-hero--fleet .fleet-metrics{
+    grid-template-columns: 1fr !important;
+  }
+  .page-hero.page-hero--image.page-hero--fleet .fleet-item span{
+    max-width: 100% !important;
+  }
+}
+/* =========================
+   SERVICIOS — HERO con imagen
+========================= */
+
+.page-hero--services{
+  background-position: center 20% !important;  /* encuadre más alto */
+  filter: brightness(1.12) contrast(1.08) saturate(0.95);
+}
+
+/* Overlay: liviano arriba, más oscuro abajo */
+.page-hero--services::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.35) 0%,
+    rgba(2,16,39,.45) 45%,
+    rgba(2,16,39,.70) 100%
+  );
+  z-index: 0;
+}
+
+/* Texto por arriba del overlay */
+.page-hero--services > .container{
+  position: relative;
+  z-index: 2;
+}
+
+/* Mobile: ajusta encuadre */
+@media (max-width: 520px){
+  .page-hero--services{
+    background-position: center 28% !important;
+  }
+}
+/* =========================================
+   SERVICIOS — Cards alineadas bajo el título
+   (FIX DEFINITIVO)
+========================================= */
+
+/* El hero NO centra verticalmente */
+.page-hero--services{
+  display: block !important;
+}
+
+/* El container se comporta como columna normal */
+.page-hero--services > .container{
+  display: block !important;
+}
+
+/* Grilla de servicios: arranca debajo del texto */
+.page-hero--services + .section{
+  margin-top: -60px;   /* acerca las cards al hero */
+  position: relative;
+  z-index: 3;
+}
+
+/* Ajuste fino de las cards */
+.page-hero--services + .section .grid-3{
+  align-items: flex-start !important;
+}
+
+/* Cards: mismas alturas y alineadas arriba */
+.page-hero--services + .section .card{
+  height: 100%;
+}
+
+/* Mobile: sin superposiciones */
+@media (max-width: 520px){
+  .page-hero--services + .section{
+    margin-top: -30px;
+  }
+}
+/* =========================================
+   SERVICIOS — Cards alineadas bajo el título
+========================================= */
+
+.page-hero--services{
+  position: relative;
+  height: 620px;
+  min-height: 620px;
+  padding: 64px 0 70px;
+  background-size: cover;
+  background-position: center 30%;
+  overflow: hidden;
+}
+
+/* overlay */
+.page-hero--services::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.75) 0%,
+    rgba(2,16,39,.50) 55%,
+    rgba(2,16,39,.45) 100%
+  );
+  z-index:0;
+}
+
+.page-hero--services .hero-top{
+  position: relative;
+  z-index: 2;
+}
+
+/* cards “metidas” dentro del hero */
+.section--services-cards{
+  margin-top: -420px;   /* 🔧 sube/baja las burbujas */
+  position: relative;
+  z-index: 3;
+}
+
+/* Mobile */
+@media (max-width: 520px){
+  .page-hero--services{
+    height: 520px;
+    min-height: 520px;
+    padding: 44px 0 48px;
+  }
+
+  .section--services-cards{
+    margin-top: -360px;
+  }
+}
+/* =========================================
+   SERVICIOS — Burbujeas dentro del hero
+========================================= */
+
+.page-hero--services{
+  position: relative !important;
+  height: 620px !important;
+  min-height: 620px !important;
+  padding: 64px 0 90px !important; /* reserva abajo */
+  overflow: hidden;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center 30% !important;
+}
+
+/* Overlay para legibilidad */
+.page-hero--services::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.78) 0%,
+    rgba(2,16,39,.50) 55%,
+    rgba(2,16,39,.55) 100%
+  );
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Título arriba */
+.page-hero--services .hero-top{
+  position: relative;
+  z-index: 2;
+}
+
+/* BURBUJAS: dentro del hero y abajo */
+.page-hero--services .hero-bubbles{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 34px;            /* 🔧 BAJAR/SUBIR: 20px / 50px */
+  z-index: 3;
+}
+
+/* Evita que las cards se estiren raro */
+.page-hero--services .hero-bubbles .grid-3{
+  align-items: stretch;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .page-hero--services{
+    height: 680px !important;     /* más alto para 2 filas */
+    min-height: 680px !important;
+  }
+  .page-hero--services .hero-bubbles .grid-3{
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 520px){
+  .page-hero--services{
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 44px 0 24px !important;
+  }
+
+  /* En mobile NO flotar: se apilan y no se cortan */
+  .page-hero--services .hero-bubbles{
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 16px;
+  }
+
+  .page-hero--services .hero-bubbles .grid-3{
+    grid-template-columns: 1fr !important;
+  }
+}
+/* ================================
+   SERVICIOS – bajar cards REAL
+================================ */
+
+/* El hero necesita más alto */
+.page-hero--services{
+  position: relative !important;
+  min-height: 760px !important;   /* 🔧 antes era muy chico */
+  padding-top: 64px !important;
+  padding-bottom: 180px !important; /* 🔧 reserva real abajo */
+  overflow: hidden;
+}
+
+/* Overlay (queda igual, solo mejora lectura) */
+.page-hero--services::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.75) 0%,
+    rgba(2,16,39,.45) 50%,
+    rgba(2,16,39,.70) 100%
+  );
+  z-index:0;
+}
+
+/* Contenido superior */
+.page-hero--services .hero-top{
+  position: relative;
+  z-index: 2;
+}
+
+/* 🔽 LAS BURBUJAS BIEN ABAJO */
+.page-hero--services .hero-bubbles{
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  bottom: 48px !important;   /* 👈 MÁS ABAJO ACÁ */
+  z-index: 3;
+}
+
+/* Desktop OK */
+@media (max-width: 980px){
+  .page-hero--services{
+    min-height: 820px !important;
+    padding-bottom: 220px !important;
+  }
+}
+
+/* Mobile: no flotan, se apilan */
+@media (max-width: 520px){
+  .page-hero--services{
+    min-height: auto !important;
+    padding-bottom: 32px !important;
+  }
+
+  .page-hero--services .hero-bubbles{
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 24px;
+  }
+}
+.page-hero{
+  position: relative;
+  padding: 110px 0 100px;
+  color: #fff;
+  overflow: hidden;
+}
+
+.page-hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 18, 40, 0.70);
+  z-index: 1;
+}
+
+.page-hero > .container{
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero--empresa{
+  background-image: url("../assets/img/logo1.png.jpg");
+  background-size: 120%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 768px){
+  .page-hero{
+    padding: 90px 0 70px;
+  }
+}
+/* =====================================
+   FIX FINAL: Equipos + Obras con MÁS LUZ
+   (Pegalo al FINAL del CSS)
+===================================== */
+
+/* 1) Normalizamos para que el filtro NO aplique al texto */
+.page-hero.page-hero--image{
+  position: relative;
+}
+.page-hero.page-hero--image::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+.page-hero.page-hero--image > .container{
+  position: relative;
+  z-index: 2;
+}
+
+/* 2) EQUIPOS: foto más luminosa */
+.page-hero--equipos{
+  /* más luz real, sin lavar */
+  filter: brightness(1.18) contrast(1.06) saturate(1.08);
+}
+
+/* overlay más liviano (menos oscuro) */
+.page-hero--equipos::before{
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.30) 0%,
+    rgba(2,16,39,.22) 45%,
+    rgba(2,16,39,.18) 100%
+  ) !important;
+}
+
+/* 3) OBRAS: foto más luminosa */
+.page-hero--obras{
+  filter: brightness(1.20) contrast(1.05) saturate(1.10);
+}
+
+.page-hero--obras::before{
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.28) 0%,
+    rgba(2,16,39,.20) 45%,
+    rgba(2,16,39,.16) 100%
+  ) !important;
+}
+
+/* 4) Mobile: un toque menos para que no quede “quemado” */
+@media (max-width: 520px){
+  .page-hero--equipos{
+    filter: brightness(1.14) contrast(1.05) saturate(1.06);
+  }
+  .page-hero--obras{
+    filter: brightness(1.15) contrast(1.04) saturate(1.07);
+  }
+}
+/* =====================================
+   EQUIPOS — FOTO MÁS LUMINOSA (FINAL)
+===================================== */
+
+/* Realce de imagen SOLO en Equipos */
+.page-hero--equipos{
+  filter: brightness(1.18) contrast(1.06) saturate(1.08);
+}
+
+/* Overlay global de .page-hero--image te oscurece:
+   en Equipos lo hacemos más liviano */
+.page-hero--equipos::before{
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.20) 0%,
+    rgba(2,16,39,.16) 55%,
+    rgba(2,16,39,.12) 100%
+  ) !important;
+}
+
+/* Mobile: un toque menos para que no se “queme” */
+@media (max-width: 520px){
+  .page-hero--equipos{
+    filter: brightness(1.12) contrast(1.05) saturate(1.06);
+  }
+}
+/* =====================================
+   OBRAS — FOTO MÁS LUMINOSA (FINAL)
+===================================== */
+
+/* Realce de imagen SOLO en Obras */
+.page-hero--obras{
+  filter: brightness(1.20) contrast(1.05) saturate(1.10);
+}
+
+/* Overlay global: en Obras lo aclaramos */
+.page-hero--obras::before{
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.18) 0%,
+    rgba(2,16,39,.14) 55%,
+    rgba(2,16,39,.10) 100%
+  ) !important;
+}
+
+/* Mobile: control para que no quede “lavada” */
+@media (max-width: 520px){
+  .page-hero--obras{
+    filter: brightness(1.14) contrast(1.04) saturate(1.07);
+  }
+}
+/* =====================================================
+   OBRAS — FIX DEFINITIVO (FOTO REALMENTE CLARA)
+===================================================== */
+
+/* 1) Quitamos CUALQUIER overlay heredado */
+.page-hero--obras::before,
+.page-hero--obras::after{
+  content: none !important;
+}
+
+/* 2) Realce fuerte SOLO a la imagen */
+.page-hero--obras{
+  filter: brightness(1.35) contrast(1.05) saturate(1.12) !important;
+}
+
+/* 3) Overlay NUEVO, MUY LIVIANO (solo para legibilidad) */
+.page-hero--obras{
+  position: relative;
+}
+
+.page-hero--obras::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.12) 0%,
+    rgba(2,16,39,.18) 55%,
+    rgba(2,16,39,.22) 60%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 4) Texto siempre arriba */
+.page-hero--obras > .container{
+  position: relative;
+  z-index: 2;
+}
+
+/* 5) Mobile: bajamos un poco el brillo */
+@media (max-width: 520px){
+  .page-hero--obras{
+    filter: brightness(1.22) contrast(1.04) saturate(1.08) !important;
+  }
+}
+/* =====================================
+   HERO LA EMPRESA — MÁS ALTO
+===================================== */
+
+.page-hero.page-hero--image.page-hero--empresa{
+  height: 720px;          /* antes ~560 */
+  min-height: 720px;
+  padding-bottom: 180px;  /* espacio para burbujas */
+  background-position: center 22%;
+}
+/* =====================================
+   BURBUJAS DENTRO DEL HERO
+===================================== */
+
+.page-hero.page-hero--image.page-hero--empresa{
+  position: relative;
+}
+
+.page-hero.page-hero--image.page-hero--empresa .hero-bubbles{
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  bottom: 48px;        /* subí/bajá a gusto */
+  z-index: 3;
+}
+/* =====================================
+   HERO EMPRESA — 4 BURBUJAS
+===================================== */
+
+.hero-bubbles .grid-4{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 18px;
+}
+
+/* Tablet */
+@media (max-width: 980px){
+  .hero-bubbles .grid-4{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 520px){
+  .hero-bubbles .grid-4{
+    grid-template-columns: 1fr;
+  }
+}
+/* =====================================
+   SERVICIOS — HERO + BURBUJAS DENTRO
+===================================== */
+
+.page-hero.page-hero--image.page-hero--services{
+  position: relative;
+  height: 760px !important;
+  min-height: 760px !important;
+  padding: 64px 0 210px !important;   /* reserva para cards */
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center 24% !important;
+  overflow: hidden;
+}
+
+/* overlay liviano para que la foto no quede oscura */
+.page-hero.page-hero--image.page-hero--services::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.22) 0%,
+    rgba(2,16,39,.30) 45%,
+    rgba(2,16,39,.48) 100%
+  ) !important;
+  z-index: 0;
+  pointer-events:none;
+}
+
+.page-hero.page-hero--image.page-hero--services .hero-top{
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero.page-hero--image.page-hero--services .hero-bubbles{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 44px;
+  z-index: 3;
+}
+
+/* Grilla flexible (para 6 cards) */
+.services-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* Glass pro */
+.page-hero--services .services-grid .card{
+  background: rgba(2,16,39,.55) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.30);
+}
+
+@media (max-width: 980px){
+  .page-hero.page-hero--image.page-hero--services{
+    height: 860px !important;
+    min-height: 860px !important;
+    padding-bottom: 240px !important;
+  }
+  .services-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px){
+  .page-hero.page-hero--image.page-hero--services{
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 44px 0 24px !important;
+    background-position: center 30% !important;
+  }
+
+  .page-hero.page-hero--image.page-hero--services .hero-bubbles{
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 16px;
+  }
+
+  .services-grid{
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .page-hero--services .services-grid .card{
+    padding: 18px 18px !important;
+    border-radius: 18px !important;
+  }
+}
+/* =========================================
+   FIX MOBILE — Menú visible + sin superposición
+   Pegalo AL FINAL del styles.css
+========================================= */
+
+/* El header debe ser la referencia del drawer */
+header.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+/* En mobile: oculto nav/cta y muestro burger */
+@media (max-width: 860px){
+  header.site-header .nav-links,
+  header.site-header .cta{
+    display: none !important;
+  }
+  header.site-header .burger{
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #eef7ff;
+    background: rgba(2,16,39,.55);
+    border: 1px solid rgba(255,255,255,.16);
+  }
+}
+
+/* Drawer: desplegar debajo del header, por arriba del contenido */
+header.site-header{
+  position: sticky;
+  top: 0;
+}
+
+header.site-header .navbar{
+  position: relative;
+  z-index: 2;
+}
+
+/* El drawer se “cuelga” del header */
+header.site-header .mobile-drawer{
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 10000;
+
+  margin: 0 !important;
+  padding: 12px 0 16px !important;
+
+  background: rgba(2,16,39,.96) !important;
+  border-top: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Asegurar que el drawer “oculto” no ocupe lugar */
+header.site-header .mobile-drawer[hidden]{
+  display: none !important;
+}
+
+/* Evitar superposición: en mobile el main baja lo necesario */
+@media (max-width: 860px){
+  main#contenido{
+    padding-top: calc(var(--topbar-h) + var(--header-h)) !important;
+  }
+}
+
+/* Si tu topbar NO es sticky, igual reservamos una altura segura */
+@media (max-width: 520px){
+  main#contenido{
+    padding-top: calc(var(--header-h) + 16px) !important;
+  }
+}
+/* =========================================================
+   FIX DEFINITIVO MOBILE MENU (FORZADO)
+   Pegalo AL FINAL del styles.css
+========================================================= */
+
+/* 1) Header SIEMPRE arriba de todo */
+header{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 99999 !important;
+}
+
+/* 2) Asegurar que el contenedor del navbar quede por arriba */
+header .navbar{
+  position: relative !important;
+  z-index: 100000 !important;
+}
+
+/* 3) En mobile: ocultamos links/cta, mostramos burger */
+@media (max-width: 860px){
+  .nav-links,
+  .cta{
+    display: none !important;
+  }
+
+  .burger{
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 100001 !important;
+  }
+}
+
+/* 4) Drawer: que NO empuje layout y que quede “flotando” arriba */
+.mobile-drawer{
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+
+  /* debajo del header */
+  top: calc(var(--topbar-h) + var(--header-h)) !important;
+
+  z-index: 100000 !important;
+
+  background: rgba(2,16,39,.97) !important;
+  border-top: 1px solid rgba(255,255,255,.12) !important;
+
+  padding: 12px 16px 16px !important;
+  margin: 0 !important;
+
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+
+  max-height: calc(100vh - (var(--topbar-h) + var(--header-h))) !important;
+  overflow: auto !important;
+}
+
+/* 5) Cuando está oculto: oculto real */
+.mobile-drawer[hidden]{
+  display: none !important;
+}
+
+/* 6) Evitar que el contenido quede debajo del header en mobile */
+@media (max-width: 860px){
+  main#contenido{
+    padding-top: 14px !important; /* el header ya es sticky; no hace falta inflar */
+  }
+}
+
+/* 7) FIX extra: si alguna sección (hero) está arriba con z-index raro, la bajamos */
+.page-hero,
+.hero,
+.section{
+  position: relative !important;
+  z-index: 1 !important;
+}
+/* =========================================================
+   FIX DEFINITIVO — MOBILE MENU + SUPERPOSICIÓN
+   Pegalo al FINAL del styles.css
+========================================================= */
+
+/* Header SIEMPRE por arriba de todo */
+header.site-header{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 999999 !important;
+  background: rgba(4,26,58,.92) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(255,255,255,.10) !important;
+}
+
+/* La barra interna también arriba */
+header.site-header .navbar{
+  position: relative !important;
+  z-index: 999999 !important;
+}
+
+/* En mobile: ocultar nav/cta, mostrar burger sí o sí */
+@media (max-width: 860px){
+  header.site-header .nav-links,
+  header.site-header .cta{
+    display: none !important;
+  }
+
+  header.site-header .burger{
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 44px !important;
+    height: 44px !important;
+
+    border-radius: 12px !important;
+    border: 1px solid rgba(255,255,255,.16) !important;
+    background: rgba(2,16,39,.55) !important;
+    color: #eef7ff !important;
+
+    position: relative !important;
+    z-index: 1000000 !important;
+  }
+}
+
+/* Drawer: flotante, siempre visible por arriba del contenido */
+header.site-header .mobile-drawer{
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+
+  /* debajo del header */
+  top: calc(var(--topbar-h) + var(--header-h)) !important;
+
+  z-index: 1000000 !important;
+
+  margin: 0 !important;
+  padding: 12px 16px 16px !important;
+
+  background: rgba(2,16,39,.97) !important;
+  border-top: 1px solid rgba(255,255,255,.12) !important;
+
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+
+  max-height: calc(100vh - (var(--topbar-h) + var(--header-h))) !important;
+  overflow: auto !important;
+
+  display: block !important; /* <- clave: no depender de reglas viejas */
+}
+
+/* Oculto real cuando tiene hidden */
+header.site-header .mobile-drawer[hidden]{
+  display: none !important;
+}
+
+/* Evitar superposición del contenido con topbar+header en mobile */
+@media (max-width: 860px){
+  main#contenido{
+    padding-top: 8px !important; /* no inflamos de más */
+  }
+}
+
+/* Asegurar que ningún hero/overlay tape el menú */
+.page-hero,
+.hero,
+.section,
+.page-hero::before,
+.page-hero::after{
+  z-index: 0 !important;
+}
+/* =========================================================
+   FIX DEFINITIVO — BURGER + DRAWER (usa data-attributes)
+   Pegalo AL FINAL del styles.css
+========================================================= */
+
+/* Header siempre arriba */
+header{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 999999 !important;
+}
+
+/* En mobile: ocultar links y cta, mostrar burger */
+@media (max-width: 860px){
+  .nav-links,
+  .cta{
+    display: none !important;
+  }
+
+  /* Burger visible sí o sí */
+  [data-burger]{
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 44px !important;
+    height: 44px !important;
+
+    border-radius: 12px !important;
+    border: 1px solid rgba(255,255,255,.16) !important;
+    background: rgba(2,16,39,.70) !important;
+    color: #eef7ff !important;
+
+    position: relative !important;
+    z-index: 1000000 !important;
+  }
+}
+
+/* Drawer: panel flotante por arriba de todo */
+[data-drawer]{
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+
+  /* debajo del header (y topbar si existe) */
+  top: calc(var(--topbar-h) + var(--header-h)) !important;
+
+  z-index: 1000000 !important;
+  padding: 12px 16px 16px !important;
+
+  background: rgba(2,16,39,.97) !important;
+  border-top: 1px solid rgba(255,255,255,.12) !important;
+
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+
+  max-height: calc(100vh - (var(--topbar-h) + var(--header-h))) !important;
+  overflow: auto !important;
+
+  display: block !important;
+}
+
+/* Oculto real cuando tiene hidden */
+[data-drawer][hidden]{
+  display: none !important;
+}
+/* Quitar franja de fondo debajo del footer en mobile */
+@media (max-width: 520px){
+  body{
+    padding-bottom: 0 !important;
+  }
+
+  /* Si querés mantener espacio para el botón WhatsApp, que sea dentro del contenido */
+  main{
+    padding-bottom: 90px;
+  }
+
+  .footer{
+    margin-bottom: 0 !important;
+  }
+}
+/* =========================
+   MOBILE MENU (FIX)
+   - drawer bajo header fixed/sticky
+========================= */
+@media (max-width: 860px){
+  header.site-header{
+    z-index: 9999;
+  }
+
+  .mobile-drawer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: rgba(2,16,39,.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255,255,255,.10);
+    padding: 10px 0 14px;
+  }
+
+  .mobile-drawer a{
+    margin: 8px 12px;
+  }
+}
+/* =========================
+   MOBILE MENU (FIX)
+   - drawer bajo header fixed/sticky
+========================= */
+@media (max-width: 860px){
+  header.site-header{
+    z-index: 9999;
+  }
+
+  .mobile-drawer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: rgba(2,16,39,.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255,255,255,.10);
+    padding: 10px 0 14px;
+  }
+
+  .mobile-drawer a{
+    margin: 8px 12px;
+  }
+}
+/* =========================
+   LAYOUT FIX: sin hueco bajo el footer
+========================= */
+html, body{ height: 100%; }
+
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main{ flex: 1 0 auto; }
+footer{ margin-top: auto; }
+/* =========================
+   HERO IMAGE: FIX MOBILE (Obras / Flota / etc.)
+========================= */
+@media (max-width: 520px){
+  .page-hero.page-hero--image{
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 42px 0 22px !important;
+    background-position: center 30% !important;
+  }
+
+  /* evita textos “apretados” */
+  .page-hero.page-hero--image h1{
+    font-size: 34px !important;
+    line-height: 1.08 !important;
+  }
+
+  /* si hay burbujas dentro del hero, que no floten */
+  .page-hero.page-hero--image .hero-bubbles{
+    position: relative !important;
+    inset: auto !important;
+    margin-top: 14px !important;
+  }
+
+  .page-hero.page-hero--image .hero-bubbles .grid-3,
+  .page-hero.page-hero--image .hero-bubbles .grid-4{
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+/* =========================================================
+   FIX REAL MOBILE — eliminar alturas forzadas
+========================================================= */
+
+@media (max-width: 520px){
+
+  /* HERO PRINCIPAL (index) */
+  .hero,
+  .hero-full,
+  .hero-media,
+  .hero-full-media{
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* Grilla debajo del hero (index) */
+  .hero-grid,
+  .hero-grid-below{
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Cards grandes que empujan el layout */
+  .hero-card{
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* Page heroes (Empresa / Obras / Flota / Equipos / Servicios) */
+  .page-hero,
+  .page-hero--image{
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 24px !important;
+  }
+
+  /* Burbujas dentro del hero: que NO floten */
+  .hero-bubbles{
+    position: relative !important;
+    bottom: auto !important;
+    inset: auto !important;
+    margin-top: 16px !important;
+  }
+
+  /* Grillas de burbujas */
+  .hero-bubbles .grid-3,
+  .hero-bubbles .grid-4,
+  .services-grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer pegado al contenido */
+  footer{
+    margin-top: 0 !important;
+  }
+}
+/* FIX de emergencia: elimina cualquier fondo rojo */
+html, body{
+  background: #0b1220 !important; /* tu azul oscuro base */
+}
+@media (max-width: 520px){
+  .page-hero,
+  .page-hero--image{
+    min-height: auto !important;
+    height: auto !important;
+    padding-bottom: 18px !important;
+  }
+
+  .hero-overlay-box,
+  .hero-bubbles{
+    margin-top: 14px !important;
+  }
+
+  html, body{ overflow-x: hidden; }
+}
+/* =========================================================
+   FIX MOBILE HERO TEXT — Flota / Obras / Equipos
+========================================================= */
+
+@media (max-width: 520px){
+
+  /* El hero NO debe forzar altura */
+  .page-hero,
+  .page-hero--image{
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* El contenedor de texto vuelve al flujo normal */
+  .page-hero .hero-top,
+  .page-hero .container{
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+  }
+
+  /* Título principal */
+  .page-hero h1{
+    font-size: 34px !important;
+    line-height: 1.05 !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* Subtítulos / descripciones */
+  .page-hero p,
+  .page-hero .lead{
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Quitar cualquier solape por márgenes negativos */
+  .page-hero *{
+    margin-top: 0 !important;
+  }
+
+  /* Evita que capas del hero se monten */
+  .page-hero::before,
+  .page-hero::after{
+    display: none !important;
+  }
+}
+/* =========================================================
+   PATCH FINAL (MOBILE) — Heroes y solapes
+   Flota / Obras / Equipos + evita “rojo” y layouts rotos
+========================================================= */
+
+@media (max-width: 520px){
+
+  /* 0) Reset de daños comunes */
+  .page-hero,
+  .page-hero--image{
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 42px 0 22px !important;
+    display: block !important;
+  }
+
+  /* 1) Nunca filtres el hero completo en mobile (afecta texto y colores) */
+  .page-hero.page-hero--image{
+    filter: none !important;
+  }
+
+  /* 2) Overlay: que exista pero no tape ni corte */
+  .page-hero.page-hero--image::before{
+    display: block !important;
+    opacity: 1 !important;
+  }
+
+  /* 3) Contenedor principal a ancho correcto */
+  .page-hero.page-hero--image > .container{
+    position: relative !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  /* 4) Texto superior (breadcrumb/h1/p) SIN posiciones absolutas */
+  .page-hero.page-hero--image .hero-top{
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .page-hero.page-hero--image h1{
+    margin: 0 0 10px 0 !important;
+    font-size: 34px !important;
+    line-height: 1.05 !important;
+  }
+
+  .page-hero.page-hero--image p{
+    margin: 0 !important;
+    font-size: 15px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* 5) Burbujas/overlay-box dejan de flotar en mobile */
+  .page-hero.page-hero--image .hero-bubbles,
+  .page-hero.page-hero--image .hero-overlay-box{
+    position: relative !important;
+    inset: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin-top: 14px !important;
+    z-index: 2 !important;
+  }
+
+  .page-hero.page-hero--image .grid-3,
+  .page-hero.page-hero--image .grid-4,
+  .page-hero.page-hero--image .services-grid{
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* 6) Evita cortes por separadores/after heredados */
+  .page-hero.page-hero--image::after{
+    content: none !important;
+    display: none !important;
+  }
+}
+/* =========================================
+   FIX MOBILE — FLOTA (evita solape de textos)
+   Pegalo AL FINAL del CSS
+========================================= */
+@media (max-width: 520px){
+
+  /* El hero se comporta normal (sin alturas raras) */
+  .page-hero.page-hero--image.page-hero--fleet{
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 44px 0 22px !important;
+    display: block !important;
+  }
+
+  /* El texto superior queda en flujo normal */
+  .page-hero.page-hero--image.page-hero--fleet .hero-top,
+  .page-hero.page-hero--image.page-hero--fleet > .container{
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+
+  /* CLAVE: métricas dejan de ser absolute/fixed y NO pisan el título */
+  .page-hero.page-hero--image.page-hero--fleet .fleet-metrics,
+  .page-hero.page-hero--image.page-hero--fleet > .fleet-metrics{
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    top: auto !important;
+    transform: none !important;
+
+    width: 100% !important;
+    margin: 16px 0 0 0 !important;
+
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  /* Evita que “burbujas” o cajas generen más solapes */
+  .page-hero.page-hero--image.page-hero--fleet .fleet-item,
+  .page-hero.page-hero--image.page-hero--fleet .metric,
+  .page-hero.page-hero--image.page-hero--fleet .fleet-metrics > *{
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  /* Tipografías controladas para que no se “encimen” */
+  .page-hero.page-hero--image.page-hero--fleet h1{
+    font-size: 34px !important;
+    line-height: 1.06 !important;
+    margin: 0 0 10px 0 !important;
+  }
+
+  .page-hero.page-hero--image.page-hero--fleet p{
+    margin: 0 !important;
+  }
+}
+/* =========================================
+   FIX MOBILE — OBRAS (burbujas prolijas)
+   Pegalo AL FINAL del CSS
+========================================= */
+@media (max-width: 520px){
+
+  /* Hero de Obras: sin alturas forzadas */
+  .page-hero.page-hero--image.page-hero--obras{
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 42px 0 22px !important;
+    display: block !important;
+  }
+
+  /* Asegurar contenedor en flujo normal */
+  .page-hero.page-hero--image.page-hero--obras > .container{
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  /* Burbujas: dejar de “flotar” y pasar debajo del título */
+  .page-hero.page-hero--image.page-hero--obras .hero-bubbles{
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    top: auto !important;
+    transform: none !important;
+
+    margin-top: 16px !important;
+    z-index: 2 !important;
+  }
+
+  /* Grilla: 1 columna (sin desfasajes) */
+  .page-hero.page-hero--image.page-hero--obras .hero-bubbles .grid-3,
+  .page-hero.page-hero--image.page-hero--obras .hero-bubbles .grid-4{
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin: 0 !important;
+  }
+
+  /* Cards al 100% (evita la “columna derecha”) */
+  .page-hero.page-hero--image.page-hero--obras .hero-bubbles .card{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 18px 18px !important;
+    border-radius: 18px !important;
+  }
+
+  /* Tipografía del título en mobile */
+  .page-hero.page-hero--image.page-hero--obras h1{
+    font-size: 34px !important;
+    line-height: 1.06 !important;
+    margin: 0 0 10px 0 !important;
+  }
+
+  /* Si tenés overlays extra en Obras, no los mates: solo aseguramos capas */
+  .page-hero.page-hero--image.page-hero--obras::before,
+  .page-hero.page-hero--image.page-hero--obras::after{
+    z-index: 0 !important;
+  }
+}

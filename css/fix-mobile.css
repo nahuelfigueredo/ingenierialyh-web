@@ -1,0 +1,83 @@
+/* =========================================================
+   FIX MOBILE (override) — L&H
+   Se carga DESPUÉS de styles.css para pisar todo lo roto
+========================================================= */
+
+@media (max-width: 520px){
+
+  html, body{
+    overflow-x: hidden !important;
+  }
+
+  /* HERO (Obras/Flota/Equipos/Servicios/Empresa) */
+  .page-hero,
+  .page-hero--image{
+    height: auto !important;
+    min-height: 0 !important;
+    display: block !important;
+    padding: 42px 0 22px !important;
+    margin: 0 !important;
+  }
+
+  /* Evita colores raros: NO filtres el section entero */
+  .page-hero.page-hero--image{
+    filter: none !important;
+  }
+
+  /* Overlay estable */
+  .page-hero.page-hero--image::before{
+    display:block !important;
+    opacity:1 !important;
+  }
+  .page-hero.page-hero--image::after{
+    content:none !important;
+    display:none !important;
+  }
+
+  /* Contenido siempre en flujo normal */
+  .page-hero.page-hero--image > .container{
+    position: relative !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .page-hero.page-hero--image .hero-top{
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .page-hero.page-hero--image h1{
+    font-size: 34px !important;
+    line-height: 1.05 !important;
+    margin: 0 0 10px 0 !important;
+  }
+
+  .page-hero.page-hero--image p{
+    font-size: 15px !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+  }
+
+  /* Si hay burbujas/tablas flotantes, en mobile NO flotan */
+  .hero-bubbles,
+  .hero-overlay-box{
+    position: relative !important;
+    inset: auto !important;
+    bottom: auto !important;
+    margin-top: 14px !important;
+    z-index: 2 !important;
+  }
+
+  .hero-bubbles .grid-3,
+  .hero-bubbles .grid-4,
+  .services-grid{
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
