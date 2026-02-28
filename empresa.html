@@ -6,36 +6,22 @@
   <title>La Empresa | Ingeniería L&H SRL</title>
   <meta name="description" content="Misión, visión, valores y enfoque operativo de Ingeniería L&H SRL." />
   <link rel="icon" href="assets/img/favicon/ChatGPT Image 8 ene 2026, 00_31_26.png" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/techint.css" />
 </head>
-<body>
+
+<body class="page">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <div class="topbar">
-    <div class="container wrap">
-      <div>
-        <span class="badge">HSE • Seguridad y cumplimiento</span>
-        <span style="margin-left:10px">Emergencias 24/7</span>
-      </div>
-      <div>
-        <a href="mailto:contacto@empresa.com">info@ingenieria.com.ar</a>
-        <span style="margin:0 8px">|</span>
-        <a href="https://wa.me/5492214616511" target="_blank" rel="noopener">+5492214616511</a>
-      </div>
-    </div>
-  </div>
-
-  <header>
+  <!-- NAVBAR -->
+  <header class="site-header" data-header>
     <div class="container navbar">
       <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
-        <div class="title">
-          <strong>Ingeniería L&H SRL</strong>
-          <span>Construcciones Industriales</span>
-        </div>
-      </a>
+  <img class="brand-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" />
+  
+</a>
 
       <nav class="nav-links" aria-label="Navegación principal">
-        <a href="empresa.html" class="active">La Empresa</a>
+        <a href="empresa.html" aria-current="page">La Empresa</a>
         <a href="servicios.html">Servicios</a>
         <a href="flota.html">Flota</a>
         <a href="equipos.html">Equipos</a>
@@ -60,69 +46,102 @@
   </header>
 
   <main id="contenido">
+   <!-- HERO institucional (solo imagen) -->
+<section
+  class="page-hero page-hero--image page-hero--empresa"
+  style="background-image:url('assets/img/empresa/Fabricacion-de-Chimenea.jpg');"
+  aria-hidden="true"
+></section>
 
-    <!-- HERO CON IMAGEN + BURBUJAS DENTRO -->
-    <section class="page-hero page-hero--image page-hero--empresa"
-      style="background-image:url('assets/img/logo1.png.jpg');">
+<!-- Título debajo del hero -->
+<section class="section section-title-block">
+  <div class="container">
+    <div class="section-title section-title--empresa">
+      <h2>La Empresa</h2>
+    </div>
+  </div>
+</section>
 
-      <div class="container hero-top">
-        <div class="breadcrumb">Inicio / La Empresa</div>
-        <h1>La Empresa</h1>
-        <p>Ingeniería L&H SRL es una empresa dedicada al mantenimiento industrial...</p>
-      </div>
+    <!-- Sección estilo “3 fotos + 3 frases” (premium) -->
+    <section class="section alt empresa-mosaic empresa-mosaic--edge">
+      <div class="container container-edge">
+        <div class="tiles-pairs tiles-pairs--alt">
+          <!-- FILA 1: FOTO | TEXTO -->
+          <figure class="tile tile-media reveal">
+            <img src="assets/img/empresa/06-2.png" alt="Construcción y montaje de equipos de proceso" loading="lazy">
+          </figure>
 
-      <!-- BURBUJAS DENTRO DE LA FOTO -->
-      <div class="hero-bubbles" aria-label="Misión, visión y valores">
-        <div class="container">
-          <div class="grid-3">
-            <article class="card reveal">
-              <h3>Misión</h3>
-              <p>
-                Ser una empresa de renombre en mantenimiento industrial y servicios, flexible e innovadora,
-                satisfaciendo necesidades internas y externas mediante trabajo en equipo, capacitación y dedicación.
-              </p>
-            </article>
+          <article class="tile tile-text reveal">
+            <p>
+              <strong>Ingeniería L&amp;H</strong> trabaja para ofrecer servicios, bienes y obras para el mantenimiento,
+              construcción de equipos y plantas de proceso.
+            </p>
+            <p>
+              Desarrollamos una fuerte especialización en <strong>intercambiadores de calor</strong>, <strong>hornos de proceso</strong>,
+              <strong>acumuladores</strong> y <strong>columnas de destilación</strong>.
+            </p>
+          </article>
 
-            <article class="card reveal">
-              <h3>Visión</h3>
-              <p>
-                Ser admirada y confiable, con mejora continua, adaptación al cambio y compromiso con las necesidades
-                y expectativas de nuestros clientes.
-              </p>
-            </article>
+          <!-- FILA 2: TEXTO | FOTO (en desktop) -->
+          <article class="tile tile-text reveal">
+            <p>
+              Todas las tareas se realizan en <strong>obras programadas</strong>, <strong>emergencias</strong> o
+              <strong>paradas de planta</strong>.
+            </p>
+            <p>
+              Esto implica un importante desarrollo de la programación y coordinación de todos los recursos involucrados.
+            </p>
+          </article>
 
-            <article class="card reveal">
-              <h3>Valores</h3>
-              <p>
-                Capacitación permanente, cumplimiento de política de seguridad, mejora continua y compromiso responsable
-                hacia nuestros públicos.
-              </p>
-            </article>
-          </div>
+          <figure class="tile tile-media reveal">
+            <img src="assets/img/empresa/Fabricacion-de-Chimenea.jpg" alt="Tareas operativas y mantenimiento en planta" loading="lazy">
+          </figure>
+
+          <!-- FILA 3: FOTO | TEXTO -->
+          <figure class="tile tile-media reveal">
+            <img src="assets/img/empresa/Liea-Red-de-Incendio-Pao.jpg" alt="Infraestructura y montaje industrial" loading="lazy">
+          </figure>
+
+          <article class="tile tile-text reveal">
+            <p>
+              Toda la exitosa y vasta experiencia de Ingeniería L&amp;H la hacemos realidad en <strong>soluciones</strong> de acuerdo
+              a las necesidades específicas de nuestros clientes.
+            </p>
+            <p>
+              Esperamos su consulta para poder asesorarlo, sin compromiso, en su próximo proyecto.
+            </p>
+          </article>
         </div>
       </div>
 
-    
-
-   
+      <div class="empresa-cta">
+        <a class="btn btn-primary" href="servicios.html">Conozca nuestros servicios</a>
+      </div>
     </section>
-
   </main>
 
   <footer class="footer">
-    <div class="container footer-grid">
-      <div><strong>Ingeniería L&H SRL</strong><br/><span>Construcciones Industriales</span></div>
-      <div>
-        <div><a href="servicios.html">Servicios</a></div>
-        <div><a href="obras.html">Obras</a></div>
-        <div><a href="contacto.html">Contacto</a></div>
-      </div>
-      <div>
-        <div>WhatsApp: +54 9 221 616 8685</div>
-        <div>Email: Info@ingenieria.com.ar</div>
-      </div>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
+        <img class="footer-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" loading="lazy">
+      </a>
+
+      
     </div>
-  </footer>
+
+    <div class="footer-links">
+      <div><a href="servicios.html">Servicios</a></div>
+      <div><a href="obras.html">Obras</a></div>
+      <div><a href="contacto.html">Contacto</a></div>
+    </div>
+
+    <div class="footer-contact">
+      <div>WhatsApp: +54 9 221 616 8685</div>
+      <div>Email: Info@ingenieria.com.ar</div>
+    </div>
+  </div>
+</footer>
 
   <a class="whatsapp-fab" href="https://wa.me/5492216168685" target="_blank" rel="noopener">WhatsApp</a>
   <script src="js/main.js"></script>

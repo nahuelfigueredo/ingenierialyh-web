@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Obra | Ingeniería L&amp;H SRL</title>
+  <meta name="description" content="Detalle de obra realizada por Ingeniería L&amp;H SRL." />
+  <link rel="icon" href="assets/img/favicon/ChatGPT Image 8 ene 2026, 00_31_26.png" />
+  <link rel="stylesheet" href="css/techint.css" />
+</head>
+
+<body class="page page-obra">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- NAVBAR -->
+  <header class="site-header" data-header>
+    <div class="container navbar">
+      <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
+        <img class="brand-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" />
+      </a>
+
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="empresa.html">La Empresa</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="flota.html">Flota</a>
+        <a href="equipos.html">Equipos</a>
+        <a href="obras.html">Obras</a>
+        <a href="clientes.html">Clientes</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+
+      <a class="cta" href="contacto.html">Solicitar cotización</a>
+      <button class="burger" data-burger aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+
+    <div class="container mobile-drawer" data-drawer hidden>
+      <a href="empresa.html">La Empresa</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="flota.html">Flota</a>
+      <a href="equipos.html">Equipos</a>
+      <a href="obras.html">Obras</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="section">
+      <!-- container wide SOLO en esta página -->
+      <div class="container container--wide">
+
+        <a class="back-link" href="obras.html" data-back-link aria-label="Volver a Obras">← Volver</a>
+
+        <div class="breadcrumb">
+          <a href="index.html">Inicio</a> /
+          <a href="obras.html">Obras</a> /
+          <span data-obra-title>Detalle</span>
+        </div>
+
+        <div class="section-title section-title--stack" style="margin-top:14px">
+          <h1 data-obra-title>Obra</h1>
+          <p data-obra-short>Descripción breve.</p>
+        </div>
+
+        <!-- DETALLE (descripción arriba, galería abajo) -->
+        <div class="work-detail work-detail--stack">
+          <!-- INFO ARRIBA -->
+          <section class="work-detail__top">
+            <dl class="work-facts" data-obra-facts></dl>
+
+            <div class="work-desc">
+              <h3>Descripción de las tareas realizadas</h3>
+              <div data-obra-long></div>
+            </div>
+          </section>
+
+          <!-- GALERÍA ABAJO -->
+          <div class="work-detail__gallery">
+            <div class="work-detail__frame" data-gallery-frame></div>
+
+            <div class="work-detail__controls">
+              <button class="work-detail__btn" type="button" data-prev aria-label="Anterior">‹</button>
+              <div class="work-detail__counter" data-counter>1 / 1</div>
+              <button class="work-detail__btn" type="button" data-next aria-label="Siguiente">›</button>
+            </div>
+
+            <div class="work-detail__thumbs" data-thumbs></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
+          <img class="footer-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" loading="lazy">
+        </a>
+
+        <div class="footer-brand-text">
+          <strong>Ingeniería L&amp;H SRL</strong><br/>
+          <span>Construcciones Industriales</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div><a href="servicios.html">Servicios</a></div>
+        <div><a href="obras.html">Obras</a></div>
+        <div><a href="contacto.html">Contacto</a></div>
+      </div>
+
+      <div class="footer-contact">
+        <div>WhatsApp: +54 9 221 616 8685</div>
+        <div>Email: Info@ingenieria.com.ar</div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-fab" href="https://wa.me/5492216168685" target="_blank" rel="noopener">WhatsApp</a>
+
+  <!-- 1) Datos -->
+  <script src="js/obras-data.js"></script>
+
+  <!-- 2) Render detalle -->
+  <script>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const id = params.get("id");
+
+      // Debe existir window.OBRAS = [...]
+      const obra = (window.OBRAS || []).find((o) => o.id === id) || null;
+
+      const titleEls = document.querySelectorAll("[data-obra-title]");
+      const shortEl = document.querySelector("[data-obra-short]");
+      const factsEl = document.querySelector("[data-obra-facts]");
+      const longEl = document.querySelector("[data-obra-long]");
+
+      const frame = document.querySelector("[data-gallery-frame]");
+      const thumbs = document.querySelector("[data-thumbs]");
+      const counter = document.querySelector("[data-counter]");
+      const btnPrev = document.querySelector("[data-prev]");
+      const btnNext = document.querySelector("[data-next]");
+
+      if (!obra) {
+        titleEls.forEach((el) => (el.textContent = "Obra no encontrada"));
+        if (shortEl) shortEl.textContent = "Volvé a Obras y elegí un proyecto.";
+        if (longEl) longEl.innerHTML = "";
+        if (factsEl) factsEl.innerHTML = "";
+        if (frame) frame.innerHTML = '<div class="work-detail__empty">Sin datos para este ID.</div>';
+        if (counter) counter.textContent = "0 / 0";
+        if (btnPrev) btnPrev.disabled = true;
+        if (btnNext) btnNext.disabled = true;
+        return;
+      }
+
+      document.title = `${obra.title} | Obras`;
+      titleEls.forEach((el) => (el.textContent = obra.title));
+      if (shortEl) shortEl.textContent = obra.short || "";
+
+      // Facts (respetando orden)
+      if (factsEl) {
+        factsEl.innerHTML = "";
+        const facts = obra.facts || {};
+        const order = ["Lugar", "Planta", "Cliente", "Empresa", "Obra", "Año"];
+        order.forEach((k) => {
+          if (!facts[k]) return;
+
+          const dt = document.createElement("dt");
+          dt.textContent = k;
+
+          const dd = document.createElement("dd");
+          dd.textContent = String(facts[k]);
+
+          factsEl.appendChild(dt);
+          factsEl.appendChild(dd);
+        });
+      }
+
+      // Long desc (HTML)
+      if (longEl) longEl.innerHTML = obra.longHtml || "";
+
+      // Gallery
+      const images = Array.isArray(obra.images) ? obra.images : [];
+      let i = 0;
+
+      const render = () => {
+        if (!frame) return;
+        frame.innerHTML = "";
+
+        if (!images.length) {
+          frame.innerHTML = '<div class="work-detail__empty">Sin imágenes.</div>';
+          if (counter) counter.textContent = "0 / 0";
+          if (btnPrev) btnPrev.disabled = true;
+          if (btnNext) btnNext.disabled = true;
+          return;
+        }
+
+        const img = document.createElement("img");
+        img.className = "work-detail__img";
+        img.src = images[i];
+        img.alt = `${obra.title} - Foto ${i + 1}`;
+        img.loading = "lazy";
+        img.decoding = "async";
+        frame.appendChild(img);
+
+        if (counter) counter.textContent = `${i + 1} / ${images.length}`;
+
+        if (btnPrev) btnPrev.disabled = images.length <= 1;
+        if (btnNext) btnNext.disabled = images.length <= 1;
+
+        if (thumbs) {
+          thumbs.querySelectorAll("button").forEach((b, idx) => {
+            b.classList.toggle("is-active", idx === i);
+          });
+        }
+      };
+
+      const prev = () => {
+        if (!images.length) return;
+        i = (i - 1 + images.length) % images.length;
+        render();
+      };
+
+      const next = () => {
+        if (!images.length) return;
+        i = (i + 1) % images.length;
+        render();
+      };
+
+      if (btnPrev) btnPrev.addEventListener("click", prev);
+      if (btnNext) btnNext.addEventListener("click", next);
+
+      if (thumbs) {
+        thumbs.innerHTML = "";
+        images.forEach((src, idx) => {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "work-detail__thumb" + (idx === 0 ? " is-active" : "");
+          b.innerHTML = `<img src="${src}" alt="">`;
+          b.addEventListener("click", () => {
+            i = idx;
+            render();
+          });
+          thumbs.appendChild(b);
+        });
+      }
+
+      render();
+    })();
+  </script>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

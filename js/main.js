@@ -1,137 +1,160 @@
 /* =========================================================
-   main.js — Ingeniería L&H (PRO)
+   main.js — Ingeniería L&H (LIMPIO)
    - Burger menu (mobile)
    - Reveal on scroll
-   - Header solid al scroll (sobre hero)
-   - Hero video slider (playlist) con fade + rotación por tiempo
-   - Side video slider (columna derecha) con rotación por END (ended)
+   - Header solid al scroll
+   - Hero video slider (playlist) por tiempo
+   - Side video slider por ended
+   - Slider de imágenes (Obras)
+   - Hero Carousel (Flota) imágenes
+   - Lightbox Galería (gallery img)
 ========================================================= */
 
 (function () {
   "use strict";
 
   /* -------------------------
+     Helpers
+  -------------------------- */
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  function uniqTruthy(arr) {
+    const out = [];
+    const seen = new Set();
+    arr.forEach((v) => {
+      const s = (v || "").trim();
+      if (!s) return;
+      if (seen.has(s)) return;
+      seen.add(s);
+      out.push(s);
+    });
+    return out;
+  }
+
+  function setVideoSource(videoEl, src) {
+    try { videoEl.pause(); } catch (_) {}
+    try {
+      videoEl.removeAttribute("src");
+      videoEl.load();
+    } catch (_) {}
+    videoEl.src = src;
+    videoEl.load();
+  }
+
+  function playSafe(videoEl) {
+    try {
+      const p = videoEl.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    } catch (_) {}
+  }
+
+  /* -------------------------
      Burger menu (mobile)
   -------------------------- */
-  const burger = document.querySelector("[data-burger]");
-  const drawer = document.querySelector("[data-drawer]");
+  (function burgerMenu() {
+    const burger = $("[data-burger]");
+    const drawer = $("[data-drawer]");
+    if (!burger || !drawer) return;
 
-  if (burger && drawer) {
-    burger.addEventListener("click", () => {
-      const isHidden = drawer.hasAttribute("hidden");
-      if (isHidden) drawer.removeAttribute("hidden");
+    function setOpen(open) {
+      if (open) drawer.removeAttribute("hidden");
       else drawer.setAttribute("hidden", "");
-      burger.setAttribute("aria-expanded", String(isHidden));
+      burger.setAttribute("aria-expanded", String(open));
+    }
+
+    burger.addEventListener("click", () => {
+      const open = drawer.hasAttribute("hidden");
+      setOpen(open);
     });
-  }
+
+    drawer.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (a) setOpen(false);
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+  })();
 
   /* -------------------------
      Reveal on scroll
   -------------------------- */
-  const revealEls = Array.from(document.querySelectorAll(".reveal"));
-  if (revealEls.length) {
+  (function revealOnScroll() {
+    const revealEls = $$(".reveal");
+    if (!revealEls.length) return;
+
     if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) e.target.classList.add("is-visible");
-          });
-        },
+        (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("is-visible")),
         { threshold: 0.12 }
       );
       revealEls.forEach((el) => io.observe(el));
     } else {
       revealEls.forEach((el) => el.classList.add("is-visible"));
     }
-  }
+  })();
 
   /* -------------------------
      Header sólido al scroll
-     Requiere: <header data-header ...>
   -------------------------- */
-  const header = document.querySelector("[data-header]");
-  if (header) {
+  (function solidHeader() {
+    const header = $("[data-header]");
+    if (!header) return;
+
     const solidAt = 40;
     const onScroll = () => {
       if (window.scrollY > solidAt) header.classList.add("is-solid");
       else header.classList.remove("is-solid");
     };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-  }
+  })();
 
   /* =========================================================
      HERO VIDEO SLIDER (arriba)
-     Rotación por tiempo (DURATION)
-     Requiere:
-     <div class="hero-media video">
-       <video class="hero-video is-active" ...></video>
-       <video class="hero-video" ...></video>
-     </div>
   ========================================================= */
   (function heroSlider() {
-    const container = document.querySelector(".hero-media.video");
+    const container = $(".hero-media.video");
     if (!container) return;
 
-    const videos = Array.from(container.querySelectorAll("video.hero-video"));
-    if (videos.length < 2) {
-      console.warn("[hero-slider] Necesitás 2 <video class='hero-video'>. Encontrados:", videos.length);
-      return;
-    }
+    const videos = $$("video.hero-video", container);
+    if (videos.length < 2) return;
 
-    // ✅ EDITÁ ACÁ tus rutas reales
-    const playlist = [
+    const playlist = uniqTruthy([
       "assets/video/9339478-uhd_3840_2160_24fps.mp4",
-      
-    ];
-
+      // "assets/video/otro.mp4",
+    ]);
     if (playlist.length < 1) return;
 
-    const DURATION = 12000; // ms por video
-    const FADE_MS = 800;    // debe coincidir con CSS (opacity transition)
+    const DURATION = 12000;
+    const FADE_MS = 800;
 
     videos.forEach((v) => {
       v.muted = true;
       v.playsInline = true;
       v.autoplay = true;
       v.preload = "auto";
-      v.loop = true; // evita freeze si el clip termina antes del timer
+      v.loop = true;
     });
 
     let index = 0;
     let active = 0;
     let timer = null;
 
-    function setSource(videoEl, src) {
-      try {
-        videoEl.pause();
-        videoEl.removeAttribute("src");
-        videoEl.load();
-        videoEl.src = src;
-        videoEl.load();
-      } catch (e) {
-        console.warn("[hero-slider] setSource error:", e);
-      }
-    }
-
-    function playSafe(videoEl) {
-      const p = videoEl.play();
-      if (p && typeof p.catch === "function") p.catch(() => {});
-    }
-
     function scheduleNext() {
       clearTimeout(timer);
-      timer = setTimeout(() => {
-        const nextIndex = (index + 1) % playlist.length;
-        swapTo(nextIndex);
-      }, DURATION);
+      if (playlist.length <= 1) return;
+      timer = setTimeout(() => swapTo((index + 1) % playlist.length), DURATION);
     }
 
     function swapTo(nextIndex) {
       const next = 1 - active;
       const nextSrc = playlist[nextIndex];
 
-      setSource(videos[next], nextSrc);
+      setVideoSource(videos[next], nextSrc);
       videos[next].loop = true;
 
       const onCanPlay = () => {
@@ -141,172 +164,234 @@
         videos[active].classList.remove("is-active");
         videos[next].classList.add("is-active");
 
-        setTimeout(() => {
-          try { videos[active].pause(); } catch (_) {}
-        }, FADE_MS + 50);
+        setTimeout(() => { try { videos[active].pause(); } catch (_) {} }, FADE_MS + 50);
 
         active = next;
         index = nextIndex;
-
         scheduleNext();
       };
 
-      const onError = () => {
-        console.warn("[hero-slider] No se pudo cargar:", nextSrc);
-        const fallback = (nextIndex + 1) % playlist.length;
-        swapTo(fallback);
-      };
-
       videos[next].addEventListener("canplay", onCanPlay, { once: true });
-      videos[next].addEventListener("error", onError, { once: true });
+      videos[next].addEventListener("error", () => scheduleNext(), { once: true });
     }
 
-    // START
-    setSource(videos[0], playlist[0]);
+    setVideoSource(videos[0], playlist[0]);
     videos[0].classList.add("is-active");
     playSafe(videos[0]);
 
-    if (playlist.length > 1) setSource(videos[1], playlist[1]);
-    if (playlist.length > 1) scheduleNext();
+    if (playlist.length > 1) setVideoSource(videos[1], playlist[1]);
+    scheduleNext();
   })();
 
   /* =========================================================
-     SIDE VIDEO SLIDER (columna derecha)
-     Rotación por fin del video (ended)
-     Requiere:
-     <aside class="side-media">
-       <video class="side-video is-active" ...></video>
-       <video class="side-video" ...></video>
-     </aside>
+     SIDE VIDEO SLIDER (ended)
   ========================================================= */
   (function sideSliderEnded() {
-    const container = document.querySelector(".side-media");
+    const container = $(".side-media");
     if (!container) return;
 
-    const videos = Array.from(container.querySelectorAll("video.side-video"));
-    if (videos.length < 2) {
-      console.warn("[side-slider] Necesitás 2 <video class='side-video'>. Encontrados:", videos.length);
-      return;
-    }
+    const videos = $$("video.side-video", container);
+    if (videos.length < 2) return;
 
-    // ✅ EDITÁ ACÁ tus rutas reales
-    const playlist = [
+    const playlist = uniqTruthy([
       "assets/video/dron4.mp4",
-      
-     
-      "assets/video/dron6.mp4"
-    ];
-
+      "assets/video/dron6.mp4",
+    ]);
     if (playlist.length < 1) return;
 
-    // Asegurar autoplay
     videos.forEach((v) => {
       v.muted = true;
       v.playsInline = true;
       v.autoplay = true;
       v.preload = "auto";
-      v.loop = false; // IMPORTANTE: queremos usar ended
+      v.loop = false;
     });
 
     let index = 0;
     let active = 0;
 
-    function load(videoEl, src) {
-      videoEl.pause();
-      videoEl.removeAttribute("src");
-      videoEl.load();
-      videoEl.src = src;
-      videoEl.load();
-    }
-
-    function playSafe(videoEl) {
-      const p = videoEl.play();
-      if (p && typeof p.catch === "function") p.catch(() => {});
-    }
-
     function swapTo(nextIndex) {
       const next = 1 - active;
+      const nextSrc = playlist[nextIndex];
 
-      load(videos[next], playlist[nextIndex]);
+      setVideoSource(videos[next], nextSrc);
 
-      videos[next].addEventListener(
-        "canplay",
-        () => {
-          try { videos[next].currentTime = 0; } catch (_) {}
-          playSafe(videos[next]);
+      const onCanPlay = () => {
+        try { videos[next].currentTime = 0; } catch (_) {}
+        playSafe(videos[next]);
 
-          videos[active].classList.remove("is-active");
-          videos[next].classList.add("is-active");
+        videos[active].classList.remove("is-active");
+        videos[next].classList.add("is-active");
 
-          videos[active].pause();
+        try { videos[active].pause(); } catch (_) {}
+        active = next;
+        index = nextIndex;
+      };
 
-          active = next;
-          index = nextIndex;
-        },
-        { once: true }
-      );
-
-      videos[next].addEventListener(
-        "error",
-        () => {
-          console.warn("[side-slider] No se pudo cargar:", playlist[nextIndex]);
-          const fallback = (nextIndex + 1) % playlist.length;
-          swapTo(fallback);
-        },
-        { once: true }
-      );
+      videos[next].addEventListener("canplay", onCanPlay, { once: true });
+      videos[next].addEventListener("error", () => {}, { once: true });
     }
 
-    // Cuando termina el video ACTIVO → pasar al siguiente
-    videos.forEach((v) => {
+    videos.forEach((v, idx) => {
       v.addEventListener("ended", () => {
-        const nextIndex = (index + 1) % playlist.length;
-        swapTo(nextIndex);
+        if (idx !== active) return;
+        swapTo((index + 1) % playlist.length);
       });
     });
 
-    // START
     videos[0].classList.add("is-active");
-    load(videos[0], playlist[0]);
+    setVideoSource(videos[0], playlist[0]);
     playSafe(videos[0]);
-
-    // Precarga del segundo si existe (mejora)
-    if (playlist.length > 1) load(videos[1], playlist[1]);
+    if (playlist.length > 1) setVideoSource(videos[1], playlist[1]);
   })();
-})();
 
+  /* =========================================================
+     Slider de imágenes (Obras)
+  ========================================================= */
+  (function worksImageSliders() {
+    const sliders = $$("[data-slider]");
+    if (!sliders.length) return;
 
-(function(){
-  const sliders = document.querySelectorAll('[data-slider]');
+    sliders.forEach((slider) => {
+      const imgs = $$(".ws-img", slider);
+      const btnPrev = $("[data-prev]", slider);
+      const btnNext = $("[data-next]", slider);
+      const counter = $("[data-counter]", slider);
+      if (!imgs.length) return;
 
-  sliders.forEach(slider => {
-    const imgs = Array.from(slider.querySelectorAll('.ws-img'));
-    const btnPrev = slider.querySelector('[data-prev]');
-    const btnNext = slider.querySelector('[data-next]');
-    const counter = slider.querySelector('[data-counter]');
+      let i = 0;
+      const update = () => {
+        imgs.forEach((img, idx) => img.classList.toggle("is-active", idx === i));
+        if (counter) counter.textContent = `${i + 1} / ${imgs.length}`;
+      };
 
-    if (!imgs.length) return;
+      btnPrev && btnPrev.addEventListener("click", () => { i = (i - 1 + imgs.length) % imgs.length; update(); });
+      btnNext && btnNext.addEventListener("click", () => { i = (i + 1) % imgs.length; update(); });
 
-    let i = 0;
+      slider.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") { e.preventDefault(); i = (i - 1 + imgs.length) % imgs.length; update(); }
+        if (e.key === "ArrowRight") { e.preventDefault(); i = (i + 1) % imgs.length; update(); }
+      });
 
-    const update = () => {
-      imgs.forEach((img, idx) => img.classList.toggle('is-active', idx === i));
-      if (counter) counter.textContent = `${i + 1} / ${imgs.length}`;
-    };
-
-    const prev = () => { i = (i - 1 + imgs.length) % imgs.length; update(); };
-    const next = () => { i = (i + 1) % imgs.length; update(); };
-
-    btnPrev && btnPrev.addEventListener('click', prev);
-    btnNext && btnNext.addEventListener('click', next);
-
-    // Teclado: flechas
-    slider.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+      update();
     });
+  })();
 
-    // Inicial
-    update();
-  });
+  /* =========================================================
+     Hero Carousel (Flota) — imágenes con autoplay + swipe
+  ========================================================= */
+  (function heroCarousel() {
+    const carousels = $$("[data-carousel]");
+    if (!carousels.length) return;
+
+    carousels.forEach((root) => {
+      const track = root.querySelector("[data-track]");
+      const slides = Array.from(root.querySelectorAll(".hero-carousel__slide"));
+      const prevBtn = root.querySelector("[data-prev]");
+      const nextBtn = root.querySelector("[data-next]");
+      const dots = Array.from(root.querySelectorAll("[data-dot]"));
+
+      if (!track || slides.length < 2) return;
+
+      let index = 0;
+      let timer = null;
+
+      function goTo(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        slides.forEach((s, si) => s.classList.toggle("is-active", si === index));
+        dots.forEach((d, di) => d.classList.toggle("is-active", di === index));
+      }
+
+      function start() {
+        stop();
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        timer = window.setInterval(() => goTo(index + 1), 6000);
+      }
+      function stop() {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      }
+
+      prevBtn && prevBtn.addEventListener("click", () => { goTo(index - 1); start(); });
+      nextBtn && nextBtn.addEventListener("click", () => { goTo(index + 1); start(); });
+
+      dots.forEach((d) => {
+        d.addEventListener("click", () => {
+          const to = Number(d.getAttribute("data-dot") || "0");
+          goTo(to);
+          start();
+        });
+      });
+
+      // Swipe
+      let x0 = null;
+      root.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+      root.addEventListener("touchend", (e) => {
+        if (x0 == null) return;
+        const x1 = e.changedTouches[0].clientX;
+        const dx = x1 - x0;
+        x0 = null;
+        if (Math.abs(dx) < 40) return;
+        goTo(dx > 0 ? index - 1 : index + 1);
+        start();
+      }, { passive: true });
+
+      root.addEventListener("mouseenter", stop);
+      root.addEventListener("mouseleave", start);
+
+      goTo(0);
+      start();
+    });
+  })();
+
+  /* =========================================================
+     Lightbox Galería — para .gallery img
+  ========================================================= */
+  (function lightboxGallery() {
+    const gallery = document.querySelector("[data-gallery]");
+    const box = document.querySelector("[data-lightbox]");
+    if (!gallery || !box) return;
+
+    const images = Array.from(gallery.querySelectorAll("img"));
+    const img = box.querySelector("[data-lightbox-img]");
+    const closeBtns = box.querySelectorAll("[data-close]");
+    const prevBtn = box.querySelector("[data-prev]");
+    const nextBtn = box.querySelector("[data-next]");
+
+    if (!images.length || !img) return;
+
+    let index = 0;
+
+    function openAt(i) {
+      index = (i + images.length) % images.length;
+      img.src = images[index].currentSrc || images[index].src;
+      img.alt = images[index].alt || "Imagen";
+      box.hidden = false;
+      box.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function close() {
+      box.hidden = true;
+      box.setAttribute("aria-hidden", "true");
+      img.src = "";
+      document.body.style.overflow = "";
+    }
+
+    function prev() { openAt(index - 1); }
+    function next() { openAt(index + 1); }
+
+    images.forEach((im, i) => im.addEventListener("click", () => openAt(i)));
+    closeBtns.forEach((b) => b.addEventListener("click", close));
+    prevBtn && prevBtn.addEventListener("click", prev);
+    nextBtn && nextBtn.addEventListener("click", next);
+
+    window.addEventListener("keydown", (e) => {
+      if (box.hidden) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    });
+  })();
 })();

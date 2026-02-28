@@ -3,183 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Obras | Ingeniería L&H SRL</title>
-  <meta name="description" content="Tipos de proyectos realizados por Ingeniería L&H SRL." />
+  <title>Obras | Ingeniería L&amp;H SRL</title>
+  <meta name="description" content="Proyectos industriales ejecutados por Ingeniería L&amp;H SRL." />
   <link rel="icon" href="assets/img/favicon/ChatGPT Image 8 ene 2026, 00_31_26.png" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <style>
-  /* HERO UNIFICADO (Clientes + Obras) — FORZADO */
-  .page-hero.page-hero--image{
-    position: relative !important;
-    height: 620px !important;
-    min-height: 620px !important;
-    padding: 64px 0 70px !important;
-    display: flex !important;
-    align-items: flex-start !important;
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    background-position: center 30% !important;
-  }
-
-  .page-hero.page-hero--image::before{
-    content:"" !important;
-    position:absolute !important;
-    inset:0 !important;
-    background: linear-gradient(
-      180deg,
-      rgba(2,16,39,.90) 0%,
-      rgba(2,16,39,.65) 55%,
-      rgba(2,16,39,.52) 100%
-    ) !important;
-    pointer-events:none !important;
-  }
-
-  .page-hero.page-hero--image > .container{
-    position: relative !important;
-    z-index: 1 !important;
-  }
-
-  @media (max-width: 520px){
-    .page-hero.page-hero--image{
-      height: 460px !important;
-      min-height: 460px !important;
-      padding: 44px 0 48px !important;
-      background-position: center 25% !important;
-    }
-  }
-</style>
-
-
-  <style>
-    /* ===== GRILLA 2 COLUMNAS PARA OBRAS ===== */
-    .works-grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      align-items: start;
-      margin-top: 14px;
-    }
-    @media (max-width: 980px){
-      .works-grid{ grid-template-columns: 1fr; }
-    }
-
-    /* Card de cada obra */
-    .work{
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      background: rgba(2,16,39,.18);
-      overflow: hidden;
-    }
-
-    .work-head{
-      padding: 16px 16px 10px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .work-head h3{
-      margin: 0 0 8px;
-      font-size: 18px;
-      line-height: 1.2;
-    }
-    .work-head p{
-      margin: 0;
-      color: rgba(238,247,255,.78);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    /* ===== SLIDER 1 FOTO + FLECHAS (FORZADO) ===== */
-    .work-slider{ position: relative; padding: 14px 16px 16px; }
-
-    .work-slider .ws-frame{
-      position: relative;
-      width: 100%;
-      height: 220px;              /* ajustable */
-      overflow: hidden;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(2,16,39,.25);
-    }
-
-    /* Ocultar todas */
-    .work-slider .ws-img{
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      max-width: none;
-      object-fit: cover;
-      display: none;
-      opacity: 0;
-    }
-    /* Mostrar solo la activa */
-    .work-slider .ws-img.is-active{
-      display: block;
-      opacity: 1;
-    }
-
-    /* Flechas */
-    .work-slider .ws-btn{
-      position:absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(2,16,39,.70);
-      color: #fff;
-      font-size: 26px;
-      line-height: 1;
-      display:grid;
-      place-items:center;
-      cursor:pointer;
-      z-index: 5;
-    }
-    .work-slider .ws-prev{ left: 22px; }
-    .work-slider .ws-next{ right: 22px; }
-
-    .work-slider .ws-meta{
-      margin-top: 10px;
-      font-size: 13px;
-      color: rgba(238,247,255,.72);
-      display:flex;
-      justify-content: flex-end;
-    }
-
-    @media (max-width: 520px){
-      .work-slider .ws-frame{ height: 190px; }
-      .work-slider .ws-prev{ left: 14px; }
-      .work-slider .ws-next{ right: 14px; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/techint.css" />
 </head>
 
-<body>
+<body class="page page-obras">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="container wrap">
-      <div>
-        <span class="badge">HSE • Seguridad y cumplimiento</span>
-        <span style="margin-left:10px">Emergencias 24/7</span>
-      </div>
-      <div>
-        <a href="mailto:info@ingenieria.com.ar">Info@ingenieria.com.ar</a>
-        <span style="margin:0 8px">|</span>
-        <a href="https://wa.me/5492214616511" target="_blank" rel="noopener">+54 9 221 461 6511</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <header>
+  <!-- NAVBAR -->
+  <header class="site-header" data-header>
     <div class="container navbar">
       <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
-        <div class="title">
-          <strong>Ingeniería L&amp;H SRL</strong>
-          <span>Construcciones Industriales</span>
-        </div>
+        <img class="brand-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" />
       </a>
 
       <nav class="nav-links" aria-label="Navegación principal">
@@ -187,7 +24,7 @@
         <a href="servicios.html">Servicios</a>
         <a href="flota.html">Flota</a>
         <a href="equipos.html">Equipos</a>
-        <a href="obras.html" class="active">Obras</a>
+        <a href="obras.html" aria-current="page">Obras</a>
         <a href="clientes.html">Clientes</a>
         <a href="contacto.html">Contacto</a>
       </nav>
@@ -201,171 +38,391 @@
       <a href="servicios.html">Servicios</a>
       <a href="flota.html">Flota</a>
       <a href="equipos.html">Equipos</a>
-      <a href="obras.html">Obras</a>
+      <a href="obras.html" aria-current="page">Obras</a>
       <a href="clientes.html">Clientes</a>
       <a href="contacto.html">Contacto</a>
     </div>
   </header>
 
   <main id="contenido">
+    <!-- HERO (solo imagen, sin burbujas) -->
+    <section
+      class="page-hero page-hero--image page-hero--obras"
+      style="background: url('assets/img/TINGLADO.jpg') center / cover no-repeat;"
+      aria-label="Obras"
+    ></section>
 
-  <section class="page-hero page-hero--image page-hero--obras"
-  style="
-    background: url('assets/img/TINGLADO.jpg') center / cover no-repeat;
-  ">
-
-
-  <div class="container hero-top">
-    <div class="breadcrumb">Inicio / Obras</div>
-    <h1>Obras</h1>
-    <p>Proyectos industriales ejecutados con foco en seguridad, planificación y cumplimiento de plazos.</p>
-  </div>
-
-  <!-- BURBUJAS SOBRE LA FOTO -->
-  <div class="hero-bubbles">
-    <div class="container grid-3">
-      <article class="card reveal">
-        <h3>Paradas de planta</h3>
-        <p>Planificación, coordinación de recursos y ejecución segura para continuidad operativa.</p>
-      </article>
-
-      <article class="card reveal">
-        <h3>Montaje de equipos de proceso</h3>
-        <p>Instalación, alineación, pruebas y puesta en servicio con control de calidad.</p>
-      </article>
-
-      <article class="card reveal">
-        <h3>Mantenimiento mayor</h3>
-        <p>Intervenciones integrales con trazabilidad y reportes técnicos.</p>
-      </article>
-    </div>
-  </div>
-
-</section>
-
-
-
-
-
-   
+    <!-- Título -->
+    <section class="section section-title-block">
+      <div class="container">
+        <div class="section-title section-title--stack">
+          <h2>Galería de obras</h2>
+          <p></p>
+        </div>
+      </div>
+    </section>
 
     <!-- GALERÍA -->
     <section class="section" id="obras">
       <div class="container">
-        <div class="section-title section-title--stack">
-          <h2>Galería de obras</h2>
-          <p>Explora nuestros proyectos y la calidad de nuestras ejecuciones.</p>
-        </div>
-
-        <!-- ✅ FALTABA ESTE CONTENEDOR -->
         <div class="works-grid">
 
           <!-- OBRA 1 -->
           <article class="work">
             <header class="work-head">
-              <h3>Parada de planta • Cambio de tubos en Horno H301</h3>
-              <p>Ejecución en parada, coordinación HSE, control de calidad y continuidad operativa.</p>
+              <h3>
+                <a href="obra.html?id=parada-platforming-htnc-2014">PARADA DE PLANTA PLATFORMING / HTNC</a>
+              </h3>
+              <p>Prefabricación y montaje de soportes, cañerías, electricidad e instrumentos. Tareas en varias MP dentro del sector.</p>
             </header>
 
-            <div class="work-slider" data-slider tabindex="0" aria-label="Galería de fotos: Horno H301">
-              <button class="ws-btn ws-prev" type="button" aria-label="Foto anterior" data-prev>‹</button>
-
+            <a class="work-slider" href="obra.html?id=parada-platforming-htnc-2014" aria-label="Abrir detalle: PARADA DE PLANTA PLATFORMING / HTNC">
               <div class="ws-frame">
-                <img class="ws-img is-active" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/03.jpg" alt="Horno H301 - Foto 1" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/06.png" alt="Horno H301 - Foto 2" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/02.png" alt="Horno H301 - Foto 3" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/03.jpg" alt="Horno H301 - Foto 4" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/01.jpg" alt="Horno H301 - Foto 5" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2022 - PARA DE PLANTA-CAMBIO DE TUBOS EN HORNO H301/05.jpg" alt="Horno H301 - Foto 6" loading="lazy" decoding="async">
+                <img class="ws-img is-active" src="assets/img/obras/PARADaPLANTAPLATFORMING-HTNC-2014/01.jpg" alt="PARADA DE PLANTA PLATFORMING / HTNC - Foto 1" loading="lazy" decoding="async">
               </div>
-
-              <button class="ws-btn ws-next" type="button" aria-label="Foto siguiente" data-next>›</button>
-
-              <div class="ws-meta" aria-live="polite">
-                <span data-counter>1 / 6</span>
-              </div>
-            </div>
+            </a>
           </article>
 
           <!-- OBRA 2 -->
           <article class="work">
             <header class="work-head">
-              <h3>Nueva línea • ROFLO desde COKE A a TOPPING C</h3>
-              <p>Montaje de línea, soportación, ajustes y terminación industrial.</p>
+              <h3>
+                <a href="obra.html?id=mantenimiento-horno-2401-2013">MANTENIMIENTO DE HORNO 2401</a>
+              </h3>
+              <p>Inspección integral, reparaciones, soldaduras con RX/TT, aislación, refractario, cambio de quemadores, END, estanquidad y documentación.</p>
             </header>
 
-            <div class="work-slider" data-slider tabindex="0" aria-label="Galería de fotos: ROFLO">
-              <button class="ws-btn ws-prev" type="button" aria-label="Foto anterior" data-prev>‹</button>
-
+            <a class="work-slider" href="obra.html?id=mantenimiento-horno-2401-2013" aria-label="Abrir detalle: MANTENIMIENTO DE HORNO 2401">
               <div class="ws-frame">
-                <img class="ws-img is-active" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/07.png" alt="ROFLO - Foto 1" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/04.png" alt="ROFLO - Foto 2" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/06.jpg" alt="ROFLO - Foto 3" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/07.png" alt="ROFLO - Foto 4" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2021 - NUEVA LINEA DE ROFLO DESDE COKE A, A TOPPING C/08.jpg" alt="ROFLO - Foto 5" loading="lazy" decoding="async">
+                <img class="ws-img is-active" src="assets/img/obras/mantenimiento-de-horno-2401/02-6.jpg" alt="MANTENIMIENTO DE HORNO 2401 - Foto 1" loading="lazy" decoding="async">
               </div>
-
-              <button class="ws-btn ws-next" type="button" aria-label="Foto siguiente" data-next>›</button>
-
-              <div class="ws-meta" aria-live="polite">
-                <span data-counter>1 / 5</span>
-              </div>
-            </div>
+            </a>
           </article>
 
           <!-- OBRA 3 -->
           <article class="work">
             <header class="work-head">
-              <h3>Paro • ADECUACION DE TK5004 A NAFTA INFINIA</h3>
-              <p>Intervención en parada, montaje y tareas asociadas con coordinación en campo.</p>
+              <h3>
+                <a href="obra.html?id=adecuacion-logop-ifo-380-2014">ADECUACIÓN DE INSTALACIÓN LOGOP PARA DESPACHO DE FUEL OIL, IFO 380</a>
+              </h3>
+              <p>Montaje de soportes y líneas IFO 380, pórticos para cruces y pasarelas; adecuación de línea existente.</p>
             </header>
 
-            <div class="work-slider" data-slider tabindex="0" aria-label="Galería de fotos: COKE B">
-              <button class="ws-btn ws-prev" type="button" aria-label="Foto anterior" data-prev>‹</button>
-
+            <a class="work-slider" href="obra.html?id=adecuacion-logop-ifo-380-2014" aria-label="Abrir detalle: ADECUACIÓN LOGOP IFO 380">
               <div class="ws-frame">
-                <img class="ws-img is-active" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/07.jpg" alt="COKE B - Foto 1" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/01.jpg" alt="COKE B - Foto 2" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/03.jpg" alt="COKE B - Foto 3" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/04.jpg" alt="COKE B - Foto 4" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2020-01 - ADECUACION DE TK5004 A NAFTA INFINIA/05.jpg" alt="COKE B - Foto 5" loading="lazy" decoding="async">
+                <img class="ws-img is-active" src="assets/img/obras/adecuacion-logop-ifo-380-201/481d0c68-760c-421b-abc1-9b8258238e43-2.jpg" alt="ADECUACIÓN LOGOP IFO 380 - Foto 1" loading="lazy" decoding="async">
               </div>
-
-              <button class="ws-btn ws-next" type="button" aria-label="Foto siguiente" data-next>›</button>
-
-              <div class="ws-meta" aria-live="polite">
-                <span data-counter>1 / 5</span>
-              </div>
-            </div>
+            </a>
           </article>
 
           <!-- OBRA 4 -->
           <article class="work">
             <header class="work-head">
-              <h3>Montaje y soportación</h3>
-              <p>Montaje de estructura, soportes y terminación con estándar industrial.</p>
+              <h3>
+                <a href="obra.html?id=prevision-tareas-metalurgicas-electricas-coke-a-2013">PREVISIÓN DE TAREAS METALÚRGICAS Y ELÉCTRICAS</a>
+              </h3>
+              <p>Tareas de urgencia en paro: desmontajes por incendio, soportes/bandejas nuevas y renovación del sistema eléctrico de subestación.</p>
             </header>
 
-            <div class="work-slider" data-slider tabindex="0" aria-label="Galería de fotos: Montaje">
-              <button class="ws-btn ws-prev" type="button" aria-label="Foto anterior" data-prev>‹</button>
-
+            <a class="work-slider" href="obra.html?id=prevision-tareas-metalurgicas-electricas-coke-a-2013" aria-label="Abrir detalle: PREVISIÓN DE TAREAS METALÚRGICAS Y ELÉCTRICAS">
               <div class="ws-frame">
-                <img class="ws-img is-active" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/03-4.png" alt="Montaje - Foto 1" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/02-4.png" alt="Montaje - Foto 2" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/04-3.png" alt="Montaje - Foto 3" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/05-2.png" alt="Montaje - Foto 4" loading="lazy" decoding="async">
-                <img class="ws-img" src="assets/img/obras/2019-2020 - ADECUACION DE SISTEMA RCI PLANTA MERDANITO - CATRIEL/08-2.png" alt="Montaje - Foto 5" loading="lazy" decoding="async">
+                <img class="ws-img is-active" src="assets/img/obras/prevision-tareas-metalurgicas-electricas-coke-a-2013/10-1.png" alt="PREVISIÓN DE TAREAS METALÚRGICAS Y ELÉCTRICAS - Foto 1" loading="lazy" decoding="async">
               </div>
-
-              <button class="ws-btn ws-next" type="button" aria-label="Foto siguiente" data-next>›</button>
-
-              <div class="ws-meta" aria-live="polite">
-                <span data-counter>1 / 5</span>
-              </div>
-            </div>
+            </a>
           </article>
 
-        </div><!-- /works-grid -->
+          <!-- OBRA 5 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=descargadero-fame-terminal-la-plata-2013">DESCARGADERO DE FAME EN TERMINAL LA PLATA</a>
+              </h3>
+              <p>Ingeniería y ampliación del descargadero: piping, estructura, civil, E&amp;I, sistemas contra incendio, pruebas y puesta en marcha.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=descargadero-fame-terminal-la-plata-2013" aria-label="Abrir detalle: DESCARGADERO DE FAME EN TERMINAL LA PLATA">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/descargadero-fame-terminal-la-plata-2013/01-3.png" alt="DESCARGADERO DE FAME EN TERMINAL LA PLATA - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 6 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=adecuacion-ducto-32-puerto-rosales-la-plata-2013">ADECUACIÓN DE DUCTO 32″ PUERTO ROSALES LA PLATA</a>
+              </h3>
+              <p>Localización de falla, excavación, parche, END, clock spring, nuevo revestimiento, tapada y documentación de calidad.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=adecuacion-ducto-32-puerto-rosales-la-plata-2013" aria-label="Abrir detalle: ADECUACIÓN DE DUCTO 32″">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/adecuacion-ducto-32-puerto-rosales-la-plata-2013/101_2843-2.jpg" alt="ADECUACIÓN DE DUCTO 32″ - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 7 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=reemplazo-cubierta-cargadero-camiones-glp-dock-sud-2013">REEMPLAZO DE CUBIERTA EN CARGADERO DE CAMIONES GLP DOCK SUD</a>
+              </h3>
+              <p>Ingeniería y ejecución: estructura y cubierta nuevas, canaletas, chapas, barreras, arenado/pintura, puesta en marcha y calidad.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=reemplazo-cubierta-cargadero-camiones-glp-dock-sud-2013" aria-label="Abrir detalle: REEMPLAZO DE CUBIERTA GLP DOCK SUD">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/reemplazo-cubierta-cargadero-camiones-glp-dock-sud-2013/04-1.png" alt="REEMPLAZO DE CUBIERTA GLP DOCK SUD - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 8 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=nuevas-bombas-p16-jp1-terminal-la-matanza-2012">NUEVAS BOMBAS P-16 PARA BOMBEO DE JP1</a>
+              </h3>
+              <p>Piping, soportes, civil, E&amp;I, columna Eaton Holec con soft starter ABB, sensores, pruebas y puesta en marcha.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=nuevas-bombas-p16-jp1-terminal-la-matanza-2012" aria-label="Abrir detalle: NUEVAS BOMBAS P-16 PARA BOMBEO DE JP1">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/NUEVAS-BOMBAS-P-16-BOMBEO-JP1-2012/03-1.jpg" alt="NUEVAS BOMBAS P-16 PARA BOMBEO DE JP1 - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 9 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=cambio-metalurgia-vacio-lubricantes-2011">CAMBIO DE METALURGIA PLANTA VACÍO LUBRICANTES</a>
+              </h3>
+              <p>Desmontaje/montaje de cañerías y válvulas, corrección de estructuras, arenado/pintura, pruebas hidráulicas y documentación.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=cambio-metalurgia-vacio-lubricantes-2011" aria-label="Abrir detalle: CAMBIO DE METALURGIA PLANTA VACÍO LUBRICANTES">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/cambio-metalurgia-vacio-lubricantes-2011/02-5.jpg" alt="CAMBIO DE METALURGIA PLANTA VACÍO LUBRICANTES - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 10 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=adecuacion-dci-glp-dock-sud-2010-2012">ADECUACIÓN DCI GLP DOCK SUD</a>
+              </h3>
+              <p>Nueva sala de bombas de incendio, bombas principales/jockey, PLC, línea 24”, alimentación eléctrica, pruebas y puesta en marcha.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=adecuacion-dci-glp-dock-sud-2010-2012" aria-label="Abrir detalle: ADECUACIÓN DCI GLP DOCK SUD">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/adecuacion-dci-glp-dock-sud-2010-2012/01 (1).png" alt="ADECUACIÓN DCI GLP DOCK SUD - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 11 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=mejoras-paro-aguas-acidas-u1300-1350-2011">EJECUCIÓN DE MEJORAS EN PARO DE PLANTA – AGUAS ÁCIDAS U-1300/1350</a>
+              </h3>
+              <p>Prefabricado/montaje de cañerías y soportes, aislación térmica, instrumentación, cableado, pruebas hidráulicas y END.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=mejoras-paro-aguas-acidas-u1300-1350-2011" aria-label="Abrir detalle: EJECUCIÓN DE MEJORAS EN PARO – AGUAS ÁCIDAS">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/mejoras-paro-aguas-acidas-u1300-1350-2011/03062011197.jpg" alt="EJECUCIÓN DE MEJORAS EN PARO – AGUAS ÁCIDAS - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 12 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=reemplazo-domo-f403-catalitico-a-2010">REEMPLAZO DE DOMO F-403 EN PARO DE PLANTA CATALÍTICO A</a>
+              </h3>
+              <p>Refuerzo e ignifugado de estructuras, montaje con grúa 400 t, aislación, instrumentación, iluminación APE, pruebas y calidad.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=reemplazo-domo-f403-catalitico-a-2010" aria-label="Abrir detalle: REEMPLAZO DE DOMO F-403">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/reemplazo-domo-f403-catalitico-a-2010/08.jpg" alt="REEMPLAZO DE DOMO F-403 - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 13 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=adecuacion-chimenea-b301-2009">ADECUACIÓN DE CHIMENEA B-301</a>
+              </h3>
+              <p>Reparación y adecuación en taller, replanteo de conexiones, arenado/pintura y traslado a CILP.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=adecuacion-chimenea-b301-2009" aria-label="Abrir detalle: ADECUACIÓN DE CHIMENEA B-301">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/adecuacion-chimenea-b301-2009/04-3.jpg" alt="ADECUACIÓN DE CHIMENEA B-301 - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 14 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=adecuacion-recipiente-nfpa-cie-2008-2010">ADECUACIÓN DE RECIPIENTE A LA NORMA NFPA EN LA PLANTA C.I.E.</a>
+              </h3>
+              <p>Red contra incendio para refrigeración de recipientes: anillos, diluvio, cañerías troncales, APE, central inteligente, pruebas y capacitación.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=adecuacion-recipiente-nfpa-cie-2008-2010" aria-label="Abrir detalle: ADECUACIÓN NFPA C.I.E.">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/adecuacion-recipiente-nfpa-cie-2008-2010/YPF-12.jpg" alt="ADECUACIÓN NFPA C.I.E. - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 15 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=muelle-flotante-catamaran-galileo-2005">MUELLE FLOTANTE PARA EL BARCO CATAMARÁN GALILEO</a>
+              </h3>
+              <p>Construcción de plataforma flotante y planchada: módulos, tanques de flotación, soldaduras, traslado y botadura.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=muelle-flotante-catamaran-galileo-2005" aria-label="Abrir detalle: MUELLE FLOTANTE CATAMARÁN GALILEO">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/muelle-flotante-catamaran-galileo-2005/galileo-06.jpg" alt="MUELLE FLOTANTE CATAMARÁN GALILEO - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 16 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=remodelacion-planta-agua-refineria-la-plata-2006">REMODELACIÓN DE PLANTA DE AGUA DE REFINERÍA LA PLATA</a>
+              </h3>
+              <p>Desguace y desmontaje total, soportes multinivel, bandejas inox para cableado, interconexiones y prueba hidráulica.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=remodelacion-planta-agua-refineria-la-plata-2006" aria-label="Abrir detalle: REMODELACIÓN DE PLANTA DE AGUA">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/remodelacion-planta-agua-refineria-la-plata-2006/tisico4.jpg" alt="REMODELACIÓN DE PLANTA DE AGUA - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 17 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=antecedente-topping-d-torre-flash-sf">ADECUACIÓN DE TK 1</a>
+              </h3>
+              <p>Se realizó Ingeniería de detalle, prefabricación, montaje de soportes, líneas, electricidad e instrumento.
+              Se realizaron inspecciones mediante ensayos destructivos y no destructivos, para indicar reparaciones
+              al TK-01S.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=ADECUACION-TKI-2014-2015" aria-label="Abrir detalle: ADECUACIÓN DE TK 1">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/ADECUACION-TK1-2014-2015/20151120_101953.jpg" alt="ANTECEDENTES TORRE FLASH - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 18 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=antecedente-revamping-reactores-hornos-aromaticos-area-100-sf">ADECUACIÓN DEL SISTEMA DE AGUA DE REFRIGERACIÓN</a>
+              </h3>
+              <p>Se realizó la Ingeniería, prefabricación y montaje de soportes, cañerías, electricidad e instrumentos en líneas de Agua de Refrigeración.
+               líneas de retorno, hacia Torres de Enfriamiento.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=antecedente-revamping-reactores-hornos-aromaticos-area-100-sf" aria-label="Abrir detalle: ANTECEDENTES REVAMPING REACTORES Y HORNOS">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/ADECUACION-SISTEMA-AGUA-REFRIGERACION-2014-2015/20150918_113258.jpg" alt="ANTECEDENTES REVAMPING REACTORES Y HORNOS - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 26 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=reemplazo-soportes-red-incendio-parrilla-valvulas-2010">REEMPLAZO DE SOPORTES RED DE INCENDIO EN PARRILLA DE VÁLVULAS</a>
+              </h3>
+              <p>Soportes nuevos y bases H°A°, ignifugado, limpieza de rociadores y pintura de red existente (2010).</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=reemplazo-soportes-red-incendio-parrilla-valvulas-2010" aria-label="Abrir detalle: REEMPLAZO SOPORTES RCI PARRILLA DE VÁLVULAS">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/REEMPLAZO-TUBOS-RADIACION-HORNOS-H301Y-H306-2019/11.jpg" alt="REEMPLAZO SOPORTES RCI - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 27 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=ADECUACION-SISTEMARCI-PLANTA-MERDANITO-CATRIEL-2019-2020">ADECUACION DE SISTEMA RCI PLANTA MEDANITO- CATRIEL</a>
+              </h3>
+              <p>Relevamiento de las instalaciones existente, contemplando la Ingeniería básica propuesta por el Cliente.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=mp-051-10-linea-drenaje-balsa-agua-lluvia-2010" aria-label="Abrir detalle: MP 051/10">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/ADECUACION-SISTEMARCI-PLANTA-MERDANITO-CATRIEL-2019-2020/03-4.png" alt="MP 051/10 - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 28 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=REPARACIONES-METALUGICAS-LINEAS-VAPOR-ALTA">REPARACIONES METALURGICAS EN LINEAS DE VAPOR DE ALTA (P11)</a>
+              </h3>
+              <p>Relevamiento e Inspección de Cañerías Afectadas. Corte de Costuras/Tramos de Cañería Afectado.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=REPARACIONES-METALIRGICAS-LINEAS-VAPOR-ALTA(P11)-2020" aria-label="Abrir detalle: REPARACIONES VAPOR ALTA">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/REPARACIONES-METALURGICAS-LINEAS-VAPOR-ALTA(P11)-2020/03.png" alt="REPARACIONES VAPOR ALTA - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+          <!-- OBRA 31 -->
+          <article class="work">
+            <header class="work-head">
+              <h3>
+                <a href="obra.html?id=ADECUACION-TK5004-NAFTA-INFINIA-2020">ADECUACIÓN DE TK5004 A NAFTA INFINIA</a>
+              </h3>
+              <p>Relevamiento de las instalaciones existentes, con la Ingeniería propuesta por el Cliente. Prefabricación de líneas Ø16” y 24”.</p>
+            </header>
+
+            <a class="work-slider" href="obra.html?id=ADECUACION-TK5004-NAFTA-INFINIA-2020" aria-label="Abrir detalle: ADECUACIÓN TK5004">
+              <div class="ws-frame">
+                <img class="ws-img is-active" src="assets/img/obras/ADECUACION-TK5004-NAFTA-INFINIA-2020/07.jpg" alt="ADECUACIÓN TK5004 - Foto 1" loading="lazy" decoding="async">
+              </div>
+            </a>
+          </article>
+
+        </div>
       </div>
     </section>
   </main>
@@ -373,58 +430,31 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-grid">
-      <div>
-        <strong>Ingeniería L&amp;H SRL</strong><br />
-        <span>Construcciones Industriales</span>
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
+          <img class="footer-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" loading="lazy">
+        </a>
+
+        <div class="footer-brand-text">
+          <strong>Ingeniería L&amp;H SRL</strong><br/>
+          <span>Construcciones Industriales</span>
+        </div>
       </div>
-      <div>
+
+      <div class="footer-links">
         <div><a href="servicios.html">Servicios</a></div>
+        <div><a href="obras.html" aria-current="page">Obras</a></div>
         <div><a href="contacto.html">Contacto</a></div>
       </div>
-      <div>
-        <div>WhatsApp: +54 9 221 461 6511</div>
+
+      <div class="footer-contact">
+        <div>WhatsApp: +54 9 221 616 8685</div>
         <div>Email: Info@ingenieria.com.ar</div>
       </div>
     </div>
   </footer>
 
   <a class="whatsapp-fab" href="https://wa.me/5492216168685" target="_blank" rel="noopener">WhatsApp</a>
-
   <script src="js/main.js"></script>
-
-  <!-- ✅ JS del slider (si preferís, lo movemos a main.js) -->
-  <script>
-    (function(){
-      const sliders = document.querySelectorAll('[data-slider]');
-
-      sliders.forEach(slider => {
-        const imgs = Array.from(slider.querySelectorAll('.ws-img'));
-        const btnPrev = slider.querySelector('[data-prev]');
-        const btnNext = slider.querySelector('[data-next]');
-        const counter = slider.querySelector('[data-counter]');
-        if (!imgs.length) return;
-
-        let i = 0;
-
-        const update = () => {
-          imgs.forEach((img, idx) => img.classList.toggle('is-active', idx === i));
-          if (counter) counter.textContent = `${i + 1} / ${imgs.length}`;
-        };
-
-        const prev = () => { i = (i - 1 + imgs.length) % imgs.length; update(); };
-        const next = () => { i = (i + 1) % imgs.length; update(); };
-
-        btnPrev && btnPrev.addEventListener('click', prev);
-        btnNext && btnNext.addEventListener('click', next);
-
-        slider.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-          if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
-        });
-
-        update();
-      });
-    })();
-  </script>
 </body>
 </html>

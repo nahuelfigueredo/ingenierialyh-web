@@ -3,116 +3,168 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Equipos | Ingeniería L&H SRL</title>
+  <title>Equipos | Ingeniería L&amp;H SRL</title>
   <meta name="description" content="Listado de equipos y capacidades técnicas." />
   <link rel="icon" href="assets/img/favicon/ChatGPT Image 8 ene 2026, 00_31_26.png" />
-  <link rel="stylesheet" href="css/styles.css" />
 
-
+  <!-- Unificado con el resto del sitio -->
+  <link rel="stylesheet" href="css/techint.css" />
 </head>
-<body>
+
+<body class="page">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <div class="topbar">
-  <div class="container wrap">
-    <div>
-      <span class="badge">HSE • Seguridad y cumplimiento</span>
-      <span style="margin-left:10px">Emergencias 24/7</span>
-    </div>
-    <div>
-      <a href="mailto:contacto@empresa.com">Info@ingenieria.com.ar</a>
-      <span style="margin:0 8px">|</span>
-      <a href="https://wa.me/+54 9 221 461 6511" target="_blank" rel="noopener">+54 9 221 461 6511</a>
-    </div>
-  </div>
-</div>
-
-  <header>
+  <!-- NAVBAR (igual a Empresa/Servicios/Flota) -->
+  <header class="site-header" data-header>
     <div class="container navbar">
-    <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
-  <div class="title">
-    <strong>Ingeniería L&H SRL</strong>
-    <span>Construcciones Industriales</span>
-  </div>
-</a>
+      <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
+        <img class="brand-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" />
+      </a>
 
-      <nav class="nav-links">
-        <a href="empresa.html">La Empresa</a><a href="servicios.html">Servicios</a><a href="flota.html">Flota</a>
-        <a href="equipos.html">Equipos</a><a href="obras.html">Obras</a><a href="clientes.html">Clientes</a><a href="contacto.html">Contacto</a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="empresa.html">La Empresa</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="flota.html">Flota</a>
+        <a href="equipos.html" aria-current="page">Equipos</a>
+        <a href="obras.html">Obras</a>
+        <a href="clientes.html">Clientes</a>
+        <a href="contacto.html">Contacto</a>
       </nav>
+
       <a class="cta" href="contacto.html">Solicitar cotización</a>
       <button class="burger" data-burger aria-label="Abrir menú" aria-expanded="false">☰</button>
     </div>
+
     <div class="container mobile-drawer" data-drawer hidden>
-      <a href="empresa.html">La Empresa</a><a href="servicios.html">Servicios</a><a href="flota.html">Flota</a>
-      <a href="equipos.html">Equipos</a><a href="obras.html">Obras</a><a href="clientes.html">Clientes</a><a href="contacto.html">Contacto</a>
+      <a href="empresa.html">La Empresa</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="flota.html">Flota</a>
+      <a href="equipos.html" aria-current="page">Equipos</a>
+      <a href="obras.html">Obras</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="contacto.html">Contacto</a>
     </div>
   </header>
 
- <main id="contenido">
+  <main id="contenido">
+    <!-- HERO (una sola foto) -->
+    <section
+      class="page-hero page-hero--image page-hero--equipos"
+      aria-label="Equipos"
+      style="
+        background:
+          linear-gradient(100deg, rgba(2,16,39,.35) 0%, rgba(2,16,39,.22) 45%, rgba(2,16,39,.15) 100%),
+          url('assets/img/Fabricacion-de-Chimenea.jpg') center / cover no-repeat;
+      "
+    >
+     
 
-  <section class="page-hero page-hero--image page-hero--equipos"
-
-    style="
-  background:
-    linear-gradient(100deg, rgba(2,16,39,.35) 0%, rgba(2,16,39,.22) 45%, rgba(2,16,39,.15) 100%),
-    url('assets/img/Fabricacion-de-Chimenea.jpg') center / cover no-repeat;
-"
->
-
-    <div class="container hero-top">
-      <div class="breadcrumb">Inicio / Equipos</div>
-      <h1>Equipos</h1>
-      <p>Recursos y capacidades técnicas para ejecución segura, eficiente y con control de calidad.</p>
-    </div>
-
-    <!-- CUADRO DENTRO DE LA FOTO -->
-    <div class="hero-overlay-box">
-      <div class="container">
-        <table class="table reveal" aria-label="Tabla de equipos">
-          <thead>
-            <tr>
-              <th>Categoría</th>
-              <th>Detalle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Equipos de elevación</td>
-              <td>Grúas articuladas, telescópicas y equipos asociados.</td>
-            </tr>
-            <tr>
-              <td>Herramientas y apoyo</td>
-              <td>Equipamiento para montaje, alineación, izaje y soporte de obra.</td>
-            </tr>
-            <tr>
-              <td>Equipos para obra civil</td>
-              <td>Herramientas y equipos de apoyo para trabajos complementarios.</td>
-            </tr>
-            <tr>
-              <td>Abastecimiento</td>
-              <td>Soluciones de logística y abastecimiento según alcance.</td>
-            </tr>
-          </tbody>
-        </table>
+      
+        </div>
       </div>
-    </div>
+    </section>
 
-  </section>
+    <!-- Título debajo (como otras secciones) -->
+    <section class="section section-title-block">
+      <div class="container">
+        <div class="section-title section-title--equipos">
+          <h2>Equipos</h2>
+        </div>
+      </div>
+    </section>
 
-</main>
+    <!-- Intro -->
+    <section class="section">
+      <div class="container">
+        <p class="fleet-intro">
+          Contamos con equipos y herramientas para tareas de montaje, izaje y soporte de obra, operados por personal capacitado y bajo estándares de seguridad.
+        </p>
+        <p class="fleet-intro fleet-intro--sub">
+          La información presentada es representativa. Consultanos por disponibilidad, capacidades y configuración según tu proyecto.
+        </p>
+      </div>
+    
 
+            
 
+    <!-- Sección PRO: Capacidades + CTA -->
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h3 class="section-kicker">Capacidades</h3>
+          <p class="section-lead">
+            Recursos para montaje, izaje, trabajos en altura y soporte de obra, con foco en seguridad, trazabilidad y calidad.
+          </p>
+        </div>
 
+        <div class="cap-grid">
+          <article class="cap-card">
+            <h4>Izaje y maniobras</h4>
+            <p>Planificación, señalización, rigging y ejecución controlada.</p>
+          </article>
+
+          <article class="cap-card">
+            <h4>Montaje industrial</h4>
+            <p>Equipamiento para montaje mecánico, alineación y ajustes.</p>
+          </article>
+
+          <article class="cap-card">
+            <h4>Trabajos en altura</h4>
+            <p>Accesos, herramientas y procedimientos bajo HSE.</p>
+          </article>
+
+          <article class="cap-card">
+            <h4>Herramientas especializadas</h4>
+            <p>Apoyo para torqueado, corte, perforación y terminaciones.</p>
+          </article>
+
+          <article class="cap-card">
+            <h4>Soporte de obra</h4>
+            <p>Equipos auxiliares para logística interna y organización.</p>
+          </article>
+
+          <article class="cap-card">
+            <h4>Abastecimiento</h4>
+            <p>Soluciones según alcance: provisión, coordinación y entrega.</p>
+          </article>
+        </div>
+
+        <div class="equipos-cta">
+          <a class="btn-primary" href="contacto.html">Consultar disponibilidad</a>
+          <a class="btn-ghost" href="contacto.html">Solicitar ficha técnica</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (igual a otras secciones) -->
   <footer class="footer">
     <div class="container footer-grid">
-      <div><strong>Ingeniería L&H SRL</strong><br/><span>Construcciones Industriales</span></div>
-      <div><div><a href="flota.html">Flota</a></div><div><a href="contacto.html">Contacto</a></div></div>
-      <div><div>WhatsApp: +54 9 221 461 6511</div><div>Email: Info@ingenieria.com.ar</div></div>
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
+          <img class="footer-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" loading="lazy">
+        </a>
+
+        <div class="footer-brand-text">
+          <strong>Ingeniería L&amp;H SRL</strong><br/>
+          <span>Construcciones Industriales</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div><a href="servicios.html">Servicios</a></div>
+        <div><a href="flota.html">Flota</a></div>
+        <div><a href="contacto.html">Contacto</a></div>
+      </div>
+
+      <div class="footer-contact">
+        <div>WhatsApp: +54 9 221 461 6511</div>
+        <div>Email: Info@ingenieria.com.ar</div>
+      </div>
     </div>
   </footer>
 
-  <a class="whatsapp-fab" href="https://wa.me/549221 461 6511X" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="whatsapp-fab" href="https://wa.me/5492214616511" target="_blank" rel="noopener">WhatsApp</a>
   <script src="js/main.js"></script>
 </body>
 </html>

@@ -3,131 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Clientes | Ingeniería L&H SRL</title>
-  <meta name="description" content="Clientes y sectores atendidos por Ingeniería L&H SRL." />
-
-  <link rel="icon" href="assets/img/favicon/favicon.png" />
-  <link rel="stylesheet" href="css/styles.css" />
-
-  <style>
-    /* HERO UNIFICADO (Clientes + Obras) — FORZADO */
-    .page-hero.page-hero--image{
-      position: relative !important;
-      height: 620px !important;
-      min-height: 620px !important;
-      padding: 64px 0 90px !important; /* + espacio para logos */
-      display: flex !important;
-      align-items: flex-start !important;
-      background-size: cover !important;
-      background-repeat: no-repeat !important;
-      background-position: center 30% !important;
-      overflow: hidden !important;
-    }
-
-    .page-hero.page-hero--image::before{
-      content:"" !important;
-      position:absolute !important;
-      inset:0 !important;
-      background: linear-gradient(
-        180deg,
-        rgba(2,16,39,.72) 0%,
-        rgba(2,16,39,.45) 40%,
-        rgba(2,16,39,.60) 100%
-      ) !important;
-      pointer-events:none !important;
-    }
-
-    .page-hero.page-hero--image > .container{
-      position: relative !important;
-      z-index: 1 !important;
-    }
-
-    /* LOGOS dentro del HERO */
-    .clients-grid--hero{
-      margin-top: 42px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 42px;
-      align-items: center;
-    }
-
-    .clients-grid--hero .client{
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      padding: 0 !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 70px;
-    }
-
-    .clients-grid--hero .client img{
-      max-width: 160px;
-      max-height: 70px;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-
-      filter: grayscale(1) contrast(1.05) brightness(1.1);
-      opacity: .88;
-      transition: filter .25s ease, opacity .25s ease, transform .25s ease;
-    }
-
-    .clients-grid--hero .client:hover img{
-      filter: none;
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 520px){
-      .page-hero.page-hero--image{
-        height: auto !important;
-        min-height: 0 !important;
-        padding: 44px 0 26px !important;
-        background-position: center 25% !important;
-      }
-
-      .clients-grid--hero{
-        margin-top: 26px;
-        grid-template-columns: 1fr 1fr;
-        gap: 22px;
-      }
-
-      .clients-grid--hero .client img{
-        max-width: 120px;
-        max-height: 52px;
-      }
-    }
-  </style>
+  <title>Clientes | Ingeniería L&amp;H SRL</title>
+  <meta name="description" content="Clientes y sectores atendidos por Ingeniería L&amp;H SRL." />
+  <link rel="icon" href="assets/img/favicon/ChatGPT Image 8 ene 2026, 00_31_26.png" />
+  <link rel="stylesheet" href="css/techint.css" />
 </head>
 
-<body>
+<body class="page page-clientes">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="container wrap">
-      <div>
-        <span class="badge">HSE • Seguridad y cumplimiento</span>
-        <span style="margin-left:10px">Emergencias 24/7</span>
-      </div>
-      <div>
-        <a href="mailto:Info@ingenieria.com.ar">Info@ingenieria.com.ar</a>
-        <span style="margin:0 8px">|</span>
-        <a href="https://wa.me/5492214616511" target="_blank" rel="noopener">+54 9 221 461 6511</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- HEADER -->
+  <!-- NAVBAR -->
   <header class="site-header" data-header>
     <div class="container navbar">
       <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
-        <div class="title">
-          <strong>Ingeniería L&amp;H SRL</strong>
-          <span>Construcciones Industriales</span>
-        </div>
+        <img class="brand-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" />
       </a>
 
       <nav class="nav-links" aria-label="Navegación principal">
@@ -136,101 +25,101 @@
         <a href="flota.html">Flota</a>
         <a href="equipos.html">Equipos</a>
         <a href="obras.html">Obras</a>
-        <a class="active" href="clientes.html">Clientes</a>
+        <a href="clientes.html" aria-current="page">Clientes</a>
         <a href="contacto.html">Contacto</a>
       </nav>
 
       <a class="cta" href="contacto.html">Solicitar cotización</a>
-
-      <button class="burger" data-burger aria-label="Abrir menú" aria-controls="mobile-drawer" aria-expanded="false">☰</button>
+      <button class="burger" data-burger aria-label="Abrir menú" aria-expanded="false">☰</button>
     </div>
 
-    <div class="container mobile-drawer" id="mobile-drawer" data-drawer hidden>
+    <div class="container mobile-drawer" data-drawer hidden>
       <a href="empresa.html">La Empresa</a>
       <a href="servicios.html">Servicios</a>
       <a href="flota.html">Flota</a>
       <a href="equipos.html">Equipos</a>
       <a href="obras.html">Obras</a>
-      <a class="active" href="clientes.html">Clientes</a>
+      <a href="clientes.html" aria-current="page">Clientes</a>
       <a href="contacto.html">Contacto</a>
     </div>
   </header>
 
   <main id="contenido">
+    <!-- HERO institucional (solo imagen) -->
+    <section
+      class="page-hero page-hero--image page-hero--clientes"
+      style="background-image:url('assets/img/Liea-Red-de-Incendio-Pao.jpg');"
+      aria-hidden="true"
+    ></section>
 
-    <!-- HERO + LOGOS ADENTRO -->
-    <section class="page-hero page-hero--image"
-      style="background-image:url('assets/img/Liea-Red-de-Incendio-Pao.jpg');">
+    <!-- Título FUERA del hero -->
+    <section class="section section-title-block">
       <div class="container">
-        <div class="breadcrumb">Inicio / Clientes</div>
-        <h1>Clientes</h1>
-        <p>
-          Empresas que confían en nuestra experiencia en instalaciones industriales críticas
-          y servicios de alto estándar.
-        </p>
+        <div class="section-title section-title--stack">
+          <h2>Clientes</h2>
+          <p>
+            Empresas que confían en nuestra experiencia en instalaciones industriales críticas
+            y servicios de alto estándar.
+          </p>
+        </div>
+      </div>
+    </section>
 
-        <!-- ✅ LOGOS ADENTRO DE LA FOTO -->
-        <div class="clients-grid clients-grid--hero" aria-label="Logos de clientes">
-          <figure class="client">
+    <!-- Logos -->
+    <section class="section alt" id="clientes">
+      <div class="container">
+        <div class="clients-grid" aria-label="Logos de clientes">
+          <figure class="client reveal">
             <img src="assets/img/clientes/1685051536415.jpg" alt="Central Dock Sud" loading="lazy" decoding="async">
           </figure>
-
-          <figure class="client">
+          <figure class="client reveal">
             <img src="assets/img/clientes/1704732677499 (1).jpg" alt="AESA" loading="lazy" decoding="async">
           </figure>
-
-          <figure class="client">
-            <img src="assets/img/clientes/aguas_y_procesos_logo.jpg" alt="A&P Aguas &amp; Procesos" loading="lazy" decoding="async">
+          <figure class="client reveal">
+            <img src="assets/img/clientes/aguas_y_procesos_logo.jpg" alt="A&amp;P Aguas &amp; Procesos" loading="lazy" decoding="async">
           </figure>
-
-          <figure class="client">
+          <figure class="client reveal">
             <img src="assets/img/clientes/od6061o616-odebrecht-logo-odebrecht-logo-vector-eps-379-25-kb-download-r1b1a3ddbq8gzyj5g5m2zoujltp27phqtq1zozi6ia.png" alt="Odebrecht" loading="lazy" decoding="async">
           </figure>
-
-          <figure class="client">
+          <figure class="client reveal">
             <img src="assets/img/clientes/Oldelval_Vertical-01-1536x960.png" alt="Oldelval" loading="lazy" decoding="async">
           </figure>
-
-          <figure class="client">
+          <figure class="client reveal">
             <img src="assets/img/clientes/ypf-logo.png" alt="YPF" loading="lazy" decoding="async">
           </figure>
-
-          <figure class="client">
+          <figure class="client reveal">
             <img src="assets/img/clientes/FOTOGRAFIA-INSTITUCIONAL-PETERSEN-LOGO.png" alt="Petersen, Thiele y Cruz" loading="lazy" decoding="async">
           </figure>
-
-          <figure class="client">
+          <figure class="client reveal">
             <img src="assets/img/clientes/images.jpg" alt="Pampa Energía" loading="lazy" decoding="async">
           </figure>
         </div>
       </div>
     </section>
-
-    <!-- ✅ SECCIÓN INFORMATIVA ABAJO (SIN LOGOS) -->
-    <section class="section" id="clientes">
-      <div class="container">
-        <div class="section-title section-title--stack">
-          <h2>Empresas que confían en nosotros</h2>
-          <p>Referencias de clientes y aliados con los que trabajamos en proyectos industriales.</p>
-        </div>
-      </div>
-    </section>
-
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-grid">
-      <div>
-        <strong>Ingeniería L&amp;H SRL</strong><br/>
-        <span>Construcciones Industriales</span>
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
+          <img class="footer-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" loading="lazy">
+        </a>
+
+        <div class="footer-brand-text">
+          <strong>Ingeniería L&amp;H SRL</strong><br/>
+          <span>Construcciones Industriales</span>
+        </div>
       </div>
-      <div>
-        <div><a href="servicios.html">Servicios</a></div>
+
+      <div class="footer-links">
+        <div><a href="clientes.html" aria-current="page">Clientes</a></div>
         <div><a href="obras.html">Obras</a></div>
         <div><a href="contacto.html">Contacto</a></div>
       </div>
-      <div>
-        <div>WhatsApp: +54 9 221 461 6511</div>
+
+      <div class="footer-contact">
+        <div>WhatsApp: +54 9 221 616 8685</div>
         <div>Email: Info@ingenieria.com.ar</div>
       </div>
     </div>

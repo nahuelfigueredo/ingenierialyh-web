@@ -1,0 +1,5293 @@
+/* =========================================================
+   Ingeniería L&H — Estilo corporativo (Techint-like) — LIMPIO
+   - Header con tira oscura sobre video + sólido al scrollear
+   - Hero editorial (2 CTAs)
+   - KPIs en sección clara debajo del hero
+   - Bloque “Capacidades / Avances” como sección clara
+========================================================= */
+
+/* =============== 1) Tokens / base =============== */
+:root{
+  --max: 1160px;
+  --gutter: 24px;
+
+  --bg: #ffffff;
+  --bg-alt: #f5f7fa;
+
+  --text: #0b1220;
+  --muted: #4b5565;
+
+  --accent: #0b5ed7;
+  --accent-2: #0a4fb4;
+
+  --line: rgba(11,18,32,.12);
+  --line-soft: rgba(11,18,32,.08);
+
+  --shadow: 0 14px 34px rgba(11,18,32,.10);
+
+  --radius: 12px;
+
+  --header-h: 78px;
+
+  --h1: 46px;
+  --h2: 28px;
+  --h3: 16px;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+a{ color:inherit; text-decoration:none; }
+a:hover{ color: var(--accent); }
+img{ max-width:100%; display:block; }
+
+.container{
+  width: min(var(--max), calc(100% - (var(--gutter) * 2)));
+  margin: 0 auto;
+}
+
+/* Accessibility */
+.skip-link{
+  position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+}
+.skip-link:focus{
+  left:16px; top:16px; width:auto; height:auto;
+  padding:10px 14px;
+  border-radius:10px;
+  background:#fff;
+  border:1px solid var(--line);
+  z-index:99999;
+}
+
+/* =============== 2) Header / nav (base) =============== */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 5000;
+  background: rgba(255,255,255,.92);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+.navbar{
+  min-height: var(--header-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  min-width: 220px;
+}
+.brand .title{
+  display:flex;
+  flex-direction:column;
+  line-height:1.15;
+}
+.brand .title strong{
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+.brand .title span{
+  font-size: 12px;
+  color: rgba(11,18,32,.62);
+  letter-spacing: .2px;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+.nav-links a{
+  font-size: 14px;
+  font-weight: 650;
+  padding: 10px 10px;
+  border-radius: 10px;
+  color: rgba(11,18,32,.84);
+}
+.nav-links a:hover{
+  background: rgba(11,94,215,.08);
+  color: rgba(11,18,32,.92);
+}
+
+.cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(11,94,215,.28);
+  background: rgba(11,94,215,.10);
+  font-weight: 750;
+  font-size: 13px;
+  color: rgba(11,18,32,.92);
+}
+.cta:hover{
+  background: rgba(11,94,215,.16);
+  border-color: rgba(11,94,215,.45);
+}
+
+.burger{
+  display:none;
+  width:44px; height:44px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background: rgba(11,18,32,.04);
+  cursor:pointer;
+  color: rgba(11,18,32,.86);
+}
+
+.mobile-drawer{
+  display:none;
+  padding: 10px 0 16px;
+  border-top: 1px solid var(--line);
+  background: rgba(255,255,255,.96);
+}
+.mobile-drawer a{
+  display:block;
+  padding: 12px 12px;
+  margin: 6px 0;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: rgba(11,18,32,.86);
+}
+.mobile-drawer a:hover{
+  background: rgba(11,94,215,.06);
+  border-color: rgba(11,94,215,.22);
+}
+
+/* =============== 3) HOME (has-hero): header sobre video SIEMPRE =============== */
+body.has-hero{ padding-top: 0; }
+
+body.has-hero .site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 99999;
+
+  background: linear-gradient(180deg, rgba(11,18,32,.55), rgba(11,18,32,0));
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: none;
+}
+
+body.has-hero .site-header.is-solid{
+  background: rgba(255,255,255,.92);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 12px 30px rgba(11,18,32,.10);
+  backdrop-filter: blur(10px);
+}
+
+body.has-hero .site-header .nav-links a,
+body.has-hero .site-header .brand .title strong,
+body.has-hero .site-header .brand .title span{
+  color: rgba(255,255,255,.92);
+}
+body.has-hero .site-header .cta{
+  color:#fff;
+  border: 1px solid rgba(255,255,255,.24);
+  background: rgba(255,255,255,.10);
+}
+body.has-hero .site-header.is-solid .nav-links a,
+body.has-hero .site-header.is-solid .brand .title strong,
+body.has-hero .site-header.is-solid .brand .title span{
+  color: rgba(11,18,32,.86);
+}
+body.has-hero .site-header.is-solid .cta{
+  color: rgba(11,18,32,.92);
+  border-color: rgba(11,94,215,.28);
+  background: rgba(11,94,215,.10);
+}
+
+/* =============== 4) Hero full (video) =============== */
+.hero{ padding: 0; }
+.hero-full{ padding: 0; }
+
+.hero-media.video{
+  position: relative;
+  overflow: hidden;
+  background: #0b1220;
+  isolation: isolate;
+  z-index: 0;
+}
+
+.hero-full-media{
+  width: 100vw;
+  min-height: 100vh;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.hero-media.video .hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+
+  opacity:0;
+  transition: opacity .9s ease;
+
+  transform: scale(1.02);
+  filter: contrast(1.05) saturate(1.05) brightness(1.02);
+  z-index: 0;
+}
+.hero-media.video .hero-video.is-active{ opacity:1; }
+
+.hero-media.video::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background: linear-gradient(
+    180deg,
+    rgba(11,18,32,.06) 0%,
+    rgba(11,18,32,.12) 18%,
+    rgba(11,18,32,.32) 42%,
+    rgba(11,18,32,.62) 72%,
+    rgba(11,18,32,.84) 100%
+  );
+}
+
+.hero-overlay{
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+}
+
+.hero-overlay-wide{
+  padding: calc(var(--header-h) + 28px) 0 44px;
+  max-width: 860px;
+}
+
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size: 12px;
+  color: rgba(255,255,255,.88);
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.08);
+}
+
+.h1{
+  margin: 16px 0 12px;
+  font-size: var(--h1);
+  line-height: 1.08;
+  letter-spacing: -0.5px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.lead{
+  margin: 0;
+  font-size: 16px;
+  max-width: 64ch;
+  color: rgba(255,255,255,.84);
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top: 18px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.24);
+  background: rgba(255,255,255,.10);
+  color: #fff;
+  font-weight: 750;
+  font-size: 13px;
+}
+.btn:hover{
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.35);
+}
+.btn.primary{
+  background: var(--accent);
+  border-color: transparent;
+}
+.btn.primary:hover{ background: var(--accent-2); }
+
+/* =============== 5) KPIs debajo del hero (barra clara) =============== */
+.kpis-bar{
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.kpis{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.kpi{
+  background: #fff;
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 14px;
+  box-shadow: 0 10px 22px rgba(11,18,32,.06);
+  padding: 16px 16px 14px;
+}
+
+.kpi strong{
+  display:block;
+  color: rgba(11,18,32,.92);
+  font-size: 26px;
+  font-weight: 850;
+  letter-spacing: -0.2px;
+}
+
+.kpi span{
+  font-size: 13px;
+  color: rgba(11,18,32,.62);
+}
+
+/* =============== 6) Sección clara: capacidades + avances =============== */
+.hero-grid-below{
+  display:grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+
+  margin-top: 0;
+  padding-top: 22px;
+  padding-bottom: 30px;
+
+  position: relative;
+  z-index: 1;
+}
+
+/* Fondo de sección */
+.hero-grid-below::before{
+  content:"";
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  background: var(--bg-alt);
+  border-top: 1px solid rgba(11,18,32,.08);
+  border-bottom: 1px solid rgba(11,18,32,.08);
+  z-index: -1;
+}
+
+.hero-card{
+  border-radius: 14px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: #fff;
+  box-shadow: 0 12px 26px rgba(11,18,32,.08);
+  overflow: hidden;
+}
+
+.sidebar{
+  padding: 26px;
+}
+.sidebar h3{
+  margin: 0 0 12px;
+  font-size: 18px;
+  letter-spacing: -.2px;
+  font-weight: 850;
+}
+
+.cap-list{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 12px;
+  margin-top: 14px;
+}
+.cap-item{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+
+  background: #fff;
+  border: 1px solid rgba(11,18,32,.12);
+  border-radius: 999px;
+  padding: 10px 14px;
+
+  font-size: 13px;
+  color: rgba(11,18,32,.86);
+}
+.cap-dot{
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+
+.card{
+  border-radius: 14px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: #fff;
+  padding: 18px;
+}
+.card h3{
+  margin: 0 0 8px;
+  font-size: 16px;
+  letter-spacing: -.1px;
+  font-weight: 850;
+}
+.card p{
+  margin: 0;
+  color: rgba(11,18,32,.70);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Side media */
+.side-media{
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: #000;
+  box-shadow: 0 12px 26px rgba(11,18,32,.08);
+}
+.side-media .side-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+
+  opacity:0;
+  transition: opacity .9s ease;
+
+  filter: contrast(1.05) saturate(1.05) brightness(1.02);
+}
+.side-media .side-video.is-active{ opacity:1; }
+
+.side-media-overlay{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding: 22px;
+  color: rgba(255,255,255,.92);
+  background: linear-gradient(
+    180deg,
+    rgba(11,18,32,0) 0%,
+    rgba(11,18,32,.32) 45%,
+    rgba(11,18,32,.72) 100%
+  );
+}
+.side-media-overlay h3{ margin:0 0 6px; font-size: 16px; font-weight: 850; }
+.side-media-overlay p{ margin:0 0 14px; font-size: 13px; color: rgba(255,255,255,.78); line-height: 1.45; }
+.side-media-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+
+/* =============== 7) Secciones / grids / tables / forms / gallery =============== */
+.section{ padding: 72px 0; }
+.section.alt{
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.section-title{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.section-title h2{
+  margin:0;
+  font-size: var(--h2);
+  letter-spacing: -0.3px;
+}
+.section-title p{
+  margin:0;
+  max-width: 680px;
+  color: rgba(11,18,32,.62);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* Table */
+.table{
+  width:100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow:hidden;
+  border-radius: var(--radius);
+  border:1px solid var(--line);
+  background:#fff;
+}
+.table th, .table td{
+  padding: 12px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+}
+.table th{
+  background: rgba(11,18,32,.03);
+  text-align:left;
+  font-weight: 800;
+}
+
+/* Gallery */
+.gallery{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.gallery figure{
+  margin:0;
+  border-radius: var(--radius);
+  overflow:hidden;
+  border: 1px solid var(--line);
+  background:#fff;
+}
+.gallery figcaption{
+  padding: 10px 12px;
+  font-size: 12px;
+  color: rgba(11,18,32,.64);
+}
+
+/* Form */
+.form{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.field{ display:flex; flex-direction:column; gap: 8px; }
+.field label{ font-size: 12px; color: rgba(11,18,32,.68); }
+.field input, .field textarea{
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  padding: 12px 12px;
+  background:#fff;
+  color: var(--text);
+  outline:none;
+}
+.field input:focus, .field textarea:focus{
+  border-color: rgba(11,94,215,.55);
+  box-shadow: 0 0 0 4px rgba(11,94,215,.12);
+}
+.field textarea{ min-height: 120px; resize: vertical; }
+.form .full{ grid-column: 1 / -1; }
+
+/* =============== 8) Footer + WhatsApp =============== */
+.footer{
+  margin-top: 40px;
+  border-top: 1px solid rgba(11,18,32,.10);
+  background: #0b1220;
+  padding: 26px 0;
+  color: rgba(255,255,255,.72);
+  font-size: 12px;
+}
+.footer-grid{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.footer a{ color: rgba(255,255,255,.88); }
+.footer a:hover{ color:#fff; text-decoration: underline; }
+
+.whatsapp-fab{
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1100;
+  padding: 12px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+  color:#fff;
+  background: linear-gradient(180deg, #25D366, #18b957);
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+}
+
+/* =============== 9) Reveal =============== */
+.reveal{
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.is-visible{ opacity:1; transform:none; }
+
+/* =============== 10) Responsive =============== */
+@media (max-width: 980px){
+  :root{ --h1: 36px; --header-h: 72px; }
+
+  .hero-full-media{ min-height: 72vh; }
+  .hero-overlay-wide{ padding: calc(var(--header-h) + 20px) 0 34px; }
+
+  .kpis{ grid-template-columns: 1fr 1fr; }
+  .kpi strong{ font-size: 22px; }
+
+  .hero-grid-below{
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-bottom: 22px;
+  }
+  .side-media{ min-height: 320px; }
+
+  .grid-3{ grid-template-columns: 1fr; }
+  .gallery{ grid-template-columns: 1fr 1fr; }
+  .form{ grid-template-columns: 1fr; }
+  .cap-list{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px){
+  .nav-links, .cta{ display:none; }
+  .burger{ display:inline-flex; align-items:center; justify-content:center; }
+  .mobile-drawer{ display:block; }
+  .mobile-drawer[hidden]{ display:none; }
+}
+
+@media (max-width: 520px){
+  :root{ --h1: 30px; }
+
+  .kpis{ grid-template-columns: 1fr; }
+  .gallery{ grid-template-columns: 1fr; }
+
+  .hero-actions .btn{ width: 100%; }
+
+  .sidebar{ padding: 18px; }
+  .card{ padding: 16px; }
+
+  .side-media{ min-height: 260px; }
+  .side-media-overlay{ padding: 14px; }
+
+  .cap-item{ border-radius: 14px; }
+}
+
+/* =========================================================
+   AJUSTES: más aire bajo el video + tipografía más grande
+   Pegar AL FINAL
+========================================================= */
+
+/* 1) Más aire debajo del video (baja KPIs y la sección clara) */
+.kpis-bar{
+  padding-top: 34px;     /* antes 18px */
+  padding-bottom: 22px;
+}
+
+/* La sección clara (Capacidades/Avances) arranca un poco más abajo */
+.hero-grid-below{
+  padding-top: 34px;     /* antes 22px */
+}
+
+/* 2) Tipografía del hero: más grande y más “editorial” */
+:root{
+  --h1: 54px;            /* antes 46px */
+}
+
+.h1{
+  line-height: 1.03;     /* más impactante */
+  letter-spacing: -0.8px;
+}
+
+.lead{
+  font-size: 18px;       /* antes 16px */
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
+/* Kicker un poco más claro y con mejor presencia */
+.kicker{
+  font-size: 13px;       /* antes 12px */
+  padding: 9px 14px;
+}
+
+/* Responsive: mantener el impacto sin romper mobile */
+@media (max-width: 980px){
+  :root{ --h1: 40px; }
+  .lead{ font-size: 15px; }
+  .kpis-bar{ padding-top: 24px; }
+  .hero-grid-below{ padding-top: 26px; }
+}
+
+@media (max-width: 520px){
+  :root{ --h1: 32px; }
+  .lead{ font-size: 14px; }
+}
+/* =========================================================
+   HERO: más editorial (columna izquierda) + correr a la izquierda
+   Pegar AL FINAL
+========================================================= */
+
+/* En desktop: overlay más angosto y alineado a una “columna” */
+@media (min-width: 1100px){
+  /* controla el ancho del bloque de texto */
+  .hero-overlay{
+    max-width: 720px;              /* antes 860px */
+  }
+
+  /* desplaza un poco hacia la izquierda dentro del container */
+  .hero-overlay-wide{
+    padding-left: 0;
+    transform: translateX(-18px);  /* 🔧 ajustable: -16 a -40 */
+  }
+
+  /* que el H1 no sea tan “largo” y se lea más premium */
+  .h1{
+    max-width: 18ch;
+  }
+
+  .lead{
+    max-width: 60ch;
+  }
+}
+
+/* En pantallas medianas: casi sin corrimiento */
+@media (min-width: 980px) and (max-width: 1099px){
+  .hero-overlay{ max-width: 760px; }
+  .hero-overlay-wide{ transform: translateX(-10px); }
+}
+
+/* En mobile/tablet: sin corrimiento (evita cortes) */
+@media (max-width: 979px){
+  .hero-overlay-wide{ transform: none; }
+  .h1{ max-width: none; }
+}
+/* =========================================================
+   Sidebar sin “cuadro” (Techint-like): contenido directo + divisores
+   Pegar AL FINAL
+========================================================= */
+
+/* 1) Quitar el “cuadro” grande SOLO en la columna izquierda */
+.hero-grid-below .sidebar.hero-card{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;                 /* el aire lo damos con el grid */
+}
+
+/* 2) Título con look editorial */
+.hero-grid-below .sidebar > h3{
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 850;
+  letter-spacing: -0.2px;
+  color: rgba(11,18,32,.92);
+}
+
+/* 3) Capacidades como lista limpia (sin “píldoras” grandes) */
+.hero-grid-below .cap-list{
+  background: #fff;
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 10px 22px rgba(11,18,32,.06);
+
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+}
+
+.hero-grid-below .cap-item{
+  border: none;
+  background: transparent;
+  padding: 8px 6px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: rgba(11,18,32,.86);
+}
+
+.hero-grid-below .cap-dot{
+  width: 7px;
+  height: 7px;
+}
+
+/* 4) “Enfoque” y “Contacto” como bloques editoriales sin card */
+.hero-grid-below .sidebar .card{
+  margin-top: 18px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* divisor sutil arriba de cada bloque */
+.hero-grid-below .sidebar .card::before{
+  content:"";
+  display:block;
+  height: 1px;
+  background: rgba(11,18,32,.10);
+  margin-bottom: 14px;
+}
+
+/* título y texto */
+.hero-grid-below .sidebar .card h3{
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: -0.1px;
+}
+
+.hero-grid-below .sidebar .card p{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(11,18,32,.70);
+}
+
+/* 5) Botón de contacto: que sea corporativo sobre fondo claro */
+.hero-grid-below .sidebar .btn.primary{
+  color: #fff;
+  background: var(--accent);
+  border-color: transparent;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .hero-grid-below .cap-list{ grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   Capabilities typography PRO (Montaje industrial, etc.)
+   Pegar AL FINAL
+========================================================= */
+
+/* Ítems: más “corporate list” */
+.hero-grid-below .cap-item{
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -0.1px;
+  color: rgba(11,18,32,.88);
+
+  line-height: 1.25;
+}
+
+/* Dot: más prolijo y con acento */
+.hero-grid-below .cap-dot{
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(11,94,215,.10);
+}
+
+/* Si estás usando el estilo con separadores: mejorar ritmo vertical */
+.hero-grid-below .cap-list{
+  margin-top: 14px;
+}
+.hero-grid-below .cap-item{
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+/* Hover sutil (desktop): se siente “pro” sin ser llamativo */
+@media (hover: hover){
+  .hero-grid-below .cap-item{
+    transition: color .18s ease, transform .18s ease;
+  }
+  .hero-grid-below .cap-item:hover{
+    color: rgba(11,18,32,.98);
+    transform: translateX(1px);
+  }
+}
+
+/* Mobile: un poco más compacto */
+@media (max-width: 520px){
+  .hero-grid-below .cap-item{
+    font-size: 13px;
+    font-weight: 650;
+  }
+}
+
+
+/* =========================================================
+   Enfoque / Contacto — tipografía PRO (igual nivel que capabilities)
+   Pegar AL FINAL
+========================================================= */
+
+/* Títulos dentro de los bloques (Enfoque / Contacto rápido) */
+.hero-grid-below .sidebar .card h3{
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: -0.2px;
+  color: rgba(11,18,32,.92);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+/* Texto: más editorial, más legible */
+.hero-grid-below .sidebar .card p{
+  font-size: 14.5px;
+  line-height: 1.78;
+  letter-spacing: -0.05px;
+  color: rgba(11,18,32,.72);
+}
+
+/* Destacados (strong) más sutiles y “corporate” */
+.hero-grid-below .sidebar .card p strong{
+  color: rgba(11,18,32,.90);
+  font-weight: 800;
+}
+
+/* Si hay <br>, que no quede tan “cortado” visualmente */
+.hero-grid-below .sidebar .card p br{
+  content:"";
+  display:block;
+  margin-top: 6px;
+}
+
+/* Botón dentro de contacto: más premium */
+.hero-grid-below .sidebar .card .btn.primary{
+  margin-top: 12px !important;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  letter-spacing: .1px;
+}
+
+/* Mobile: un toque más compacto */
+@media (max-width: 520px){
+  .hero-grid-below .sidebar .card h3{ font-size: 15px; }
+  .hero-grid-below .sidebar .card p{
+    font-size: 13.5px;
+    line-height: 1.75;
+  }
+}
+
+
+/* =========================================================
+   HERO internas con imagen (Empresa, etc.)
+   Pegar AL FINAL de techint.css
+========================================================= */
+
+.page-hero--image{
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: 64px 0 34px;
+  min-height: 320px;
+
+  border-bottom: 1px solid rgba(11,18,32,.08);
+  isolation: isolate;
+}
+
+.page-hero--image::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(11,18,32,.78) 0%,
+    rgba(11,18,32,.55) 42%,
+    rgba(11,18,32,.20) 78%,
+    rgba(11,18,32,.08) 100%
+  );
+}
+
+.page-hero-inner{
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+}
+
+.page-hero--image .breadcrumb{
+  color: rgba(255,255,255,.78);
+}
+
+.page-hero--image h1{
+  margin: 10px 0 10px;
+  font-size: 40px;
+  line-height: 1.08;
+  letter-spacing: -0.4px;
+  color: #fff;
+}
+
+.page-hero--image p{
+  margin: 0;
+  max-width: 70ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.84);
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .page-hero--image{
+    padding: 46px 0 26px;
+    min-height: 260px;
+  }
+  .page-hero--image h1{ font-size: 32px; }
+}
+
+/* =========================================================
+   Header internas: franja azul corporativa con diagonales
+   (similar a la imagen)
+========================================================= */
+
+body.page .site-header{
+  position: sticky; /* internas normalmente sticky, no fixed */
+  top: 0;
+  z-index: 5000;
+
+  border-bottom: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: none;
+  background: #0b5ed7; /* fallback */
+  overflow: hidden;
+}
+
+/* Fondo azul + gradiente */
+body.page .site-header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  background: linear-gradient(90deg, #073a93 0%, #0b5ed7 55%, #0f6fe9 100%);
+}
+
+/* Diagonales / líneas */
+body.page .site-header::after{
+  content:"";
+  position:absolute;
+  inset:-60px -120px;
+  z-index:-1;
+  opacity: .55;
+  background:
+    repeating-linear-gradient(
+      -10deg,
+      rgba(255,255,255,.22) 0px,
+      rgba(255,255,255,.22) 3px,
+      rgba(255,255,255,0) 3px,
+      rgba(255,255,255,0) 64px
+    );
+  transform: translateY(10px);
+}
+
+/* En internas, nav en blanco */
+body.page .site-header .brand .title strong,
+body.page .site-header .brand .title span,
+body.page .site-header .nav-links a{
+  color: rgba(255,255,255,.94);
+}
+
+body.page .site-header .nav-links a:hover{
+  background: rgba(255,255,255,.12);
+  color: #fff;
+}
+
+/* CTA en blanco “glass” */
+body.page .site-header .cta{
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.28);
+  background: rgba(255,255,255,.12);
+}
+body.page .site-header .cta:hover{
+  background: rgba(255,255,255,.16);
+  border-color: rgba(255,255,255,.40);
+}
+
+/* Burger */
+body.page .site-header .burger{
+  color: #fff;
+  border-color: rgba(255,255,255,.22);
+  background: rgba(255,255,255,.10);
+}
+
+/* Drawer mobile acorde */
+body.page .mobile-drawer{
+  background: rgba(8,44,120,.96);
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+body.page .mobile-drawer a{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.92);
+}
+body.page .mobile-drawer a:hover{
+  background: rgba(255,255,255,.12);
+}
+
+/* Ajuste: el hero interno debe empezar debajo del header */
+body.page .page-hero--image{
+  padding-top: 54px;
+}
+
+
+/* =========================================================
+   FIX LOGO en navbar (evita que quede gigante)
+   Pegar AL FINAL
+========================================================= */
+
+/* Asegura que el header no crezca por el logo */
+.site-header .navbar{
+  min-height: var(--header-h);
+  align-items: center;
+}
+
+/* Brand: limita ancho total para que no empuje el menú */
+.brand.brand-logo{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  max-width: 360px; /* evita que se coma toda la barra */
+}
+
+/* Logo: tamaño corporativo fijo */
+.brand-mark{
+  width: 220px;          /* ✅ tamaño */
+  height: 100px;         /* ✅ tamaño */
+  object-fit: contain;  /* mantiene proporción */
+  flex: 0 0 auto;       /* no crece */
+  display: block;
+}
+
+/* Texto: que no se vaya de alto */
+.brand .title strong{
+  font-size: 14px;
+  line-height: 1.1;
+}
+.brand .title span{
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+/* Home: placa blanca sutil para que el logo oscuro se lea */
+body.has-hero .brand-mark,
+body.page .brand-mark{
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  filter: none !important;
+}
+
+/* En header sólido (cuando scrolleás), la placa puede ser más suave */
+body.has-hero .site-header.is-solid .brand-mark{
+  background: rgba(11,18,32,.04);
+  border-color: rgba(11,18,32,.10);
+}
+
+/* Responsive */
+@media (max-width: 520px){
+  .brand.brand-logo{ max-width: 260px; gap: 10px; }
+  .brand-mark{ width: 44px; height: 34px; padding: 5px 7px; }
+  .brand .title strong{ font-size: 13px; }
+  .brand .title span{ font-size: 11px; }
+}
+/* =========================================================
+   Navbar: logo un poco más a la izquierda + menú más grande
+   Pegar AL FINAL
+========================================================= */
+
+/* 1) Logo más a la izquierda (solo pantallas grandes) */
+@media (min-width: 1100px){
+  .site-header .brand{
+    transform: translateX(-16px); /* ajustá: -8 a -24 */
+  }
+}
+
+/* 2) Menú más grande y con mejor presencia */
+.site-header .nav-links a{
+  font-size: 15px;        /* antes 14px */
+  font-weight: 750;
+  letter-spacing: -0.1px;
+  padding: 12px 12px;     /* un poco más alto/ancho */
+}
+
+/* Que no se “apriete” todo: más gap entre ítems */
+.site-header .nav-links{
+  gap: 12px;              /* antes 10px aprox */
+}
+
+/* CTA acompaña el nuevo tamaño */
+.site-header .cta{
+  font-size: 13.5px;
+  padding: 11px 14px;
+  font-weight: 800;
+}
+
+/* Responsive: mantener controlado en pantallas medianas */
+@media (max-width: 1099px){
+  .site-header .nav-links a{
+    font-size: 14px;
+    padding: 10px 10px;
+  }
+}
+/* =========================================================
+   Empresa: "Compromiso y dirección" más premium (Techint-like)
+   Pegar AL FINAL
+========================================================= */
+
+radient(180deg, var(--accent), rgba(11,94,215,.18));
+}
+
+.section-title p{
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(11,18,32,.62);
+  max-width: 62ch;
+}/* 1) Sección: más aire y un fondo más “institucional” */
+.section.alt{
+  background:
+    radial-gradient(900px 420px at 12% 0%, rgba(11,94,215,.06), rgba(255,255,255,0) 60%),
+    var(--bg-alt);
+}
+
+/* 2) Encabezado: layout editorial (título + texto alineado) */
+.section-title{
+  align-items: baseline;
+  margin-bottom: 22px;
+}
+
+.section-title h2{
+  font-size: 32px;
+  letter-spacing: -0.6px;
+  font-weight: 900;
+  position: relative;
+  padding-left: 14px;
+}
+
+/* Acento Techint: línea azul */
+.section-title h2::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top: .18em;
+  bottom: .18em;
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #0b5ed7, rgba(11,94,215,.35));
+}
+
+/* 3) Cards: menos redondeo, borde fino, sombra mínima */
+.grid-3{
+  gap: 18px;
+}
+
+.grid-3 .card{
+  border-radius: 14px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 10px 26px rgba(11,18,32,.06);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Banda superior muy sutil (no “cuadro”) */
+.grid-3 .card::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; right:0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(11,94,215,.20));
+  opacity: .9;
+}
+
+/* 4) Tipografía dentro */
+.grid-3 .card h3{
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  color: rgba(11,18,32,.92);
+}
+
+.grid-3 .card p{
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.78;
+  letter-spacing: -0.05px;
+  color: rgba(11,18,32,.70);
+}
+
+/* 5) Hover sutil (premium) */
+@media (hover:hover){
+  .grid-3 .card{
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .grid-3 .card:hover{
+    transform: translateY(-2px);
+    border-color: rgba(11,94,215,.22);
+    box-shadow: 0 18px 42px rgba(11,18,32,.10);
+  }
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .section-title h2{ font-size: 26px; }
+  .grid-3 .card{ padding: 18px; }
+}
+
+/* =========================================================
+   Empresa — Mosaic premium (3 fotos + 3 frases)
+========================================================= */
+
+.empresa-mosaic .section-title h2{
+  padding-left: 14px;
+  position: relative;
+}
+.empresa-mosaic .section-title h2::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.18em;
+  bottom:.18em;
+  width:4px;
+  border-radius:999px;
+  background: linear-gradient(180deg, var(--accent), rgba(11,94,215,.18));
+}
+
+.mosaic-grid{
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* Medias */
+.mosaic-media{
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(11,18,32,.10);
+  box-shadow: 0 14px 34px rgba(11,18,32,.10);
+  background: #fff;
+  min-height: 260px;
+}
+.mosaic-media img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+/* Text blocks */
+.mosaic-text{
+  border-radius: 16px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 10px 26px rgba(11,18,32,.06);
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.mosaic-text::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; right:0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(11,94,215,.20));
+  opacity: .9;
+}
+
+.mosaic-text p{
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: -0.08px;
+  color: rgba(11,18,32,.76);
+}
+.mosaic-text p strong{
+  color: rgba(11,18,32,.92);
+  font-weight: 900;
+}
+
+/* Layout (similar a tu referencia):
+   - texto grande a la izquierda arriba (col 1-5)
+   - foto grande a la derecha arriba (col 6-12)
+   - foto abajo izquierda (col 1-7)
+   - texto abajo derecha (col 8-12)
+   + un tercer texto “center” que puede ubicarse en el medio
+*/
+.mosaic-grid > :nth-child(1){ grid-column: 1 / span 5;  min-height: 260px; }
+.mosaic-grid > :nth-child(2){ grid-column: 6 / -1;      min-height: 260px; }
+
+.mosaic-grid > :nth-child(3){ grid-column: 1 / span 7;  min-height: 280px; }
+.mosaic-grid > :nth-child(4){ grid-column: 8 / -1;      min-height: 280px; }
+
+.mosaic-grid > :nth-child(5){ grid-column: 8 / -1;      min-height: 220px; }
+.mosaic-grid > :nth-child(6){ grid-column: 1 / span 7;  min-height: 220px; }
+
+/* El texto centrado se siente más institucional */
+.mosaic-text.is-center{
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+/* Hover sutil */
+@media (hover:hover){
+  .mosaic-media, .mosaic-text{
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .mosaic-media:hover, .mosaic-text:hover{
+    transform: translateY(-2px);
+    border-color: rgba(11,94,215,.22);
+    box-shadow: 0 18px 42px rgba(11,18,32,.12);
+  }
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .mosaic-grid{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .mosaic-grid > *{
+    grid-column: 1 / -1 !important;
+    min-height: unset;
+  }
+  .mosaic-media{ height: 240px; }
+  .mosaic-text{ padding: 18px; }
+  .mosaic-text p{ font-size: 15px; }
+}
+
+/* =========================================================
+   Mosaic: tratamiento de imagen (más premium/corporativo)
+========================================================= */
+
+.mosaic-media img{
+  /* look más institucional */
+  filter: contrast(1.05) saturate(0.95) brightness(1.02);
+}
+
+/* Opcional: un overlay MUY sutil para homogeneizar */
+.mosaic-media{
+  position: relative;
+}
+.mosaic-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: linear-gradient(
+    180deg,
+    rgba(11,18,32,.06) 0%,
+    rgba(11,18,32,.00) 40%,
+    rgba(11,18,32,.06) 100%
+  );
+}
+
+/* =========================================================
+   Hero Empresa: recorte y look premium
+========================================================= */
+
+.page-hero--empresa{
+  background-position: center 62%; /* baja un poco el encuadre */
+}
+
+.page-hero--empresa::before{
+  /* un poquito más oscuro que el default para texto */
+  background: linear-gradient(
+    90deg,
+    rgba(11,18,32,.82) 0%,
+    rgba(11,18,32,.58) 42%,
+    rgba(11,18,32,.22) 78%,
+    rgba(11,18,32,.10) 100%
+  );
+}
+
+/* =========================================================
+   Empresa Mosaic 6 piezas — mismo alto y look premium
+========================================================= */
+
+:root{
+  --mosaic-row: 300px; /* ajustá 280/300/320 según cuánto texto querés mostrar */
+}
+
+.empresa-mosaic{
+  background:
+    radial-gradient(900px 420px at 12% 0%, rgba(11,94,215,.06), rgba(255,255,255,0) 60%),
+    var(--bg-alt);
+}
+
+.empresa-mosaic .mosaic-grid.mosaic-6{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: var(--mosaic-row); /* ✅ MISMO ALTO */
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* Cada pieza llena su celda */
+.empresa-mosaic .mosaic-grid.mosaic-6 > *{
+  height: 100%;
+  min-height: 0;
+}
+
+/* Layout 6 piezas (2 filas x 3 piezas, anchos distintos pero altura igual) */
+.empresa-mosaic .mosaic-grid.mosaic-6 > :nth-child(1){ grid-column: 1 / span 5; }
+.empresa-mosaic .mosaic-grid.mosaic-6 > :nth-child(2){ grid-column: 6 / -1; }
+
+.empresa-mosaic .mosaic-grid.mosaic-6 > :nth-child(3){ grid-column: 1 / span 4; }
+.empresa-mosaic .mosaic-grid.mosaic-6 > :nth-child(4){ grid-column: 5 / span 4; }
+.empresa-mosaic .mosaic-grid.mosaic-6 > :nth-child(5){ grid-column: 9 / span 4; }
+.empresa-mosaic .mosaic-grid.mosaic-6 > :nth-child(6){ grid-column: 1 / span 12; }
+
+/* Si la última foto la querés NO full width, decime y la dejamos como el ejemplo (span 7) */
+
+
+
+/* =========================================================
+   Empresa: mosaico 6 cuadrados iguales (3x2)
+========================================================= */
+
+.empresa-mosaic{
+  background:
+    radial-gradient(900px 420px at 12% 0%, rgba(11,94,215,.06), rgba(255,255,255,0) 90%),
+    var(--bg-alt);
+}
+
+/* Grilla 3x2 */
+.tiles-6{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* Cada tile: cuadrado perfecto */
+.tiles-6 .tile{
+  aspect-ratio: 1 / 1;     /* ✅ cuadrado */
+  width: 100%;
+  border-radius: 0px;
+  overflow: hidden;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 10px 26px rgba(11,18,32,.06);
+}
+
+/* Fotos */
+.tiles-6 .tile-media{
+  margin: 0;
+  background: #000;
+  box-shadow: 0 14px 34px rgba(11,18,32,.10);
+}
+.tiles-6 .tile-media img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;       /* ✅ recorte prolijo */
+  filter: contrast(1.04) saturate(.95) brightness(1.02);
+}
+
+/* Textos: centrados y con jerarquía */
+.tiles-6 .tile-text{
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* ✅ centrado vertical */
+  position: relative;
+}
+
+.tiles-6 .tile-text::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; right:0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(11,94,215,.20));
+}
+
+.tiles-6 .tile-text p{
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  letter-spacing: -0.08px;
+  color: rgba(11,18,32,.74);
+}
+
+.tiles-6 .tile-text p + p{
+  margin-top: 12px;
+}
+
+.tiles-6 .tile-text strong{
+  color: rgba(11,18,32,.92);
+  font-weight: 900;
+}
+
+/* Hover premium */
+@media (hover:hover){
+  .tiles-6 .tile{
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .tiles-6 .tile:hover{
+    transform: translateY(-2px);
+    border-color: rgba(11,94,215,.22);
+    box-shadow: 0 18px 42px rgba(11,18,32,.12);
+  }
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .tiles-6{
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  }
+}
+@media (max-width: 560px){
+  .tiles-6{
+    grid-template-columns: 1fr; /* 1 columna */
+  }
+  .tiles-6 .tile-text{
+    padding: 20px;
+  }
+}
+/* =========================================================
+   Empresa: 2 columnas (foto+texto), 6 cuadrados, full width
+========================================================= */
+
+/* Contenedor más ancho para que “llene pantalla” como el ejemplo */
+.container.container-wide{
+  max-width: 1320px;  /* subí/bajá: 1240/1320/1440 */
+}
+
+/* Si querés aún más ��edge to edge”, bajamos padding en desktop */
+@media (min-width: 1100px){
+  .empresa-mosaic--full .container.container-wide{
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+.tiles-pairs{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* ✅ 2 columnas */
+  gap: 18px;
+}
+
+/* Cada tile cuadrado */
+.tiles-pairs .tile{
+  aspect-ratio: 1 / 1;  /* ✅ cuadrados iguales */
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 10px 26px rgba(11,18,32,.06);
+}
+
+/* Media */
+.tiles-pairs .tile-media{
+  margin: 0;
+  background: #000;
+  box-shadow: 0 14px 34px rgba(11,18,32,.10);
+}
+.tiles-pairs .tile-media img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: contrast(1.04) saturate(.95) brightness(1.02);
+}
+
+/* Textos */
+.tiles-pairs .tile-text{
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.tiles-pairs .tile-text::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; right:0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(11,94,215,.20));
+}
+
+.tiles-pairs .tile-text p{
+  margin: 0;
+  font-size: 18px;   /* como tu ejemplo */
+  line-height: 1.9;
+  letter-spacing: -0.10px;
+  color: rgba(11,18,32,.76);
+}
+.tiles-pairs .tile-text p + p{
+  margin-top: 22px;
+}
+.tiles-pairs .tile-text strong{
+  color: rgba(11,18,32,.92);
+  font-weight: 900;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .tiles-pairs{
+    grid-template-columns: 1fr; /* se apila */
+  }
+  .tiles-pairs .tile-text{
+    padding: 22px;
+  }
+  .tiles-pairs .tile-text p{
+    font-size: 16px;
+    line-height: 1.75;
+  }
+}
+
+/* =========================================================
+   Empresa: mosaico edge-to-edge, 2 columnas, 6 cuadrados alternados
+========================================================= */
+
+/* Contenedor "pegado a bordes" */
+.container.container-edge{
+  max-width: none;              /* ✅ sin límite */
+  width: calc(100vw - 20px);    /* margen mínimo (20px por lado) */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (min-width: 1200px){
+  .container.container-edge{
+    width: calc(100vw - 12px);  /* aún más pegado (12px por lado) */
+  }
+}
+
+/* Grilla 2 columnas */
+.tiles-pairs{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* Tiles cuadrados */
+.tiles-pairs .tile{
+  aspect-ratio: 1 / 1;
+  width: 80%;
+  border-radius: 0px;
+  overflow: hidden;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 10px 26px rgba(11,18,32,.06);
+}
+
+/* Media */
+.tiles-pairs .tile-media{
+  margin: 0;
+  background: #000;
+  box-shadow: 0 14px 34px rgba(11,18,32,.10);
+}
+.tiles-pairs .tile-media img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: contrast(1.04) saturate(.95) brightness(1.02);
+}
+
+/* Texto (tipo el ejemplo) */
+.tiles-pairs .tile-text{
+  padding: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.tiles-pairs .tile-text::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; right:0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(11,94,215,.20));
+}
+
+.tiles-pairs .tile-text p{
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.9;
+  letter-spacing: -0.10px;
+  color: rgba(11,18,32,.76);
+}
+.tiles-pairs .tile-text p + p{
+  margin-top: 22px;
+}
+.tiles-pairs .tile-text strong{
+  color: rgba(11,18,32,.92);
+  font-weight: 900;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .container.container-edge{
+    width: calc(100vw - 28px);  /* margen 14px por lado */
+  }
+  .tiles-pairs{
+    grid-template-columns: 1fr;
+  }
+  .tiles-pairs .tile-text{
+    padding: 22px;
+  }
+  .tiles-pairs .tile-text p{
+    font-size: 16px;
+    line-height: 1.75;
+  }
+}
+
+/* =========================================================
+   Empresa: edge-to-edge real (0 margen) + tiles pegados (gap 0)
+========================================================= */
+
+/* Contenedor sin márgenes laterales */
+.container.container-edge{
+  max-width: none !important;
+  width: 100vw !important;     /* ✅ 0 margen */
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Grilla sin separación entre tiles */
+.tiles-pairs{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 !important;           /* ✅ foto y texto pegados */
+}
+
+/* Tiles cuadrados sin borde/redondeo para que “encastren” perfecto */
+.tiles-pairs .tile{
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border-radius: 0 !important; /* ✅ sin redondeo */
+  border: 0 !important;        /* ✅ sin línea entre medio */
+  box-shadow: none !important; /* ✅ sin sombra entre piezas */
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Fotos */
+.tiles-pairs .tile-media{ margin: 0; background: #000; }
+.tiles-pairs .tile-media img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: contrast(1.04) saturate(.95) brightness(1.02);
+}
+
+/* Textos */
+.tiles-pairs .tile-text{
+  padding: clamp(18px, 4vw, 56px); /* se adapta al tamaño de pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* Separadores finos sin generar espacio */
+.tiles-pairs .tile{
+  box-shadow: none !important;
+  border: 0 !important;
+}
+.tiles-pairs{
+  background: rgba(11,18,32,.10); /* color de las líneas */
+  gap: 1px !important;            /* línea de 1px */
+}
+.tiles-pairs .tile{
+  background: #fff;
+}
+
+.tiles-pairs .tile-text p{
+  margin: 0;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.9;
+  letter-spacing: -0.10px;
+  color: rgba(11,18,32,.76);
+}
+.tiles-pairs .tile-text p + p{ margin-top: 22px; }
+.tiles-pairs .tile-text strong{ color: rgba(11,18,32,.92); font-weight: 900; }
+
+/* Mobile: 1 columna (también sin márgenes ni gaps) */
+@media (max-width: 980px){
+  .tiles-pairs{ grid-template-columns: 1fr; }
+}
+
+.tiles-pairs .tile-text{
+  text-align: center;          /* si lo querés como tu ejemplo */
+}
+.tiles-pairs .tile-text p{
+  max-width: 34ch;             /* ancho óptimo de lectura */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================================
+   Mobile: ordenar como Foto + Texto, Foto + Texto, Foto + Texto
+========================================================= */
+
+@media (max-width: 980px){
+  /* Pasamos a flex para poder reordenar */
+  .tiles-pairs{
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* FILA 1 */
+  .tiles-pairs > :nth-child(1){ order: 1; } /* foto 1 */
+  .tiles-pairs > :nth-child(2){ order: 2; } /* texto 1 */
+
+  /* FILA 2 (en desktop está invertida: texto | foto) */
+  .tiles-pairs > :nth-child(3){ order: 4; } /* texto 2 */
+  .tiles-pairs > :nth-child(4){ order: 3; } /* foto 2 */
+
+  /* FILA 3 */
+  .tiles-pairs > :nth-child(5){ order: 5; } /* foto 3 */
+  .tiles-pairs > :nth-child(6){ order: 6; } /* texto 3 */
+}
+
+/* =========================================================
+   Empresa mosaico: texto más grande (como el ejemplo)
+========================================================= */
+
+.tiles-pairs .tile-text p{
+  font-size: clamp(25px, 1.55vw, 35px); /* ✅ más grande */
+  line-height: 1.95;
+  letter-spacing: -0.12px;
+}
+
+/* Un poco más de aire entre párrafos */
+.tiles-pairs .tile-text p + p{
+  margin-top: 26px;
+}
+
+/* En pantallas medianas, que no se dispare */
+@media (max-width: 1200px){
+  .tiles-pairs .tile-text p{
+    font-size: clamp(17px, 2.1vw, 20px);
+  }
+}
+
+/* =========================================================
+   “La Empresa” más al medio (centrado vertical + horizontal)
+========================================================= */
+
+.section-title--empresa{
+  text-align: center;
+  /* más espacio arriba/abajo para que quede "en el medio" */
+  padding: clamp(34px, 6vw, 72px) 0 clamp(18px, 3vw, 36px);
+  margin: 0; /* evita que se vaya para arriba/abajo por márgenes */
+}
+
+.section-title--empresa h2{
+  margin: 0;
+  font-size: clamp(38px, 4.6vw, 62px);
+  line-height: 1.03;
+  letter-spacing: -1.2px;
+  font-weight: 950;
+}
+
+/* acento debajo, también centrado */
+.section-title--empresa h2::after{
+  content:"";
+  display:block;
+  width: 86px;
+  height: 4px;
+  margin: 18px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), rgba(11,94,215,.22));
+}
+ 
+
+/* =========================================================
+   Título Empresa: grande, centrado, más cerca del header
+========================================================= */
+
+.empresa-title-screen{
+  min-height: 0;                 /* ✅ saca el 70vh */
+  display: grid;
+  place-items: center;
+  padding: 34px 16px 18px;       /* ✅ cerca del header, sin tanto blanco */
+}
+
+@media (min-width: 980px){
+  .empresa-title-screen{
+    padding-top: 42px;           /* un poco más aire en desktop */
+    padding-bottom: 22px;
+  }
+}
+
+/* =========================================================
+   Botón premium (CTA)
+========================================================= */
+
+.empresa-cta{
+  display: flex;
+  justify-content: center;
+  padding: 28px 0 0;
+}
+
+.btn-primary{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 14px 22px;
+  border-radius: 999px;
+
+  background: linear-gradient(90deg, var(--accent, #0B5ED7), #0a4fc0);
+  color: #fff;
+  text-decoration: none;
+
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: .2px;
+
+  box-shadow: 0 14px 34px rgba(11, 94, 215, .22);
+  border: 1px solid rgba(255,255,255,.14);
+
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+
+.btn-primary:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 18px 44px rgba(11, 94, 215, .28);
+}
+
+.btn-primary:active{
+  transform: translateY(0);
+  box-shadow: 0 10px 24px rgba(11, 94, 215, .20);
+}
+
+.btn-primary:focus-visible{
+  outline: 3px solid rgba(11,94,215,.35);
+  outline-offset: 3px;
+}
+
+
+/* Mover el título (bloque debajo del hero) hacia arriba */
+.section.section-title-block{
+  margin-top: -50px;   /* ajustá: -30 / -50 / -70 / -90 */
+  padding-top: 0;
+  padding-bottom: 14px;
+  position: relative;
+  z-index: 5;
+}
+
+/* Centrado del título */
+.section.section-title-block .section-title{
+  justify-content: center; /* por si es flex */
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.section.section-title-block .section-title h2{
+  margin: 0;
+  padding-left: 0; /* saca el padding del acento izquierdo */
+}
+
+/* =========================================================
+   Footer: mismo fondo que el menú (gradiente + diagonales)
+========================================================= */
+
+.footer{
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,.14);
+  background: #0b5ed7; /* fallback */
+  color: rgba(255,255,255,.94);
+}
+
+/* Fondo azul + gradiente (igual que header) */
+.footer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background: linear-gradient(90deg, #073a93 0%, #0b5ed7 55%, #0f6fe9 100%);
+}
+
+/* Diagonales / líneas (igual que header) */
+.footer::after{
+  content:"";
+  position:absolute;
+  inset:-60px -120px;
+  z-index:1;
+  opacity: .55;
+  background:
+    repeating-linear-gradient(
+      -10deg,
+      rgba(255,255,255,.22) 0px,
+      rgba(255,255,255,.22) 3px,
+      rgba(255,255,255,0) 3px,
+      rgba(255,255,255,0) 64px
+    );
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+/* Que el contenido del footer quede arriba de los fondos */
+.footer .container{
+  position: relative;
+  z-index: 2;
+}
+
+.footer a{
+  color: rgba(255,255,255,.94);
+}
+
+.footer a:hover{
+  color: #fff;
+  text-decoration: underline;
+}
+/* Tipografía footer */
+.footer{
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.footer strong{
+  font-size: 18px;
+}
+
+/* Logo + marca */
+.footer-brand{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-logo-link{
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-logo{
+  width: 190px;   /* ideal para ese logo horizontal */
+  height: auto;
+  object-fit: contain;
+}
+
+/* Links */
+.footer a{
+  color: rgba(255,255,255,.94);
+  text-decoration: none;
+}
+
+.footer a:hover{
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Mobile: apilar mejor */
+@media (max-width: 720px){
+  .footer-brand{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-logo{
+    width: 200px;
+  }
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo{
+  width: 150px;   /* como es horizontal, controlá por ancho */
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* En pantallas chicas: achicar para que no rompa el navbar */
+@media (max-width: 900px){
+  .brand-logo{ width: 120px; }
+}
+
+@media (max-width: 520px){
+  .brand-logo{ width: 105px; }
+  .brand .title span{ display:none; } /* opcional: para que no se apretuje */
+}
+
+
+
+/* SERVICIOS: el hero es blanco, pero las cards son blancas -> texto oscuro dentro */
+.page-hero--services .card{
+  background: #fff;
+  color: #0b1220;          /* fuerza texto oscuro */
+  border-radius: 18px;
+  padding: 18px 18px;
+  box-shadow: 0 16px 40px rgba(2,16,39,.20);
+}
+
+.page-hero--services .card h3{
+  color: #0b1220;
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.page-hero--services .card p{
+  color: rgba(11,18,32,.80);
+  margin: 0;
+  line-height: 1.5;
+}
+/* ================================
+   SERVICIOS – Mejora visual cards
+================================ */
+
+/* 1) Un overlay un poco más fuerte para que el fondo no “compita” */
+
+
+/* 2) Grilla: un poco más de aire y centrado */
+.page-hero--services .services-grid{
+  gap: 18px;
+}
+
+/* 3) Cards: borde + acento azul tipo Techint + padding más prolijo */
+.page-hero--services .card{
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 18px;
+  padding: 20px 22px;
+  box-shadow: 0 18px 55px rgba(2,16,39,.28);
+  backdrop-filter: blur(2px);
+
+  /* acento */
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+/* 4) Tipografía más fina y consistente */
+.page-hero--services .card h3{
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+  color: #0b1220;
+}
+
+.page-hero--services .card p{
+  margin: 0;
+  color: rgba(11,18,32,.78);
+  line-height: 1.55;
+}
+
+/* 5) Hover suave (en desktop) */
+@media (hover:hover){
+  .page-hero--services .card{
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .page-hero--services .card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 26px 70px rgba(2,16,39,.34);
+    background: rgba(255,255,255,.985);
+  }
+}
+
+/* Servicios: hero solo imagen (sin overlays ni burbujas) */
+.page-hero--services{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 20%;
+}
+
+/* Grilla de servicios en sección normal */
+.services-grid.services-grid--page{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 980px){
+  .services-grid.services-grid--page{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px){
+  .services-grid.services-grid--page{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards (si no querés afectar otras cards del sitio, lo limito a services-grid--page) */
+.services-grid--page .card{
+  background: #fff;
+  border-radius: 18px;
+  padding: 20px 22px;
+  box-shadow: 0 18px 55px rgba(2,16,39,.10);
+  border: 1px solid rgba(11,18,32,.08);
+}
+
+.services-grid--page .card h3{
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+.services-grid--page .card p{
+  margin: 0;
+  color: rgba(11,18,32,.78);
+  line-height: 1.55;
+}
+
+.page-hero--services{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 20%;
+}
+
+/* ================================
+   SERVICIOS: título SIEMPRE abajo del hero (no superpuesto)
+================================ */
+
+/* Esto anula el "encime" que lo mete dentro de la foto */
+.page-hero--services + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 28px;          /* aire entre foto y título */
+}
+
+/* Asegura que el hero sea un banner (no una sección alta por padding) */
+.page-hero.page-hero--image.page-hero--services{
+  padding: 0 !important;
+  height: 320px;              /* ajustá a gusto */
+  min-height: 320px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 70% center;
+  overflow: hidden;
+}
+.page-hero.page-hero--image.page-hero--services::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(8, 27, 51, 0.88) 0%,
+      rgba(8, 27, 51, 0.72) 45%,
+      rgba(8, 27, 51, 0.38) 80%
+    );
+}
+
+
+/* =========================================================
+   SERVICIOS — look más corporativo / profesional
+========================================================= */
+
+/* 1) Bloque de título tipo corporativo (barra izquierda) */
+.section-title--servicios{
+  display: flex;
+  justify-content: flex-start;   /* en vez de centrado */
+}
+
+.section-title--servicios h2{
+  position: relative;
+  padding-left: 14px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+}
+
+.section-title--servicios h2::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #073a93 0%, #0b5ed7 60%, #0f6fe9 100%);
+}
+
+/* 2) Sección de cards: un fondo muy leve para “marca” */
+.section.alt{
+  background: linear-gradient(180deg, rgba(7,58,147,.06) 0%, rgba(255,255,255,1) 55%);
+}
+
+/* 3) Cards: borde sutil + acento + hover corporativo */
+.services-grid--page{
+  gap: 20px;
+}
+
+.services-grid--page .card{
+  background: #fff;
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 18px;
+  padding: 22px 22px;
+  box-shadow: 0 18px 45px rgba(2,16,39,.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.services-grid--page .card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width: 4px;
+  background: #0b5ed7;
+  opacity: .95;
+}
+
+/* Tipografía */
+.services-grid--page .card h3{
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #0b1220;
+}
+
+.services-grid--page .card p{
+  margin: 0;
+  color: rgba(11,18,32,.78);
+  line-height: 1.6;
+}
+
+/* Hover suave */
+@media (hover:hover){
+  .services-grid--page .card{
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .services-grid--page .card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 26px 70px rgba(2,16,39,.12);
+    border-color: rgba(11,94,215,.28);
+  }
+/* HERO Servicios: foco en la parte baja (piping/instalación) */
+.page-hero.page-hero--image.page-hero--services{
+  padding: 0 !important;
+  height: 380px;            /* un poco más alto para reducir recorte */
+  min-height: 380px;
+}
+
+.page-hero--services{
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center 85% !important;  /* 👈 baja el encuadre */
+}
+
+/* Servicios: overlay más liviano (foto menos oscura) */
+.page-hero--services::before{
+  background: rgba(6, 18, 40, 0.35) !important; /* antes 0.70 */
+}
+
+/* Alternativa más pro: gradiente suave */
+.page-hero--services::before{
+  background: linear-gradient(
+    180deg,
+    rgba(6, 18, 40, 0.20) 0%,
+    rgba(6, 18, 40, 0.40) 55%,
+    rgba(6, 18, 40, 0.50) 100%
+  ) !important;
+}
+/* Flota: título SIEMPRE abajo del hero */
+.page-hero--fleet + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 28px;
+}
+
+/* Flota: hero tipo banner (solo imagen) */
+.page-hero.page-hero--image.page-hero--fleet{
+  padding: 0 !important;
+  height: 380px;
+  min-height: 380px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 70%;
+}
+/* =========================================================
+   FLOTA — Layout más profesional (menos vacío + KPIs en tiles)
+========================================================= */
+
+/* 1) Título Flota: alineado y con acento corporativo */
+.section-title--fleet{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.section-title--fleet h2{
+  margin: 0;
+  font-weight: 950;
+  letter-spacing: -0.4px;
+  position: relative;
+  padding-left: 14px;
+}
+
+.section-title--fleet h2::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 30px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #073a93 0%, #0b5ed7 60%, #0f6fe9 100%);
+}
+
+/* 2) Sacar el "aire" excesivo debajo del título */
+.page-hero--fleet + .section.section-title-block{
+  padding-top: 18px !important;
+  padding-bottom: 10px !important;
+}
+
+
+
+/* Acento azul tipo corporativo */
+.fleet-item::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width: 4px;
+  background: #0b5ed7;
+}
+
+.fleet-item strong{
+  display: block;
+  font-size: 18px;
+  font-weight: 950;
+  letter-spacing: -0.2px;
+  color: #0b1220;
+  margin-bottom: 6px;
+}
+
+.fleet-item span{
+  display: block;
+  color: rgba(11,18,32,.72);
+  line-height: 1.4;
+}
+
+/* Hover suave */
+@media (hover:hover){
+  .fleet-item{
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .fleet-item:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 24px 60px rgba(2,16,39,.12);
+    border-color: rgba(11,94,215,.22);
+  }
+}
+
+/* =========================================================
+   FLOTA — Hero carrusel (2 fotos)
+========================================================= */
+
+.page-hero--carousel{
+  padding: 0 !important;
+  height: 420px;
+  min-height: 420px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 720px){
+  .page-hero--carousel{
+    height: 320px;
+    min-height: 320px;
+  }
+}
+
+.hero-carousel{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-carousel__track{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  height: 100%;
+  transition: transform .55s ease;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-carousel__track{ transition: none; }
+}
+
+.hero-carousel__slide{
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /* foco más abajo para que se vea más “flota/piso” */
+  background-position: center 70%;
+}
+
+/* Overlay suave (como Empresa: no oscurece de más) */
+.hero-carousel__overlay{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(6,18,40,.18) 0%,
+    rgba(6,18,40,.28) 55%,
+    rgba(6,18,40,.35) 100%
+  );
+}
+
+/* Botones */
+.hero-carousel__btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.35);
+  background: rgba(6,18,40,.35);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.hero-carousel__btn:hover{
+  background: rgba(6,18,40,.50);
+}
+
+.hero-carousel__btn--prev{ left: 16px; }
+.hero-carousel__btn--next{ right: 16px; }
+
+@media (max-width: 520px){
+  .hero-carousel__btn{ display: none; } /* en celu, dejamos solo dots */
+}
+
+/* Dots */
+.hero-carousel__dots{
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+.hero-carousel__dot{
+  width: 9px;
+  height: 9px;
+  border-radius: 99px;
+  border: 1px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.25);
+  cursor: pointer;
+  padding: 0;
+}
+
+.hero-carousel__dot.is-active{
+  width: 28px;
+  background: #0b5ed7;
+  border-color: rgba(255,255,255,.0);
+}
+
+/* =========================================================
+   Galería PRO (tiles consistentes + hover)
+========================================================= */
+
+.gallery-head{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+@media (max-width: 720px){
+  .gallery-head{ flex-direction: column; align-items: flex-start; }
+}
+
+.pro-gallery{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 980px){
+  .pro-gallery{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px){
+  .pro-gallery{ grid-template-columns: 1fr; }
+}
+
+/* Tile como botón (accesible) */
+.pro-gallery__item{
+  appearance: none;
+  border: 1px solid rgba(11,18,32,.10);
+  background: #fff;
+  padding: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 16px 45px rgba(2,16,39,.08);
+  position: relative;
+}
+
+/* Ratio consistente (evita tiles desparejas) */
+.pro-gallery__item img{
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.001);
+}
+
+/* “shine” y zoom suave */
+.pro-gallery__item::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.10) 35%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  transform: translateX(-20%);
+  transition: opacity .18s ease, transform .35s ease;
+  pointer-events: none;
+}
+
+@media (hover:hover){
+  .pro-gallery__item{
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .pro-gallery__item:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 28px 75px rgba(2,16,39,.14);
+    border-color: rgba(11,94,215,.22);
+  }
+  .pro-gallery__item:hover img{
+    transform: scale(1.04);
+    transition: transform .35s ease;
+  }
+  .pro-gallery__item:hover::after{
+    opacity: 1;
+    transform: translateX(10%);
+  }
+}
+
+/* =========================================================
+   Lightbox (sin librerías)
+========================================================= */
+.lightbox[hidden]{ display: none; }
+
+.lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.lightbox__backdrop{
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(2,16,39,.72);
+  cursor: zoom-out;
+}
+
+.lightbox__dialog{
+  position: relative;
+  margin: 0;
+  width: min(1100px, calc(100% - 28px));
+  height: min(78vh, 720px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0b1220;
+  box-shadow: 0 40px 120px rgba(0,0,0,.40);
+}
+
+.lightbox__img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #0b1220;
+  display: block;
+}
+
+.lightbox__close{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(6,18,40,.35);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox__nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(6,18,40,.35);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox__nav--prev{ left: 12px; }
+.lightbox__nav--next{ right: 12px; }
+
+@media (max-width: 520px){
+  .lightbox__nav{ display:none; }
+}
+/* =========================================================
+   FLOTA — Título como otras secciones + bloque resumen más pro
+========================================================= */
+
+/* Título Flota con acento corporativo (igual estilo que Servicios) */
+.section-title--fleet{
+  display: flex;
+  justify-content: flex-start;
+}
+.section-title--fleet h2{
+  margin: 0;
+  position: relative;
+  padding-left: 14px;
+  font-weight: 950;
+  letter-spacing: -0.4px;
+}
+.section-title--fleet h2::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 30px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #073a93 0%, #0b5ed7 60%, #0f6fe9 100%);
+}
+
+/* Menos aire entre título y contenido */
+.page-hero--fleet + .section.section-title-block{
+  padding-top: 18px !important;
+  padding-bottom: 6px !important;
+}
+.section.section-title-block + .section{
+  padding-top: 10px !important;
+}
+
+/* Contenedor “resumen” para que no quede suelto */
+.fleet-summary{
+  max-width: 1060px;
+}
+
+/* Intro */
+.fleet-intro{
+  margin: 0 0 16px;
+  max-width: 78ch;
+  color: rgba(11,18,32,.78);
+  line-height: 1.7;
+}
+
+/* KPIs: que no se vean tan “separados del texto” */
+.fleet-metrics{
+  margin-top: 10px !important;
+}
+
+/* (Opcional) bajar un poco la sombra si te parece demasiado */
+.fleet-item{
+  box-shadow: 0 14px 38px rgba(2,16,39,.08) !important;
+}
+
+/* =========================================================
+   FLOTA — KPIs flotantes (panel premium)
+========================================================= */
+
+
+
+
+
+
+
+/* Separadores */
+.fleet-kpi + .fleet-kpi{
+  border-left: 1px solid rgba(11,18,32,.08);
+}
+@media (max-width: 980px){
+  .fleet-kpi + .fleet-kpi{ border-left: 0; }
+  .fleet-kpi:nth-child(n+3){ border-top: 1px solid rgba(11,18,32,.08); }
+}
+@media (max-width: 520px){
+  .fleet-kpi:nth-child(n+2){ border-top: 1px solid rgba(11,18,32,.08); }
+}
+
+/* Acento azul (sutil, no invasivo) */
+.fleet-kpi::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #073a93 0%, #0b5ed7 60%, #0f6fe9 100%);
+  opacity: .95;
+}
+
+/* Tipografía */
+.fleet-kpi strong{
+  display:block;
+  font-size: 18px;
+  font-weight: 950;
+  letter-spacing: -0.2px;
+  color: #0b1220;
+  margin-bottom: 6px;
+}
+.fleet-kpi span{
+  display:block;
+  color: rgba(11,18,32,.72);
+  line-height: 1.35;
+}
+
+/* Ajuste: como el panel “come” espacio, bajamos el padding de la sección título */
+.fleet-kpis-float + .section.section-title-block{
+  padding-top: 16px !important;
+}
+
+/* =========================================================
+   FLOTA — Fix: KPIs flotantes sin pisar el título
+========================================================= */
+
+/* El panel sube menos (no invade el área del título) */
+.fleet-kpis-float{
+  margin-top: -34px !important; /* antes -54px */
+  z-index: 5;
+}
+
+/* Panel más bajo y fino */
+.fleet-kpis{
+  border-radius: 16px !important;
+  box-shadow: 0 18px 55px rgba(2,16,39,.12) !important;
+}
+
+/* Menos alto */
+.fleet-kpi{
+  padding: 12px 16px !important;
+}
+
+/* Tipos un poco más chicos (menos “mazacote”) */
+.fleet-kpi strong{
+  font-size: 16px !important;
+  margin-bottom: 4px !important;
+}
+.fleet-kpi span{
+  font-size: 14px !important;
+}
+
+/* Separación garantizada entre KPIs flotantes y el título */
+.fleet-kpis-float + .section.section-title-block{
+  padding-top: 44px !important;  /* deja aire para que no se pisen */
+}
+
+/* En mobile, que no quede enorme */
+@media (max-width: 520px){
+  .fleet-kpis-float{ margin-top: -22px !important; }
+  .fleet-kpis-float + .section.section-title-block{ padding-top: 34px !important; }
+}
+
+/* =========================================================
+   FLOTA — KPIs TRANSPARENTES dentro del HERO (sin tapar la foto)
+   Requiere que el bloque .fleet-kpis-float esté dentro del <section> del hero.
+========================================================= */
+
+/* Hero como contenedor */
+.page-hero--fleet.page-hero--carousel,
+.page-hero--fleet.page-hero--image{
+  position: relative;
+  overflow: hidden;
+}
+
+/* Panel KPI en overlay, abajo a la izquierda, sin “bloquear” la foto */
+.page-hero--fleet .fleet-kpis-float{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  margin: 0 !important;
+  z-index: 4;
+  pointer-events: none; /* no molesta a la interacción del carrusel */
+}
+
+/* Contenedor interno */
+.page-hero--fleet .fleet-kpis{
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  background: rgba(255,255,255,.14); /* transparente */
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 18px;
+  padding: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 22px 70px rgba(0,0,0,.22);
+}
+
+@media (max-width: 980px){
+  .page-hero--fleet .fleet-kpis{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 520px){
+  .page-hero--fleet .fleet-kpis{
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* KPI item: “chip” de vidrio */
+.page-hero--fleet .fleet-kpi{
+  padding: 10px 12px;
+  border-radius: 14px;
+
+  background: rgba(2,16,39,.22); /* oscuro transparente (mejor lectura) */
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+/* Acento azul sutil (no bloque completo) */
+.page-hero--fleet .fleet-kpi::before{
+  content:"";
+  display:block;
+  width: 22px;
+  height: 3px;
+  border-radius: 9px;
+  background: #0b5ed7;
+  margin-bottom: 8px;
+  opacity: .95;
+}
+
+.page-hero--fleet .fleet-kpi strong{
+  display:block;
+  color: #fff;
+  font-weight: 950;
+  letter-spacing: -0.2px;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.page-hero--fleet .fleet-kpi span{
+  display:block;
+  color: rgba(255,255,255,.78);
+  font-size: 13.5px;
+  line-height: 1.35;
+}
+
+/* FLOTA — Título más grande */
+.section-title--fleet h2{
+  font-size: clamp(40px, 5vw, 64px) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.8px !important;
+}
+
+/* Acento (barrita) proporcional al título */
+.section-title--fleet h2::before{
+  height: clamp(34px, 4.5vw, 52px) !important;
+  width: 6px !important;
+}
+/* FLOTA — Título más grande */
+.section-title--fleet h2{
+  font-size: clamp(40px, 5vw, 64px) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.8px !important;
+}
+
+/* Acento (barrita) proporcional al título */
+.section-title--fleet h2::before{
+  height: clamp(34px, 4.5vw, 52px) !important;
+  width: 6px !important;
+}
+
+/* =========================================================
+   FLOTA — Intro más “pro”: otra tipografía + composición
+   (sin cambiar todo el sitio)
+========================================================= */
+
+/* Si ya usás Google Fonts en otra sección, omití esto.
+   Si no, agrega esta familia en techint.css o en <head>. */
+.fleet-intro{
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
+  font-size: 18px;
+  line-height: 1.75;
+  letter-spacing: 0.1px;
+  color: rgba(11,18,32,.74);
+  max-width: 76ch;
+  margin: 10px 0 0;
+  padding-left: 14px;
+  position: relative;
+}
+
+/* Acento lateral para acompañar el título y que se vea editorial */
+.fleet-intro::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top: 0.35em;
+  width: 4px;
+  height: calc(100% - 0.7em);
+  border-radius: 8px;
+  background: rgba(11,94,215,.35);
+}
+
+/* En mobile un poco más compacto */
+@media (max-width: 520px){
+  .fleet-intro{
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
+
+/* Lightbox para .gallery (sin alterar tamaños de la grilla) */
+.gallery img{ cursor: zoom-in; }
+
+.lightbox[hidden]{ display:none; }
+.lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.lightbox__backdrop{
+  position:absolute;
+  inset:0;
+  border:0;
+  background: rgba(2,16,39,.72);
+  cursor: zoom-out;
+}
+
+.lightbox__dialog{
+  position: relative;
+  margin: 0;
+  width: min(1100px, calc(100% - 28px));
+  height: min(78vh, 720px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0b1220;
+  box-shadow: 0 40px 120px rgba(0,0,0,.40);
+}
+
+.lightbox__img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #0b1220;
+  display:block;
+}
+
+.lightbox__close{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.25);
+  background: rgba(6,18,40,.35);
+  color:#fff;
+  font-size:26px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.lightbox__nav{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.25);
+  background: rgba(6,18,40,.35);
+  color:#fff;
+  font-size:28px;
+  line-height:1;
+  cursor:pointer;
+}
+.lightbox__nav--prev{ left: 12px; }
+.lightbox__nav--next{ right: 12px; }
+
+@media (max-width:520px){
+  .lightbox__nav{ display:none; }
+}
+
+.fleet-intro--sub{
+  margin-top: 6px;
+  font-size: 15px;
+  color: rgba(11,18,32,.62);
+  max-width: 86ch;
+}
+
+
+
+  .page-hero--fleet .fleet-kpis{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    padding: 10px !important;
+    border-radius: 16px !important;
+    background: rgba(255,255,255,.10) !important;
+    border: 1px solid rgba(255,255,255,.18) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .page-hero--fleet .fleet-kpi{
+    padding: 9px 10px !important;
+    border-radius: 14px !important;
+    background: rgba(2,16,39,.28) !important;
+  }
+
+  /* sacamos el “bar” y lo cambiamos por un puntito (menos alto) */
+  .page-hero--fleet .fleet-kpi::before{
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 999px !important;
+    margin-bottom: 6px !important;
+    background: #0b5ed7 !important;
+  }
+
+  .page-hero--fleet .fleet-kpi strong{
+    font-size: 13.5px !important;
+    margin-bottom: 2px !important;
+    letter-spacing: -0.1px !important;
+  }
+
+  .page-hero--fleet .fleet-kpi span{
+    font-size: 12px !important;
+    line-height: 1.25 !important;
+    color: rgba(255,255,255,.80) !important;
+  }
+}
+@media (max-width: 520px){
+  .page-hero--carousel.page-hero--fleet .hero-carousel__overlay{
+    background: linear-gradient(180deg, rgba(2,16,39,.15) 0%, rgba(2,16,39,.25) 100%) !important;
+  }
+}
+
+/* =========================================================
+   FIX MOBILE: forzar que el HERO se vea (no colapsa / no se oculta)
+========================================================= */
+@media (max-width: 520px){
+  /* El section del hero no puede estar oculto */
+  .page-hero--fleet{
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: 320px !important;
+    min-height: 320px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Carrusel ocupa todo el alto */
+  .page-hero--fleet .hero-carousel,
+  .page-hero--fleet .hero-carousel__track{
+    height: 100% !important;
+  }
+
+  /* Slides con imagen visible */
+  .page-hero--fleet .hero-carousel__slide{
+    height: 100% !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  /* Por si el track está quedando en horizontal sin mostrar */
+  .page-hero--fleet .hero-carousel__track{
+    display: block !important;
+  }
+}
+
+/* =========================================================
+   HERO CARRUSEL — FIX definitivo (evita que en mobile quede en 0px)
+========================================================= */
+
+/* El hero SIEMPRE tiene altura */
+.page-hero.page-hero--carousel.page-hero--fleet{
+  position: relative;
+  height: clamp(260px, 40vw, 460px);
+  min-height: 260px;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+/* Contenedores del carrusel llenan el hero */
+.page-hero--carousel .hero-carousel{
+  height: 100%;
+  position: relative;
+}
+.page-hero--carousel .hero-carousel__track{
+  height: 100%;
+}
+
+/* Cada slide ocupa el alto del hero y muestra el background */
+.page-hero--carousel .hero-carousel__slide{
+  height: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* En mobile: más alto para que se vea bien */
+@media (max-width: 520px){
+  .page-hero.page-hero--carousel.page-hero--fleet{
+    height: 320px !important;
+    min-height: 320px !important;
+  }
+}
+
+/* =========================================================
+   FLOTA — HERO carrusel visible + KPIs dentro del hero (única versión)
+========================================================= */
+
+/* Hero con altura consistente */
+.page-hero.page-hero--carousel.page-hero--fleet{
+  position: relative;
+  height: 420px;
+  min-height: 420px;
+  padding: 0 !important;
+  overflow: hidden;
+}
+@media (max-width: 720px){
+  .page-hero.page-hero--carousel.page-hero--fleet{
+    height: 320px;
+    min-height: 320px;
+  }
+}
+
+/* Carrusel ocupa todo el hero */
+.page-hero--carousel.page-hero--fleet .hero-carousel,
+.page-hero--carousel.page-hero--fleet .hero-carousel__track,
+.page-hero--carousel.page-hero--fleet .hero-carousel__slide{
+  height: 100%;
+}
+.page-hero--carousel.page-hero--fleet .hero-carousel__slide{
+  background-size: cover;
+  background-position: center 70%;
+  background-repeat: no-repeat;
+}
+
+/* KPIs dentro del hero (overlay) */
+.page-hero--fleet .fleet-kpis-float{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 16px;
+  z-index: 3;
+  margin: 0 !important;
+  pointer-events: none; /* no molesta al carrusel */
+}
+
+.page-hero--fleet .fleet-kpis{
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding: 12px;
+
+  /* vidrio */
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.page-hero--fleet .fleet-kpi{
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(2,16,39,.26);
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+.page-hero--fleet .fleet-kpi::before{
+  content:"";
+  display:block;
+  width: 18px;
+  height: 3px;
+  border-radius: 9px;
+  background: #0b5ed7;
+  margin-bottom: 8px;
+}
+
+.page-hero--fleet .fleet-kpi strong{
+  display:block;
+  color:#fff;
+  font-weight: 900;
+  font-size: 15px;
+  margin: 0 0 3px;
+}
+.page-hero--fleet .fleet-kpi span{
+  display:block;
+  color: rgba(255,255,255,.78);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+/* =========================================================
+   FLOTA — Mobile: KPIs compactos en fila (scroll horizontal)
+========================================================= */
+@media (max-width: 520px){
+  /* KPIs debajo del hero (no overlay) */
+  .page-hero--fleet .fleet-kpis-float{
+    position: static !important;
+    margin: 10px 0 0 !important;
+  }
+
+  /* fila scrolleable */
+  .page-hero--fleet .fleet-kpis{
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: minmax(210px, 78%) !important; /* ancho de cada KPI */
+    grid-template-columns: unset !important;
+    gap: 10px !important;
+
+    padding: 0 14px 6px !important;   /* aire lateral */
+    margin: 0 -14px !important;       /* “full-bleed” suave */
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .page-hero--fleet .fleet-kpis::-webkit-scrollbar{
+    height: 6px;
+  }
+  .page-hero--fleet .fleet-kpis::-webkit-scrollbar-thumb{
+    background: rgba(11,18,32,.18);
+    border-radius: 999px;
+  }
+
+  /* cards más chicas */
+  .page-hero--fleet .fleet-kpi{
+    scroll-snap-align: start;
+    
+    border: 1px solid rgba(11,18,32,.10) !important;
+    border-radius: 14px !important;
+    padding: 10px 12px !important;
+    min-height: 70px;
+  }
+
+  .page-hero--fleet .fleet-kpi::before{
+    width: 16px !important;
+    height: 3px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .page-hero--fleet .fleet-kpi strong{
+    color: #0b1220 !important;
+    font-size: 13px !important;
+    margin: 0 0 2px !important;
+    font-weight: 900 !important;
+  }
+
+  .page-hero--fleet .fleet-kpi span{
+    color: rgba(11,18,32,.72) !important;
+    font-size: 11.5px !important;
+    line-height: 1.2 !important;
+
+    /* evita que se hagan demasiado altos */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+/* FLOTA — el título SIEMPRE debajo del hero */
+.page-hero--fleet{
+  margin-bottom: 0 !important;
+}
+.page-hero--fleet + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+  position: relative;
+  z-index: 0;
+}
+
+@media (max-width: 520px){
+  /* Asegura que el bloque exista y tenga aire */
+  .page-hero--fleet .fleet-kpis-float{
+    display: block !important;
+  }
+
+  /* Asegura que el contenedor tenga padding lateral (si tu .container no aplica ahí) */
+  .page-hero--fleet .fleet-kpis{
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}
+
+/* =========================================================
+   FLOTA — Carrusel: fix mobile (track ancho + recorte)
+========================================================= */
+.page-hero--fleet .hero-carousel{
+  overflow: hidden;           /* recorta la “tira” */
+}
+
+.page-hero--fleet .hero-carousel__track{
+  width: 100%;
+  display: flex !important;   /* más robusto que grid en mobile */
+  height: 100%;
+  transform: translateX(0);
+}
+
+.page-hero--fleet .hero-carousel__slide{
+  flex: 0 0 100%;             /* cada slide = 100% ancho */
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================================
+   EMPRESA — Título siempre debajo del hero (mobile + desktop)
+========================================================= */
+
+/* Asegura que el hero no “invada” el bloque siguiente */
+.page-hero--empresa{
+  margin-bottom: 0 !important;
+}
+
+/* El bloque de título que viene después del hero */
+.page-hero--empresa + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+  position: relative;
+  z-index: 0;
+}
+
+/* =========================================================
+   EQUIPOS — Hero con 1 foto + 4 cards (overlay desktop / debajo mobile)
+   (Pegá esto al FINAL de techint.css)
+========================================================= */
+
+/* Hero banner consistente */
+.page-hero.page-hero--image.page-hero--equipos{
+  position: relative;
+  padding: 0 !important;
+  height: 420px;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+/* Contenido superior (breadcrumb/título/bajada) */
+.page-hero--equipos .hero-top{
+  position: relative;
+  z-index: 2;
+  padding-top: 34px;
+  padding-bottom: 22px;
+  color: #fff;
+}
+
+.page-hero--equipos .hero-top h1{
+  margin: 10px 0 8px;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.6px;
+}
+
+.page-hero--equipos .hero-top p{
+  margin: 0;
+  max-width: 70ch;
+  color: rgba(255,255,255,.86);
+}
+
+/* Caja overlay (desktop/tablet) */
+.page-hero--equipos .hero-overlay-box{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  z-index: 3;
+}
+
+/* Grilla de cards “glass” */
+.equipos-cards{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: 18px;
+  padding: 12px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 22px 70px rgba(0,0,0,.22);
+}
+
+.equipos-card{
+  background: rgba(2,16,39,.26);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  padding: 12px 12px;
+  color: #fff;
+}
+
+.equipos-card h3{
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+.equipos-card p{
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: rgba(255,255,255,.78);
+}
+
+/* Título “Equipos” debajo del hero (si usás section-title-block) */
+.page-hero--equipos + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .equipos-cards{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px){
+  .page-hero.page-hero--image.page-hero--equipos{
+    height: 320px;
+    min-height: 320px;
+  }
+}
+
+/* MOBILE: las cards bajan debajo del hero (no tapan la foto) */
+@media (max-width: 520px){
+  .page-hero--equipos .hero-top{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .page-hero--equipos .hero-overlay-box{
+    position: static;
+    margin-top: 12px;
+    padding: 0 14px;
+  }
+
+  .equipos-cards{
+    grid-template-columns: 1fr;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .equipos-card{
+    background: #eef1f6;
+    color: #0b1220;
+    border: 1px solid rgba(11,18,32,.10);
+  }
+
+  .equipos-card p{
+    color: rgba(11,18,32,.72);
+  }
+}
+
+/* =========================================================
+   EQUIPOS — HERO (1 foto) + cards overlay + sección PRO (capacidades + CTA)
+   Pegá esto AL FINAL de techint.css
+========================================================= */
+
+/* ---------- HERO Equipos (banner) ---------- */
+.page-hero.page-hero--image.page-hero--equipos{
+  position: relative;
+  padding: 0 !important;
+  height: 420px;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+/* Contenido superior (breadcrumb/título/bajada) */
+.page-hero--equipos .hero-top{
+  position: relative;
+  z-index: 2;
+  padding-top: 34px;
+  padding-bottom: 22px;
+  color: #fff;
+}
+
+.page-hero--equipos .hero-top h1{
+  margin: 10px 0 8px;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.6px;
+}
+
+.page-hero--equipos .hero-top p{
+  margin: 0;
+  max-width: 70ch;
+  color: rgba(255,255,255,.86);
+}
+
+/* Cards dentro del hero (desktop/tablet overlay) */
+.page-hero--equipos .hero-overlay-box{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  z-index: 3;
+}
+
+/* Grilla de cards “glass” */
+.equipos-cards{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: 18px;
+  padding: 12px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 22px 70px rgba(0,0,0,.22);
+}
+
+.equipos-card{
+  background: rgba(2,16,39,.26);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  padding: 12px 12px;
+  color: #fff;
+}
+
+.equipos-card h3{
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+.equipos-card p{
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: rgba(255,255,255,.78);
+}
+
+/* Título “Equipos” SIEMPRE debajo del hero */
+.page-hero--equipos + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+}
+
+/* Responsive hero */
+@media (max-width: 720px){
+  .page-hero.page-hero--image.page-hero--equipos{
+    height: 320px;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 980px){
+  .equipos-cards{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* MOBILE: cards bajan debajo del hero (no tapan la foto) */
+@media (max-width: 520px){
+  .page-hero--equipos .hero-top{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .page-hero--equipos .hero-overlay-box{
+    position: static;
+    margin-top: 12px;
+    padding: 0 14px;
+  }
+
+  .equipos-cards{
+    grid-template-columns: 1fr;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .equipos-card{
+    background: #eef1f6;
+    color: #0b1220;
+    border: 1px solid rgba(11,18,32,.10);
+  }
+
+  .equipos-card p{
+    color: rgba(11,18,32,.72);
+  }
+}
+
+/* ---------- Sección PRO: Capacidades ---------- */
+.section-head{
+  max-width: 920px;
+  margin-bottom: 16px;
+}
+
+.section-kicker{
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(11,18,32,.62);
+}
+
+.section-lead{
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.65;
+  color: rgba(11,18,32,.78);
+}
+
+/* Grid de capacidades */
+.cap-grid{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 980px){
+  .cap-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px){
+  .cap-grid{ grid-template-columns: 1fr; }
+}
+
+.cap-card{
+  background: #fff;
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 18px;
+  padding: 16px 16px;
+  box-shadow: 0 14px 42px rgba(2,16,39,.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Acento corporativo */
+.cap-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width: 4px;
+  background: #0b5ed7;
+  opacity: .95;
+}
+
+.cap-card h4{
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 950;
+  letter-spacing: -0.2px;
+  color: #0b1220;
+}
+
+.cap-card p{
+  margin: 0;
+  color: rgba(11,18,32,.74);
+  line-height: 1.55;
+}
+
+@media (hover:hover){
+  .cap-card{
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .cap-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 24px 70px rgba(2,16,39,.12);
+    border-color: rgba(11,94,215,.22);
+  }
+}
+
+/* ---------- CTA Botones ---------- */
+.equipos-cta{
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn-primary, .btn-ghost{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.btn-primary{
+  background: #0b5ed7;
+  color: #fff;
+  border: 1px solid rgba(11,94,215,.65);
+  box-shadow: 0 18px 45px rgba(11,94,215,.22);
+}
+
+.btn-ghost{
+  background: transparent;
+  color: #0b1220;
+  border: 1px solid rgba(11,18,32,.18);
+}
+
+@media (max-width: 520px){
+  .btn-primary, .btn-ghost{ width: 100%; }
+}
+
+
+
+
+
+/* =========================================================
+   FLOTA — Carrusel: fix mobile (track ancho + recorte)
+========================================================= */
+.page-hero--fleet .hero-carousel{
+  overflow: hidden;
+}
+.page-hero--fleet .hero-carousel__track{
+  width: 100%;
+  display: flex !important;
+  height: 100%;
+  transform: translateX(0);
+}
+.page-hero--fleet .hero-carousel__slide{
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   EMPRESA — Título siempre debajo del hero (mobile + desktop)
+========================================================= */
+.page-hero--empresa{
+  margin-bottom: 0 !important;
+}
+.page-hero--empresa + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+  position: relative;
+  z-index: 0;
+}
+
+
+/* =========================================================
+   EQUIPOS — Hero con 1 foto + 4 cards (overlay desktop / debajo mobile)
+========================================================= */
+.page-hero.page-hero--image.page-hero--equipos{
+  position: relative;
+  padding: 0 !important;
+  height: 420px;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.page-hero--equipos .hero-top{
+  position: relative;
+  z-index: 2;
+  padding-top: 34px;
+  padding-bottom: 22px;
+  color: #fff;
+}
+
+.page-hero--equipos .hero-top h1{
+  margin: 10px 0 8px;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.6px;
+}
+
+.page-hero--equipos .hero-top p{
+  margin: 0;
+  max-width: 70ch;
+  color: rgba(255,255,255,.86);
+}
+
+.page-hero--equipos .hero-overlay-box{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  z-index: 3;
+}
+
+.equipos-cards{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: 18px;
+  padding: 12px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 22px 70px rgba(0,0,0,.22);
+}
+
+.equipos-card{
+  background: rgba(2,16,39,.26);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  padding: 12px 12px;
+  color: #fff;
+}
+
+.equipos-card h3{
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+.equipos-card p{
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: rgba(255,255,255,.78);
+}
+
+.page-hero--equipos + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+}
+
+@media (max-width: 980px){
+  .equipos-cards{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px){
+  .page-hero.page-hero--image.page-hero--equipos{
+    height: 320px;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 520px){
+  .page-hero--equipos .hero-top{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .page-hero--equipos .hero-overlay-box{
+    position: static;
+    margin-top: 12px;
+    padding: 0 14px;
+  }
+
+  .equipos-cards{
+    grid-template-columns: 1fr;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .equipos-card{
+    background: #eef1f6;
+    color: #0b1220;
+    border: 1px solid rgba(11,18,32,.10);
+  }
+
+  .equipos-card p{
+    color: rgba(11,18,32,.72);
+  }
+}
+
+
+
+
+
+/* =========================================================
+   EMPRESA — Título siempre debajo del hero (mobile + desktop)
+========================================================= */
+.page-hero--empresa{
+  margin-bottom: 0 !important;
+}
+.page-hero--empresa + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+  position: relative;
+  z-index: 0;
+}
+
+
+/* =========================================================
+   EQUIPOS — Hero con 1 foto + 4 cards (overlay desktop / debajo mobile)
+========================================================= */
+.page-hero.page-hero--image.page-hero--equipos{
+  position: relative;
+  padding: 0 !important;
+  height: 420px;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.page-hero--equipos .hero-top{
+  position: relative;
+  z-index: 2;
+  padding-top: 34px;
+  padding-bottom: 22px;
+  color: #fff;
+}
+
+.page-hero--equipos .hero-top h1{
+  margin: 10px 0 8px;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.6px;
+}
+
+.page-hero--equipos .hero-top p{
+  margin: 0;
+  max-width: 70ch;
+  color: rgba(255,255,255,.86);
+}
+
+.page-hero--equipos .hero-overlay-box{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  z-index: 3;
+}
+
+.equipos-cards{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: 18px;
+  padding: 12px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 22px 70px rgba(0,0,0,.22);
+}
+
+.equipos-card{
+  background: rgba(2,16,39,.26);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  padding: 12px 12px;
+  color: #fff;
+}
+
+.equipos-card h3{
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+.equipos-card p{
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: rgba(255,255,255,.78);
+}
+
+.page-hero--equipos + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+}
+
+@media (max-width: 980px){
+  .equipos-cards{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px){
+  .page-hero.page-hero--image.page-hero--equipos{
+    height: 320px;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 520px){
+  .page-hero--equipos .hero-top{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .page-hero--equipos .hero-overlay-box{
+    position: static;
+    margin-top: 12px;
+    padding: 0 14px;
+  }
+
+  .equipos-cards{
+    grid-template-columns: 1fr;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .equipos-card{
+    background: #eef1f6;
+    color: #0b1220;
+    border: 1px solid rgba(11,18,32,.10);
+  }
+
+  .equipos-card p{
+    color: rgba(11,18,32,.72);
+  }
+}
+
+/* =========================================================
+   FLOTA — DEFINITIVO
+   KPIs SOLO TEXTO sobre la foto (sin cajas) + mobile sin pisarse
+========================================================= */
+
+/* FLOTA — el título SIEMPRE debajo del hero */
+.page-hero--fleet{
+  margin-bottom: 0 !important;
+  position: relative !important; /* base para overlay */
+}
+
+.page-hero--fleet + .section.section-title-block{
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+  position: relative;
+  z-index: 0;
+}
+
+/* Carrusel: mantiene recorte (no afecta KPIs porque van fuera del carrusel) */
+.page-hero--fleet .hero-carousel{
+  overflow: hidden;           /* recorta la “tira” */
+}
+.page-hero--fleet .hero-carousel__track{
+  width: 100%;
+  display: flex !important;
+  height: 100%;
+  transform: translateX(0);
+}
+.page-hero--fleet .hero-carousel__slide{
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+}
+
+/* KPIs dentro del hero (overlay) */
+.page-hero--fleet .fleet-kpis-float{
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 16px !important;
+  z-index: 30 !important;
+  margin: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Contenedor: sin panel y en grilla */
+.page-hero--fleet .fleet-kpis{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+/* KPI: solo texto (sin cajas) */
+.page-hero--fleet .fleet-kpi{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+}
+
+/* sin barrita */
+.page-hero--fleet .fleet-kpi::before{
+  display: none !important;
+  content: none !important;
+}
+
+/* texto sobre foto */
+.page-hero--fleet .fleet-kpi strong{
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 950 !important;
+  line-height: 1.1 !important;
+  margin: 0 0 4px !important;
+  text-shadow: 0 10px 26px rgba(0,0,0,.55) !important;
+}
+.page-hero--fleet .fleet-kpi span{
+  color: rgba(255,255,255,.88) !important;
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  text-shadow: 0 10px 26px rgba(0,0,0,.55) !important;
+
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Tablet */
+@media (max-width: 980px){
+  .page-hero--fleet .fleet-kpis{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+
+  
+
+  .page-hero--fleet .fleet-kpis-float{
+    bottom: 12px !important;
+  }
+
+  /* padding lateral real (tu KPI está dentro de .container) */
+  .page-hero--fleet .fleet-kpis .container{
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .page-hero--fleet .fleet-kpi strong{ font-size: 14px !important; }
+  .page-hero--fleet .fleet-kpi span{ font-size: 12px !important; }
+
+/* =========================================================
+   FLOTA — Mobile: KPIs SOLO TEXTO en 1 fila scrolleable (sin banda, sin cajas)
+========================================================= */
+@media (max-width: 520px){
+  /* KPIs sobre la foto */
+  .page-hero.page-hero--carousel.page-hero--fleet .fleet-kpis-float{
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 50 !important;
+
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  /* que el container no limite el scroller */
+  .page-hero.page-hero--carousel.page-hero--fleet .fleet-kpis-float > .container{
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* fila horizontal scrolleable */
+  .page-hero.page-hero--carousel.page-hero--fleet .fleet-kpis{
+    width: 100% !important;
+
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: minmax(220px, 78%) !important; /* ancho de cada KPI */
+    grid-template-columns: unset !important;
+
+    gap: 16px !important;
+
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+
+    scroll-snap-type: x mandatory !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* “snap” y sin cajas */
+  .page-hero.page-hero--carousel.page-hero--fleet .fleet-kpi{
+    scroll-snap-align: start !important;
+
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+
+    min-width: 0 !important;
+  }
+
+  /* texto legible */
+  .page-hero.page-hero--carousel.page-hero--fleet .fleet-kpi::before{
+    display: none !important;
+    content: none !important;
+  }
+
+  .page-hero.page-hero--carousel.page-hero--fleet .fleet-kpi strong{
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 950 !important;
+    line-height: 1.15 !important;
+    margin: 0 !important;
+    text-shadow: 0 10px 26px rgba(0,0,0,.65) !important;
+  }
+
+  .page-hero.page-hero--carousel.page-hero--fleet .fleet-kpi span{
+    color: rgba(255,255,255,.88) !important;
+    font-size: 12px !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+    text-shadow: 0 10px 26px rgba(0,0,0,.65) !important;
+
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  /* scrollbar sutil (opcional) */
+  .page-hero.page-hero--carousel.page-hero--fleet .fleet-kpis::-webkit-scrollbar{
+    height: 6px;
+  }
+  .page-hero.page-hero--carousel.page-hero--fleet .fleet-kpis::-webkit-scrollbar-thumb{
+    background: rgba(255,255,255,.22);
+    border-radius: 999px;
+  }
+}
+
+/* =========================================================
+   EQUIPOS — Centrar botones CTA (desktop/tablet)
+========================================================= */
+.page-equipos .equipos-cta,
+.page-hero--equipos .equipos-cta,
+.equipos-cta{
+  justify-content: center;   /* centra el grupo */
+  align-items: center;
+}
+
+/* opcional: que el grupo no se estire demasiado */
+.page-equipos .equipos-cta,
+.page-hero--equipos .equipos-cta,
+.equipos-cta{
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* opcional: mismo ancho para ambos botones (queda prolijo) */
+@media (min-width: 521px){
+  .equipos-cta .btn-primary,
+  .equipos-cta .btn-ghost{
+    min-width: 220px;
+  }
+}
+
+/* =========================================================
+   OBRAS — estilos específicos (migrado desde obras.html)
+   Mantener este bloque al FINAL de techint.css
+========================================================= */
+
+/* HERO OBRAS */
+.page-hero.page-hero--image.page-hero--obras{
+  position: relative !important;
+  height: 620px !important;
+  min-height: 620px !important;
+  padding: 64px 0 70px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center 30% !important;
+  overflow: hidden;
+}
+
+.page-hero.page-hero--image.page-hero--obras::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(2,16,39,.90) 0%,
+    rgba(2,16,39,.65) 55%,
+    rgba(2,16,39,.52) 100%
+  ) !important;
+  pointer-events:none !important;
+}
+
+.page-hero.page-hero--image.page-hero--obras > .container{
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+@media (max-width: 520px){
+  .page-hero.page-hero--image.page-hero--obras{
+    height: 460px !important;
+    min-height: 460px !important;
+    padding: 44px 0 48px !important;
+    background-position: center 25% !important;
+  }
+}
+
+/* Burbuja/cards del hero */
+.page-hero--obras .hero-bubbles{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  z-index: 2;
+}
+
+/* ===== GRILLA 2 COLUMNAS PARA OBRAS ===== */
+.works-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+  margin-top: 14px;
+}
+@media (max-width: 980px){
+  .works-grid{ grid-template-columns: 1fr; }
+}
+
+/* Card de cada obra */
+.work{
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 18px;
+  background: rgba(2,16,39,.18);
+  overflow: hidden;
+}
+
+.work-head{
+  padding: 16px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.work-head h3{
+  margin: 0 0 8px;
+  font-size: 18px;
+  line-height: 1.2;
+}
+.work-head p{
+  margin: 0;
+  color: rgba(238,247,255,.78);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   OBRAS — Igualar tamaño de hero con Equipos (no tan alto)
+========================================================= */
+.page-hero.page-hero--image.page-hero--obras{
+  height: 420px !important;
+  min-height: 420px !important;
+  padding: 34px 0 22px !important;   /* similar a Equipos */
+  background-position: center 30% !important;
+}
+
+@media (max-width: 720px){
+  .page-hero.page-hero--image.page-hero--obras{
+    height: 320px !important;
+    min-height: 320px !important;
+  }
+}
+
+@media (max-width: 520px){
+  .page-hero.page-hero--image.page-hero--obras{
+    padding: 28px 0 18px !important;
+    background-position: center 25% !important;
+  }
+}
+
+/* =========================================================
+   OBRAS — Burbujas como Equipos (overlay desktop / debajo mobile)
+   + Evitar que "Galería de obras" quede metido bajo el hero
+========================================================= */
+
+/* Hero actúa como contenedor del overlay */
+.page-hero.page-hero--image.page-hero--obras{
+  position: relative !important;
+  overflow: hidden;
+}
+
+/* Overlay de burbujas (desktop) */
+.page-hero--obras .hero-bubbles{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  z-index: 3;
+}
+
+/* Hacer las cards más “burbujas” y menos gigantes */
+.page-hero--obras .hero-bubbles .grid-3{
+  align-items: stretch;
+}
+
+.page-hero--obras .hero-bubbles .card{
+  border-radius: 18px;
+  padding: 16px 18px;
+  max-width: 520px;            /* evita que se estiren infinito */
+  margin-inline: auto;
+}
+
+.page-hero--obras .hero-bubbles .card h3{
+  margin: 0 0 8px;
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.page-hero--obras .hero-bubbles .card p{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Reservar espacio debajo del hero para que la sección siguiente no se meta */
+.page-hero.page-hero--image.page-hero--obras{
+  margin-bottom: 140px; /* espacio para el alto de las burbujas */
+}
+
+/* Mobile: burbujas debajo del hero (como Equipos) */
+@media (max-width: 520px){
+  .page-hero.page-hero--image.page-hero--obras{
+    margin-bottom: 0;
+  }
+
+  .page-hero--obras .hero-bubbles{
+    position: static;
+    margin-top: 12px;
+    padding: 0 14px;
+  }
+
+  /* en mobile apiladas */
+  .page-hero--obras .hero-bubbles .grid-3{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .page-hero--obras .hero-bubbles .card{
+    max-width: none;
+  }
+}
+
+/* =========================================================
+   OBRAS — Galería 3 columnas + cards + slider + modal detalle
+   Pegá este bloque AL FINAL de techint.css
+========================================================= */
+
+/* ====== GRID 3 columnas ====== */
+.works-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+  margin-top: 14px;
+}
+
+@media (max-width: 1100px){
+  .works-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 980px){
+  .works-grid{ grid-template-columns: 1fr; }
+}
+
+/* ====== CARD OBRA ====== */
+.work{
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 18px;
+  background: rgba(2,16,39,.18);
+  overflow: hidden;
+}
+
+.work-head{
+  padding: 16px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.work-head h3{
+  margin: 0 0 8px;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+/* Título clickeable */
+.work-head h3 a{
+  color: inherit;
+  text-decoration: none;
+}
+.work-head h3 a:hover{
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,.35);
+  text-underline-offset: 3px;
+}
+.work-head h3 a:focus-visible{
+  outline: 3px solid rgba(255,255,255,.35);
+  outline-offset: 4px;
+  border-radius: 10px;
+}
+
+.work-head p{
+  margin: 0;
+  color: rgba(238,247,255,.78);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* ====== SLIDER (card) ====== */
+.work-slider{
+  position: relative;
+  padding: 14px 16px 16px;
+}
+
+.work-slider .ws-frame{
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(2,16,39,.25);
+}
+
+/* Ocultar todas */
+.work-slider .ws-img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  display: none;
+  opacity: 0;
+}
+/* Mostrar solo la activa */
+.work-slider .ws-img.is-active{
+  display: block;
+  opacity: 1;
+}
+
+/* Flechas */
+.work-slider .ws-btn{
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(2,16,39,.70);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index: 5;
+  user-select: none;
+}
+
+.work-slider .ws-btn:hover{
+  background: rgba(2,16,39,.82);
+  border-color: rgba(255,255,255,.26);
+}
+
+.work-slider .ws-prev{ left: 22px; }
+.work-slider .ws-next{ right: 22px; }
+
+.work-slider .ws-meta{
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(238,247,255,.72);
+  display:flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 520px){
+  .work-slider .ws-frame{ height: 190px; }
+  .work-slider .ws-prev{ left: 14px; }
+  .work-slider .ws-next{ right: 14px; }
+}
+
+/* =========================================================
+   MODAL DETALLE
+========================================================= */
+.work-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+}
+
+.work-modal.is-open{
+  display: block;
+}
+
+.work-modal__backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 10, 22, .74);
+}
+
+/* Panel */
+.work-modal__panel{
+  position: relative;
+  width: min(980px, calc(100% - 28px));
+  margin: 18px auto;
+  background: rgba(10,18,38,.94);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 18px;
+  box-shadow: 0 30px 120px rgba(0,0,0,.55);
+  overflow: hidden;
+}
+
+.work-modal__head{
+  padding: 16px 16px 10px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.work-modal__title{
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.work-modal__desc{
+  margin: 8px 0 0;
+  color: rgba(238,247,255,.78);
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 85ch;
+}
+.work-modal__desc p{
+  margin: 0;
+}
+
+.work-modal__close{
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(2,16,39,.55);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor:pointer;
+}
+.work-modal__close:hover{
+  background: rgba(2,16,39,.72);
+}
+
+.work-modal__body{
+  padding: 14px 16px 16px;
+}
+
+/* Frame grande */
+.work-modal__frame{
+  position: relative;
+  height: 440px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(2,16,39,.25);
+}
+
+.work-modal__img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.work-modal__img.is-active{
+  display: block;
+}
+
+/* Flechas modal */
+.work-modal__btn{
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(2,16,39,.72);
+  color: #fff;
+  font-size: 28px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index: 2;
+  user-select: none;
+}
+.work-modal__btn:hover{
+  background: rgba(2,16,39,.86);
+  border-color: rgba(255,255,255,.28);
+}
+.work-modal__prev{ left: 14px; }
+.work-modal__next{ right: 14px; }
+
+/* Thumbnails */
+.work-modal__thumbs{
+  margin-top: 12px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 84px;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.work-modal__thumb{
+  width: 84px;
+  height: 56px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  overflow: hidden;
+  cursor: pointer;
+  opacity: .72;
+  background: transparent;
+  padding: 0;
+}
+.work-modal__thumb.is-active{
+  opacity: 1;
+  border-color: rgba(255,255,255,.35);
+}
+.work-modal__thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mobile modal */
+@media (max-width: 520px){
+  .work-modal__panel{
+    width: calc(100% - 16px);
+    margin: 10px auto;
+  }
+  .work-modal__frame{
+    height: 320px;
+  }
+}
+
+/* =========================================================
+   OBRAS — Modal 2 columnas (foto fija + texto scrolleable)
+========================================================= */
+
+/* Panel con alto controlado */
+.work-modal__panel{
+  width: min(1100px, calc(100% - 28px));
+  max-height: calc(100vh - 28px);
+  margin: 14px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Convertir body a layout 2 columnas */
+.work-modal__body{
+  padding: 0;                 /* sacamos padding para manejarlo por columnas */
+  display: grid;
+  grid-template-columns: 1.25fr .95fr; /* foto | texto */
+  min-height: 0;              /* clave para scroll en grid */
+}
+
+/* Frame/foto ocupa toda la altura disponible */
+.work-modal__frame{
+  height: auto;               /* ya no fija */
+  min-height: 360px;
+  border-radius: 0;           /* queda integrado al panel */
+  border: 0;
+  border-right: 1px solid rgba(255,255,255,.10);
+}
+
+/* Flechas un poco más suaves */
+.work-modal__btn{
+  background: rgba(2,16,39,.55);
+  border-color: rgba(255,255,255,.16);
+}
+.work-modal__btn:hover{
+  background: rgba(2,16,39,.70);
+  border-color: rgba(255,255,255,.24);
+}
+
+/* Columna de texto: scrollea si es largo */
+.work-modal__desc{
+  margin: 0;
+  padding: 14px 16px 16px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 28px - 64px); /* 64px aprox del header del modal */
+}
+
+/* Thumbs debajo del texto (sticky) */
+.work-modal__thumbs{
+  margin: 0;
+  padding: 10px 16px 14px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  background: rgba(10,18,38,.55);
+}
+
+/* Para que el bloque de thumbs quede pegado abajo a la derecha */
+.work-modal__body{
+  grid-template-rows: 1fr auto;
+}
+.work-modal__frame{
+  grid-row: 1 / span 2; /* foto ocupa ambas filas */
+}
+.work-modal__desc{
+  grid-column: 2;
+  grid-row: 1;
+}
+.work-modal__thumbs{
+  grid-column: 2;
+  grid-row: 2;
+  overflow-x: auto;
+}
+
+/* Mobile: 1 columna (foto arriba, texto abajo) */
+@media (max-width: 720px){
+  .work-modal__panel{
+    width: calc(100% - 16px);
+    max-height: calc(100vh - 16px);
+    margin: 8px auto;
+  }
+
+  .work-modal__body{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .work-modal__frame{
+    grid-row: auto;
+    grid-column: 1;
+    min-height: 240px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+    border-radius: 0;
+  }
+
+  .work-modal__desc{
+    grid-column: 1;
+    grid-row: auto;
+    max-height: 38vh; /* texto scrollea un poco si es largo */
+  }
+
+  .work-modal__thumbs{
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 520px){
+  .work-detail__frame{
+    background: rgba(0,0,0,.25);
+    padding: 8px;
+    border-radius: 16px;
+  }
+}
+
+/* =========================================================
+   OBRA — tamaño de galería en mobile (DEFINITIVO)
+========================================================= */
+@media (max-width: 600px){
+  /* IMPORTANTÍSIMO: pisar el height:520px */
+  body.page.page-obra .work-detail__frame{
+    height: clamp(200px, 32vh, 280px) !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 8px !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+  }
+
+  body.page.page-obra .work-detail__img{
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: contain !important; /* para fotos verticales */
+  }
+}
+/* =========================================================
+   OBRA — Galería estable (fix definitivo, desktop + mobile)
+   (dejar al FINAL del archivo)
+========================================================= */
+
+.page.page-obra .work-detail__gallery{
+  width: 100%;
+}
+
+/* Frame: sin grid, sin padding (para que la foto ocupe todo) */
+.page.page-obra .work-detail__frame{
+  display: block !important;
+  padding: 0 !important;
+  place-items: unset !important; /* por si venía de display:grid */
+  background: #fff;
+  border: 1px solid #e8edf3;
+  box-shadow: 0 10px 24px rgba(16, 24, 40, 0.06);
+  overflow: hidden;
+}
+
+/* Imagen: ocupa el frame entero */
+.page.page-obra .work-detail__frame > img.work-detail__img{
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-position: center;
+}
+
+/* Controles: fila centrada */
+.page.page-obra .work-detail__controls{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Botones: tamaño cómodo */
+.page.page-obra .work-detail__btn{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+}
+
+/* Thumbs: fila con scroll horizontal */
+.page.page-obra .work-detail__thumbs{
+  display: flex !important;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Tamaños thumbs */
+.page.page-obra .work-detail__thumb{
+  flex: 0 0 auto;
+  width: 62px;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Thumb img */
+.page.page-obra .work-detail__thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mobile: altura del frame controlada */
+@media (max-width: 600px){
+  .page.page-obra .work-detail__frame{
+    height: clamp(200px, 32vh, 280px) !important;
+    border-radius: 16px !important;
+    background: #0b1220; /* lindo si usás contain */
+  }
+
+  /* Elegí UNA:
+     - contain: no recorta (mejor para verticales)
+     - cover: llena el cuadro (recorta un poco) */
+  .page.page-obra .work-detail__frame > img.work-detail__img{
+    object-fit: contain !important;
+  }
+}
+
+/* OBRA — zoom leve dentro del frame (sin salir del cuadro) */
+.page.page-obra .work-detail__frame > img.work-detail__img{
+  transform: scale(1.08);
+  transform-origin: center;
+}

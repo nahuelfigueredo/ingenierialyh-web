@@ -3,139 +3,174 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Flota | Ingeniería L&H SRL</title>
-  <meta name="description" content="Flota y logística operativa para trabajos industriales." />
+  <title>Flota | Ingeniería L&amp;H SRL</title>
+  <meta name="description" content="Flota de vehículos y equipos de Ingeniería L&amp;H SRL." />
   <link rel="icon" href="assets/img/favicon/ChatGPT Image 8 ene 2026, 00_31_26.png" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/fix-mobile.css" />
+  <link rel="stylesheet" href="css/techint.css" />
 </head>
-<body>
+
+<body class="page page-flota">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <div class="topbar">
-  <div class="container wrap">
-    <div>
-      <span class="badge">HSE • Seguridad y cumplimiento</span>
-      <span style="margin-left:10px">Emergencias 24/7</span>
-    </div>
-    <div>
-      <a href="mailto:contacto@empresa.com">Info@ingenieria.com.ar</a>
-      <span style="margin:0 8px">|</span>
-      <a href="https://wa.me/542216168685" target="_blank" rel="noopener">+5492214616511 </a>
-    </div>
-  </div>
-</div>
-
-  <header>
+  <!-- NAVBAR -->
+  <header class="site-header" data-header>
     <div class="container navbar">
       <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
-  <div class="title">
-    <strong>Ingeniería L&H SRL</strong>
-    <span>Construcciones Industriales</span>
-  </div>
-</a>
+        <img class="brand-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" />
+      </a>
 
-      <nav class="nav-links">
-        <a href="empresa.html">La Empresa</a><a href="servicios.html">Servicios</a><a href="flota.html">Flota</a>
-        <a href="equipos.html">Equipos</a><a href="obras.html">Obras</a><a href="clientes.html">Clientes</a><a href="contacto.html">Contacto</a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="empresa.html">La Empresa</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="flota.html" aria-current="page">Flota</a>
+        <a href="equipos.html">Equipos</a>
+        <a href="obras.html">Obras</a>
+        <a href="clientes.html">Clientes</a>
+        <a href="contacto.html">Contacto</a>
       </nav>
+
       <a class="cta" href="contacto.html">Solicitar cotización</a>
       <button class="burger" data-burger aria-label="Abrir menú" aria-expanded="false">☰</button>
     </div>
+
     <div class="container mobile-drawer" data-drawer hidden>
-      <a href="empresa.html">La Empresa</a><a href="servicios.html">Servicios</a><a href="flota.html">Flota</a>
-      <a href="equipos.html">Equipos</a><a href="obras.html">Obras</a><a href="clientes.html">Clientes</a><a href="contacto.html">Contacto</a>
+      <a href="empresa.html">La Empresa</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="flota.html" aria-current="page">Flota</a>
+      <a href="equipos.html">Equipos</a>
+      <a href="obras.html">Obras</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="contacto.html">Contacto</a>
     </div>
   </header>
 
   <main id="contenido">
-   <section class="page-hero page-hero--image page-hero--fleet"
-  style="background-image:url('assets/img/flota.jpeg');">
 
-  <div class="container hero-top">
-    <div class="breadcrumb">Inicio / Flota</div>
-    <h1>Flota</h1>
-    <p>
-      Flota propia y equipos operativos disponibles para responder con
-      eficiencia, seguridad y autonomía en cada proyecto.
-    </p>
+    <!-- HERO: Carrusel full-width (2 fotos) + textos (sin cajas) -->
+    <section class="page-hero page-hero--flota" aria-label="Flota">
+      <!-- Carrusel full-width (2 fotos) -->
+      <div class="flota-hero-carousel" data-carousel aria-label="Carrusel de flota">
+        <div class="flota-hero-carousel__viewport">
+          <div class="flota-hero-carousel__track" data-track>
+            <article class="hero-carousel__slide is-active">
+              <img src="assets/img/flota4.png" alt="Flota - Imagen 1" loading="lazy" decoding="async">
+            </article>
 
-    <div class="fleet-metrics" aria-label="Métricas de flota">
-      <div class="fleet-item">
-        <strong>+20</strong>
-        <span>vehículos operativos</span>
+            <article class="hero-carousel__slide">
+              <img src="assets/img/flota3.png" alt="Flota - Imagen 2" loading="lazy" decoding="async">
+            </article>
+          </div>
+        </div>
+
+        <button class="flota-hero-carousel__btn flota-hero-carousel__btn--prev" type="button" data-prev aria-label="Anterior">‹</button>
+        <button class="flota-hero-carousel__btn flota-hero-carousel__btn--next" type="button" data-next aria-label="Siguiente">›</button>
+
+        <div class="flota-hero-carousel__dots" aria-label="Indicadores">
+          <button class="flota-hero-carousel__dot is-active" type="button" data-dot="0" aria-label="Ir a la imagen 1"></button>
+          <button class="flota-hero-carousel__dot" type="button" data-dot="1" aria-label="Ir a la imagen 2"></button>
+        </div>
       </div>
-      <div class="fleet-item">
-        <strong>Flota propia</strong>
-        <span>mantenimiento y control interno</span>
+
+      <!-- Overlay: textos -->
+      <div class="flota-hero-overlay">
+        <div class="container">
+          <div class="hero-bubbles">
+            <div class="grid-3">
+              <article class="card reveal">
+                <h3>Movilidad operativa</h3>
+                <p>Unidades para supervisión, traslados y logística de cuadrillas.</p>
+              </article>
+
+              <article class="card reveal">
+                <h3>Soporte en campo</h3>
+                <p>Vehículos equipados para tareas industriales y asistencia técnica.</p>
+              </article>
+
+              <article class="card reveal">
+                <h3>Disponibilidad</h3>
+                <p>Mantenimiento preventivo y control para asegurar continuidad.</p>
+              </article>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="fleet-item">
-        <strong>Disponibilidad</strong>
-        <span>respuesta inmediata en obra</span>
+    </section>
+
+    <!-- Título (SIEMPRE fuera del hero) -->
+    <section class="section section-title-block">
+      <div class="container">
+        <div class="section-title section-title--stack">
+          <h2>Galería de flota</h2>
+          <p>Recursos disponibles para ejecutar trabajos industriales con seguridad y eficiencia.</p>
+        </div>
       </div>
-      <div class="fleet-item">
-        <strong>Cobertura</strong>
-        <span>regional y nacional</span>
+    </section>
+
+    <!-- GALERÍA: 6 imágenes mismo tamaño -->
+    <section class="section">
+      <div class="container">
+        <div class="gallery-grid" data-gallery>
+          <figure class="gallery-item reveal">
+            <img src="assets/img/flota5.png" alt="Flota - Foto 1" loading="lazy" decoding="async">
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="assets/img/flota6.png" alt="Flota - Foto 2" loading="lazy" decoding="async">
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="assets/img/flota7.png" alt="Flota - Foto 3" loading="lazy" decoding="async">
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="assets/img/flota8.png" alt="Flota - Foto 4" loading="lazy" decoding="async">
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="assets/img/flota9.png" alt="Flota - Foto 5" loading="lazy" decoding="async">
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="assets/img/flota4.png" alt="Flota - Foto 6" loading="lazy" decoding="async">
+          </figure>
+        </div>
+
+        <!-- Lightbox (si querés que al click se agrande) -->
+        <div class="lightbox" data-lightbox hidden aria-hidden="true" role="dialog" aria-label="Vista ampliada">
+          <button class="lightbox__close" type="button" data-close aria-label="Cerrar">×</button>
+          <button class="lightbox__nav lightbox__nav--prev" type="button" data-prev aria-label="Anterior">‹</button>
+          <img class="lightbox__img" data-lightbox-img alt="">
+          <button class="lightbox__nav lightbox__nav--next" type="button" data-next aria-label="Siguiente">›</button>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-
-   <section class="section">
-  <div class="container">
-
-    <div class="section-title section-title--stack">
-      <h2>Galería</h2>
-      <p>“Tecnología de última generación en movimiento. Mantenemos una flota moderna…”</p>
-    </div>
-
-    <div class="gallery">
-      <figure class="reveal">
-        <img src="assets/img/imagen1.jpg.jpeg" alt="Unidad de flota - ejemplo" />
-        
-      </figure>
-
-      <figure class="reveal">
-        <img src="assets/img/imagen4.jpg.jpeg" alt="Unidad de flota - ejemplo" />
-        
-      </figure>
-
-      <figure class="reveal">
-        <img src="assets/img/imagen2.jpg.jpeg" alt="Unidad de flota - ejemplo" />
-        
-      </figure>
-
-      <figure class="reveal">
-        <img src="assets/img/100_3049.jpg" alt="Unidad de flota - ejemplo" />
-        
-      </figure>
-
-      <figure class="reveal">
-        <img src="assets/img/22676144-bd39-4b80-bc9d-d6c3483b9d7d.jpg" alt="Unidad de flota - ejemplo" />
-       
-      </figure>
-
-      <figure class="reveal">
-        <img src="assets/img/100_3087.jpg" alt="Unidad de flota - ejemplo" />
-        
-      </figure>
-    </div>
-
-  </div>
-</section>
+    </section>
 
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-grid">
-      <div><strong>Ingeniería L&H SRL</strong><br/><span>Construcciones Industriales</span></div>
-      <div><div><a href="servicios.html">Servicios</a></div><div><a href="contacto.html">Contacto</a></div></div>
-      <div><div>WhatsApp: +54 9 221 6168685 </div><div>Email: Info@ingenieria.com.ar</div></div>
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
+          <img class="footer-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" loading="lazy">
+        </a>
+
+        <div class="footer-brand-text">
+          <strong>Ingeniería L&amp;H SRL</strong><br/>
+          <span>Construcciones Industriales</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div><a href="servicios.html">Servicios</a></div>
+        <div><a href="obras.html">Obras</a></div>
+        <div><a href="contacto.html">Contacto</a></div>
+      </div>
+
+      <div class="footer-contact">
+        <div>WhatsApp: +54 9 221 616 8685</div>
+        <div>Email: Info@ingenieria.com.ar</div>
+      </div>
     </div>
   </footer>
 
   <a class="whatsapp-fab" href="https://wa.me/5492216168685" target="_blank" rel="noopener">WhatsApp</a>
+
   <script src="js/main.js"></script>
 </body>
 </html>

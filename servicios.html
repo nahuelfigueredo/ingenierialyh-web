@@ -3,40 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Servicios | Ingeniería L&H SRL</title>
+  <title>Servicios | Ingeniería L&amp;H SRL</title>
   <meta name="description" content="Servicios de montaje industrial, mantenimiento, paradas de planta y equipos de proceso." />
   <link rel="icon" href="assets/img/favicon/ChatGPT Image 8 ene 2026, 00_31_26.png" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/techint.css" />
 </head>
-<body>
+
+<body class="page">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <div class="topbar">
-    <div class="container wrap">
-      <div>
-        <span class="badge">HSE • Seguridad y cumplimiento</span>
-        <span style="margin-left:10px">Emergencias 24/7</span>
-      </div>
-      <div>
-        <a href="mailto:Info@ingenieria.com.ar">Info@ingenieria.com.ar</a>
-        <span style="margin:0 8px">|</span>
-        <a href="https://wa.me/5492214616511" target="_blank" rel="noopener">+54 9 221 461 6511</a>
-      </div>
-    </div>
-  </div>
-
-  <header>
+  <!-- NAVBAR -->
+  <header class="site-header" data-header>
     <div class="container navbar">
       <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
-        <div class="title">
-          <strong>Ingeniería L&H SRL</strong>
-          <span>Construcciones Industriales</span>
-        </div>
+        <img class="brand-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" />
       </a>
 
       <nav class="nav-links" aria-label="Navegación principal">
         <a href="empresa.html">La Empresa</a>
-        <a class="active" href="servicios.html">Servicios</a>
+        <a href="servicios.html" aria-current="page">Servicios</a>
         <a href="flota.html">Flota</a>
         <a href="equipos.html">Equipos</a>
         <a href="obras.html">Obras</a>
@@ -50,7 +35,7 @@
 
     <div class="container mobile-drawer" data-drawer hidden>
       <a href="empresa.html">La Empresa</a>
-      <a href="servicios.html">Servicios</a>
+      <a href="servicios.html" aria-current="page">Servicios</a>
       <a href="flota.html">Flota</a>
       <a href="equipos.html">Equipos</a>
       <a href="obras.html">Obras</a>
@@ -60,68 +45,81 @@
   </header>
 
   <main id="contenido">
+    <!-- HERO institucional (solo imagen) -->
+    <section
+      class="page-hero page-hero--image page-hero--services"
+      style="background-image:url('assets/img/Vandejeado.jpg');"
+      aria-hidden="true"
+    ></section>
 
-    <section class="page-hero page-hero--image page-hero--services"
-      style="background-image:url('assets/img/Vandejeado.jpg');">
-
-      <div class="container hero-top">
-        <div class="breadcrumb">Inicio / Servicios</div>
-        <h1>Servicios</h1>
-        <p>
-          Servicios para mantenimiento industrial y construcción de equipos y plantas de proceso,
-          con seguridad, calidad y cumplimiento como eje.
-        </p>
+    <!-- Título debajo del hero -->
+    <section class="section section-title-block">
+      <div class="container">
+        <div class="section-title section-title--servicios">
+          <h2>Servicios</h2>
+        </div>
       </div>
+    </section>
 
-      <!-- BURBUJAS DENTRO DE LA FOTO -->
-      <div class="hero-bubbles" aria-label="Listado de servicios">
-        <div class="container">
-          <div class="services-grid">
-            <article class="card reveal">
-              <h3>Montaje industrial</h3>
-              <p>Montaje de equipos, piping asociado, estructuras y coordinación en obra.</p>
-            </article>
+    <!-- Cards WOW (con foto + overlay + diagonales) -->
+    <section class="section alt">
+      <div class="container">
+        <div class="services-grid services-grid--page">
+          <article class="card reveal service-card service-card--montaje">
+            <h3>Montaje industrial</h3>
+            <p>Montaje de equipos, piping asociado, estructuras y coordinación en obra.</p>
+          </article>
 
-            <article class="card reveal">
-              <h3>Mantenimiento industrial</h3>
-              <p>Preventivo, correctivo y mayor, con trazabilidad y reportes.</p>
-            </article>
+          <article class="card reveal service-card service-card--mantenimiento">
+            <h3>Mantenimiento industrial</h3>
+            <p>Preventivo, correctivo y mayor, con trazabilidad y reportes.</p>
+          </article>
 
-            <article class="card reveal">
-              <h3>Paradas de planta</h3>
-              <p>Planificación, recursos, ejecución y control para minimizar tiempos fuera de servicio.</p>
-            </article>
+          <article class="card reveal service-card service-card--paradas">
+            <h3>Paradas de planta</h3>
+            <p>Planificación, recursos, ejecución y control para minimizar tiempos fuera de servicio.</p>
+          </article>
 
-            <article class="card reveal">
-              <h3>Intercambiadores de calor</h3>
-              <p>Intervenciones, mantenimiento, reemplazos y fabricación/armado según alcance.</p>
-            </article>
+          <article class="card reveal service-card service-card--intercambiadores">
+            <h3>Intercambiadores de calor</h3>
+            <p>Intervenciones, mantenimiento, reemplazos y fabricación/armado según alcance.</p>
+          </article>
 
-            <article class="card reveal">
-              <h3>Hornos de proceso</h3>
-              <p>Trabajos programados y emergencias con foco en seguridad operacional.</p>
-            </article>
+          <article class="card reveal service-card service-card--hornos">
+            <h3>Hornos de proceso</h3>
+            <p>Trabajos programados y emergencias con foco en seguridad operacional.</p>
+          </article>
 
-            <article class="card reveal">
-              <h3>Columnas de destilación</h3>
-              <p>Montaje y mantenimiento de equipos críticos en plantas de proceso.</p>
-            </article>
-          </div>
+          <article class="card reveal service-card service-card--columnas">
+            <h3>Columnas de destilación</h3>
+            <p>Montaje y mantenimiento de equipos críticos en plantas de proceso.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
+          <img class="footer-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" loading="lazy">
+        </a>
+
+        <div class="footer-brand-text">
+          <strong>Ingeniería L&amp;H SRL</strong><br/>
+          <span>Construcciones Industriales</span>
         </div>
       </div>
 
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div><strong>Ingeniería L&H SRL</strong><br/><span>Construcciones Industriales</span></div>
-      <div>
+      <div class="footer-links">
+        <div><a href="servicios.html" aria-current="page">Servicios</a></div>
         <div><a href="obras.html">Obras</a></div>
         <div><a href="contacto.html">Contacto</a></div>
       </div>
-      <div>
+
+      <div class="footer-contact">
         <div>WhatsApp: +54 9 221 616 8685</div>
         <div>Email: Info@ingenieria.com.ar</div>
       </div>
