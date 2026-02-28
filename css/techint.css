@@ -5291,3 +5291,32 @@ radient(180deg, var(--accent), rgba(11,94,215,.18));
   transform: scale(1.08);
   transform-origin: center;
 }
+
+/* =========================================================
+   OBRA (detalle) — DESKTOP FIX: evitar fotos gigantes
+   (pisar overrides previos)
+========================================================= */
+
+@media (min-width: 601px){
+  /* visor principal: altura razonable en desktop */
+  .page.page-obra .work-detail__frame{
+    width: 100% !important;
+    max-width: 980px !important;
+    margin: 0 auto !important;
+
+    /* clave: que no sea enorme */
+    height: clamp(420px, 58vh, 560px) !important;
+
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+  }
+
+  .page.page-obra .work-detail__frame > img.work-detail__img{
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* cover si querés que llene */
+    display: block !important;
+    transform: none !important;     /* por si agregaste scale */
+  }
+}

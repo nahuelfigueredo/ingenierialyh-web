@@ -1,0 +1,4 @@
+notepad .gitignore
+# Videos pesados (no subir a GitHub)
+assets/video/*.mp4
+
