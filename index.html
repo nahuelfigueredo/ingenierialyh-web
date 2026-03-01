@@ -53,9 +53,11 @@
 
       <!-- VIDEO FULL WIDTH -->
       <div class="hero-media video hero-full-media">
-        <video class="hero-video is-active" autoplay muted playsinline loop preload="metadata" poster="assets/img/posters/hero.jpg">
+        <video class="hero-video is-active"
+               autoplay muted playsinline loop preload="metadata"
+               poster="assets/img/encabezado-final (2).jpg">
           <source src="assets/video/9339478-uhd_3840_2160_24fps.mp4" type="video/mp4" />
-          <source src="assets/video/hero.webm" type="video/webm" />
+          <!-- Si no tenés hero.webm en assets/video, no lo pongas porque da 404 -->
         </video>
 
         <div class="container hero-overlay hero-overlay-wide">
@@ -110,27 +112,15 @@
           </div>
         </aside>
 
-       <aside class="hero-card side-media reveal" aria-label="Avances de obra">
-  <video class="side-video is-active" autoplay muted playsinline loop preload="metadata"
-         poster="assets/img/posters/avances.jpg">
-    <source src="assets/video/avances.mp4" type="video/mp4" />
-  </video>
+        <!-- COLUMNA DERECHA -->
+        <aside class="hero-card side-media reveal" aria-label="Avances de obra">
+          <video class="side-video is-active"
+                 autoplay muted playsinline loop preload="metadata"
+                 poster="assets/img/footer.jpg">
+            <source src="assets/video/avances.mp4" type="video/mp4" />
+          </video>
 
-  <div class="side-media-below">
-    <h3>Avances de obra</h3>
-    <p>Proyectos industriales en ejecución. Seguridad, plazos y continuidad operativa.</p>
-
-    <div class="side-media-actions">
-      <a class="btn primary" href="obras.html">Ver obras</a>
-      <a class="btn" href="contacto.html">Solicitar cotización</a>
-    </div>
-  </div>
-
-    
-  </div>
-</aside>
-         
-          <div class="side-media-overlay">
+          <div class="side-media-below">
             <h3>Avances de obra</h3>
             <p>Proyectos industriales en ejecución. Seguridad, plazos y continuidad operativa.</p>
 
@@ -146,7 +136,7 @@
     </section>
   </main>
 
- <footer class="footer">
+  <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
@@ -154,7 +144,6 @@
         </a>
 
         <div class="footer-brand-text">
-          
         </div>
       </div>
 
@@ -170,7 +159,6 @@
       </div>
     </div>
   </footer>
-
 
   <a class="whatsapp-fab" href="https://api.whatsapp.com/send?phone=5492216168685" target="_blank" rel="noopener">WhatsApp</a>
 
