@@ -48,7 +48,7 @@
     <!-- HERO (solo imagen). No hay título adentro. -->
     <section
       class="page-hero page-hero--image page-hero--contacto"
-      style="background-image:url('assets/img/Vandejeado.jpg');"
+      style="background-image:url('assets/img/empresa/1\ \(1\).png');"
       aria-hidden="true"
     ></section>
 
@@ -66,21 +66,55 @@
     <section class="section alt">
       <div class="container">
         <div class="contact-grid">
-          <aside class="card reveal contact-card">
-            <h3>Datos</h3>
-            <p>
-              WhatsApp: <strong>+54 9 221 616 8685</strong><br/>
-              Email: <strong>Info@ingenieria.com.ar</strong><br/>
-              Zona: <strong>Buenos Aires, AR</strong>
-            </p>
-            <p style="margin-top:10px">
-              Horario: <strong>Lun a Vie 8:00–18:00</strong><br/>
-              Emergencias: <strong>24/7</strong>
-            </p>
 
-            <a class="btn" href="https://wa.me/5492216168685" target="_blank" rel="noopener">WhatsApp directo</a>
+          <!-- DATOS (premium, con links clickeables) -->
+          <aside class="card reveal contact-card" aria-label="Datos de contacto">
+            <h3>Datos</h3>
+
+            <ul class="contact-list">
+              <li>
+                <span class="contact-ico" aria-hidden="true">📱</span>
+                <div class="contact-item">
+                  <div class="contact-label">WhatsApp</div>
+                  <a class="contact-link" href="https://wa.me/5492216168685" target="_blank" rel="noopener">
+                    +54 9 221 616 8685
+                  </a>
+                </div>
+              </li>
+
+              <li>
+                <span class="contact-ico" aria-hidden="true">✉️</span>
+                <div class="contact-item">
+                  <div class="contact-label">Email</div>
+                  <a class="contact-link" href="mailto:Info@ingenieria.com.ar">Info@ingenieria.com.ar</a>
+                </div>
+              </li>
+
+              <li>
+                <span class="contact-ico" aria-hidden="true">📍</span>
+                <div class="contact-item">
+                  <div class="contact-label">Zona</div>
+                  <div class="contact-text">Buenos Aires, AR</div>
+                </div>
+              </li>
+
+              <li>
+                <span class="contact-ico" aria-hidden="true">🕒</span>
+                <div class="contact-item">
+                  <div class="contact-label">Horario</div>
+                  <div class="contact-text">Lun a Vie 8:00–18:00 · Emergencias 24/7</div>
+                </div>
+              </li>
+            </ul>
+
+            <div class="contact-cta">
+              <a class="btn primary" href="https://wa.me/5492216168685" target="_blank" rel="noopener">
+                WhatsApp directo
+              </a>
+            </div>
           </aside>
 
+          <!-- FORMULARIO -->
           <article class="card reveal">
             <h3>Formulario</h3>
 
@@ -116,15 +150,14 @@
               </div>
             </form>
           </article>
+
         </div>
       </div>
     </section>
-
-  
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer">
+ <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
@@ -132,15 +165,14 @@
         </a>
 
         <div class="footer-brand-text">
-          <strong>Ingeniería L&amp;H SRL</strong><br/>
-          <span>Construcciones Industriales</span>
+          
         </div>
       </div>
 
       <div class="footer-links">
         <div><a href="servicios.html">Servicios</a></div>
-        <div><a href="obras.html">Obras</a></div>
-        <div><a href="contacto.html" aria-current="page">Contacto</a></div>
+        <div><a href="obras.html" aria-current="page">Obras</a></div>
+        <div><a href="contacto.html">Contacto</a></div>
       </div>
 
       <div class="footer-contact">
@@ -149,6 +181,7 @@
       </div>
     </div>
   </footer>
+
 
   <a class="whatsapp-fab" href="https://wa.me/5492216168685" target="_blank" rel="noopener">WhatsApp</a>
   <script src="js/main.js"></script>

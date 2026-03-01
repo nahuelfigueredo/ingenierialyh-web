@@ -1,13 +1,13 @@
 /* =========================================================
-   main.js — Ingeniería L&H (LIMPIO)
+   main.js — Ingeniería L&H (LIMPIO / BLINDADO)
    - Burger menu (mobile)
    - Reveal on scroll
    - Header solid al scroll
    - Hero video slider (playlist) por tiempo
    - Side video slider por ended
-   - Slider de imágenes (Obras)
-   - Hero Carousel (Flota) imágenes
-   - Lightbox Galería (gallery img)
+   - Slider de imágenes (Obras) [data-slider]
+   - Hero Carousel (Flota) imágenes [data-carousel]
+   - Lightbox Galería (gallery img) [data-gallery] + [data-lightbox]
 ========================================================= */
 
 (function () {
@@ -125,7 +125,6 @@
 
     const playlist = uniqTruthy([
       "assets/video/9339478-uhd_3840_2160_24fps.mp4",
-      // "assets/video/otro.mp4",
     ]);
     if (playlist.length < 1) return;
 
@@ -246,7 +245,8 @@
   })();
 
   /* =========================================================
-     Slider de imágenes (Obras)
+     Slider de imágenes (Obras) — SOLO dentro de [data-slider]
+     (blindado para no enganchar otros botones)
   ========================================================= */
   (function worksImageSliders() {
     const sliders = $$("[data-slider]");
@@ -254,19 +254,30 @@
 
     sliders.forEach((slider) => {
       const imgs = $$(".ws-img", slider);
+      if (!imgs.length) return;
+
       const btnPrev = $("[data-prev]", slider);
       const btnNext = $("[data-next]", slider);
       const counter = $("[data-counter]", slider);
-      if (!imgs.length) return;
 
       let i = 0;
+
       const update = () => {
         imgs.forEach((img, idx) => img.classList.toggle("is-active", idx === i));
         if (counter) counter.textContent = `${i + 1} / ${imgs.length}`;
       };
 
-      btnPrev && btnPrev.addEventListener("click", () => { i = (i - 1 + imgs.length) % imgs.length; update(); });
-      btnNext && btnNext.addEventListener("click", () => { i = (i + 1) % imgs.length; update(); });
+      if (btnPrev) btnPrev.addEventListener("click", (e) => {
+        e.preventDefault();
+        i = (i - 1 + imgs.length) % imgs.length;
+        update();
+      });
+
+      if (btnNext) btnNext.addEventListener("click", (e) => {
+        e.preventDefault();
+        i = (i + 1) % imgs.length;
+        update();
+      });
 
       slider.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") { e.preventDefault(); i = (i - 1 + imgs.length) % imgs.length; update(); }
@@ -279,6 +290,7 @@
 
   /* =========================================================
      Hero Carousel (Flota) — imágenes con autoplay + swipe
+     IMPORTANTE: prev/next scoped dentro del root
   ========================================================= */
   (function heroCarousel() {
     const carousels = $$("[data-carousel]");
@@ -313,8 +325,8 @@
         timer = null;
       }
 
-      prevBtn && prevBtn.addEventListener("click", () => { goTo(index - 1); start(); });
-      nextBtn && nextBtn.addEventListener("click", () => { goTo(index + 1); start(); });
+      if (prevBtn) prevBtn.addEventListener("click", () => { goTo(index - 1); start(); });
+      if (nextBtn) nextBtn.addEventListener("click", () => { goTo(index + 1); start(); });
 
       dots.forEach((d) => {
         d.addEventListener("click", () => {
@@ -324,7 +336,6 @@
         });
       });
 
-      // Swipe
       let x0 = null;
       root.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
       root.addEventListener("touchend", (e) => {
@@ -346,7 +357,8 @@
   })();
 
   /* =========================================================
-     Lightbox Galería — para .gallery img
+     Lightbox Galería — para [data-gallery] img
+     Recomendado: data-lightbox-prev / data-lightbox-next
   ========================================================= */
   (function lightboxGallery() {
     const gallery = document.querySelector("[data-gallery]");
@@ -356,8 +368,10 @@
     const images = Array.from(gallery.querySelectorAll("img"));
     const img = box.querySelector("[data-lightbox-img]");
     const closeBtns = box.querySelectorAll("[data-close]");
-    const prevBtn = box.querySelector("[data-prev]");
-    const nextBtn = box.querySelector("[data-next]");
+
+    // Cambiado para evitar choque global con otros sliders
+    const prevBtn = box.querySelector("[data-lightbox-prev]") || box.querySelector("[data-prev]");
+    const nextBtn = box.querySelector("[data-lightbox-next]") || box.querySelector("[data-next]");
 
     if (!images.length || !img) return;
 
@@ -384,8 +398,8 @@
 
     images.forEach((im, i) => im.addEventListener("click", () => openAt(i)));
     closeBtns.forEach((b) => b.addEventListener("click", close));
-    prevBtn && prevBtn.addEventListener("click", prev);
-    nextBtn && nextBtn.addEventListener("click", next);
+    if (prevBtn) prevBtn.addEventListener("click", prev);
+    if (nextBtn) nextBtn.addEventListener("click", next);
 
     window.addEventListener("keydown", (e) => {
       if (box.hidden) return;

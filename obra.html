@@ -12,7 +12,6 @@
 <body class="page page-obra">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <!-- NAVBAR -->
   <header class="site-header" data-header>
     <div class="container navbar">
       <a class="brand brand-text" href="index.html" aria-label="Ir a Inicio">
@@ -46,9 +45,7 @@
 
   <main id="contenido">
     <section class="section">
-      <!-- container wide SOLO en esta página -->
       <div class="container container--wide">
-
         <a class="back-link" href="obras.html" data-back-link aria-label="Volver a Obras">← Volver</a>
 
         <div class="breadcrumb">
@@ -62,9 +59,7 @@
           <p data-obra-short>Descripción breve.</p>
         </div>
 
-        <!-- DETALLE (descripción arriba, galería abajo) -->
         <div class="work-detail work-detail--stack">
-          <!-- INFO ARRIBA -->
           <section class="work-detail__top">
             <dl class="work-facts" data-obra-facts></dl>
 
@@ -74,25 +69,22 @@
             </div>
           </section>
 
-          <!-- GALERÍA ABAJO -->
           <div class="work-detail__gallery">
             <div class="work-detail__frame" data-gallery-frame></div>
 
             <div class="work-detail__controls">
-              <button class="work-detail__btn" type="button" data-prev aria-label="Anterior">‹</button>
+              <button class="work-detail__btn" type="button" data-obra-prev aria-label="Anterior">‹</button>
               <div class="work-detail__counter" data-counter>1 / 1</div>
-              <button class="work-detail__btn" type="button" data-next aria-label="Siguiente">›</button>
+              <button class="work-detail__btn" type="button" data-obra-next aria-label="Siguiente">›</button>
             </div>
 
             <div class="work-detail__thumbs" data-thumbs></div>
           </div>
         </div>
-
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
@@ -121,17 +113,23 @@
 
   <a class="whatsapp-fab" href="https://wa.me/5492216168685" target="_blank" rel="noopener">WhatsApp</a>
 
-  <!-- 1) Datos -->
-  <script src="js/obras-data.js"></script>
+  <!-- Datos -->
+  <script src="js/obras-data.js?v=20260301"></script>
 
-  <!-- 2) Render detalle -->
+  <!-- Render detalle -->
   <script>
     (function () {
       const params = new URLSearchParams(location.search);
       const id = params.get("id");
 
-      // Debe existir window.OBRAS = [...]
-      const obra = (window.OBRAS || []).find((o) => o.id === id) || null;
+      if (!id) return;
+
+      if (!Array.isArray(window.OBRAS)) return;
+
+      const obra =
+        window.OBRAS.find((o) => o.id === id) ||
+        window.OBRAS.find((o) => String(o.id).toLowerCase() === String(id).toLowerCase()) ||
+        null;
 
       const titleEls = document.querySelectorAll("[data-obra-title]");
       const shortEl = document.querySelector("[data-obra-short]");
@@ -141,8 +139,8 @@
       const frame = document.querySelector("[data-gallery-frame]");
       const thumbs = document.querySelector("[data-thumbs]");
       const counter = document.querySelector("[data-counter]");
-      const btnPrev = document.querySelector("[data-prev]");
-      const btnNext = document.querySelector("[data-next]");
+      const btnPrev = document.querySelector("[data-obra-prev]");
+      const btnNext = document.querySelector("[data-obra-next]");
 
       if (!obra) {
         titleEls.forEach((el) => (el.textContent = "Obra no encontrada"));
@@ -153,6 +151,7 @@
         if (counter) counter.textContent = "0 / 0";
         if (btnPrev) btnPrev.disabled = true;
         if (btnNext) btnNext.disabled = true;
+        if (thumbs) thumbs.innerHTML = "";
         return;
       }
 
@@ -160,30 +159,28 @@
       titleEls.forEach((el) => (el.textContent = obra.title));
       if (shortEl) shortEl.textContent = obra.short || "";
 
-      // Facts (respetando orden)
       if (factsEl) {
         factsEl.innerHTML = "";
         const facts = obra.facts || {};
         const order = ["Lugar", "Planta", "Cliente", "Empresa", "Obra", "Año"];
         order.forEach((k) => {
           if (!facts[k]) return;
-
           const dt = document.createElement("dt");
           dt.textContent = k;
-
           const dd = document.createElement("dd");
           dd.textContent = String(facts[k]);
-
           factsEl.appendChild(dt);
           factsEl.appendChild(dd);
         });
       }
 
-      // Long desc (HTML)
       if (longEl) longEl.innerHTML = obra.longHtml || "";
 
-      // Gallery
-      const images = Array.isArray(obra.images) ? obra.images : [];
+      const images = (Array.isArray(obra.images) ? obra.images : [])
+        .map((src) => String(src || "").trim())
+        .filter(Boolean)
+        .map((src) => (src.startsWith("img/") ? `assets/${src}` : src));
+
       let i = 0;
 
       const render = () => {
@@ -195,6 +192,7 @@
           if (counter) counter.textContent = "0 / 0";
           if (btnPrev) btnPrev.disabled = true;
           if (btnNext) btnNext.disabled = true;
+          if (thumbs) thumbs.innerHTML = "";
           return;
         }
 
@@ -207,7 +205,6 @@
         frame.appendChild(img);
 
         if (counter) counter.textContent = `${i + 1} / ${images.length}`;
-
         if (btnPrev) btnPrev.disabled = images.length <= 1;
         if (btnNext) btnNext.disabled = images.length <= 1;
 
@@ -218,17 +215,8 @@
         }
       };
 
-      const prev = () => {
-        if (!images.length) return;
-        i = (i - 1 + images.length) % images.length;
-        render();
-      };
-
-      const next = () => {
-        if (!images.length) return;
-        i = (i + 1) % images.length;
-        render();
-      };
+      const prev = () => { if (!images.length) return; i = (i - 1 + images.length) % images.length; render(); };
+      const next = () => { if (!images.length) return; i = (i + 1) % images.length; render(); };
 
       if (btnPrev) btnPrev.addEventListener("click", prev);
       if (btnNext) btnNext.addEventListener("click", next);
@@ -240,10 +228,7 @@
           b.type = "button";
           b.className = "work-detail__thumb" + (idx === 0 ? " is-active" : "");
           b.innerHTML = `<img src="${src}" alt="">`;
-          b.addEventListener("click", () => {
-            i = idx;
-            render();
-          });
+          b.addEventListener("click", () => { i = idx; render(); });
           thumbs.appendChild(b);
         });
       }

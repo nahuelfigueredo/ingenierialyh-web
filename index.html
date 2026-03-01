@@ -15,12 +15,10 @@
   <!-- NAVBAR -->
   <header class="site-header" data-header>
     <div class="container navbar">
-      <a class="brand brand-logo" href="index.html" aria-label="Ir a Inicio">
-  <img class="brand-mark" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&H" />
-  <div class="title">
-    
-  </div>
-</a>
+      <a class="brand" href="index.html" aria-label="Ir a Inicio">
+        <img class="brand-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&H" />
+        <div class="title"></div>
+      </a>
 
       <nav class="nav-links" aria-label="Navegación principal">
         <a href="empresa.html">La Empresa</a>
@@ -55,8 +53,10 @@
 
       <!-- VIDEO FULL WIDTH -->
       <div class="hero-media video hero-full-media">
-        <video class="hero-video is-active" autoplay muted playsinline preload="metadata"></video>
-        <video class="hero-video" autoplay muted playsinline preload="metadata"></video>
+        <video class="hero-video is-active" autoplay muted playsinline loop preload="metadata" poster="assets/img/posters/hero.jpg">
+          <source src="assets/video/9339478-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+          <source src="assets/video/hero.webm" type="video/webm" />
+        </video>
 
         <div class="container hero-overlay hero-overlay-wide">
           <div class="kicker">Montaje industrial • Mantenimiento • Paradas de planta</div>
@@ -72,8 +72,6 @@
           </div>
         </div>
       </div>
-
-     
 
       <!-- SECCIÓN CLARA: capacidades + avances -->
       <div class="container hero-grid hero-grid-below">
@@ -112,11 +110,26 @@
           </div>
         </aside>
 
-        <!-- COLUMNA DERECHA -->
-        <aside class="hero-card side-media reveal" aria-label="Avances de obra">
-          <video class="side-video is-active" autoplay muted playsinline preload="metadata"></video>
-          <video class="side-video" autoplay muted playsinline preload="metadata"></video>
+       <aside class="hero-card side-media reveal" aria-label="Avances de obra">
+  <video class="side-video is-active" autoplay muted playsinline loop preload="metadata"
+         poster="assets/img/posters/avances.jpg">
+    <source src="assets/video/avances.mp4" type="video/mp4" />
+  </video>
 
+  <div class="side-media-below">
+    <h3>Avances de obra</h3>
+    <p>Proyectos industriales en ejecución. Seguridad, plazos y continuidad operativa.</p>
+
+    <div class="side-media-actions">
+      <a class="btn primary" href="obras.html">Ver obras</a>
+      <a class="btn" href="contacto.html">Solicitar cotización</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+         
           <div class="side-media-overlay">
             <h3>Avances de obra</h3>
             <p>Proyectos industriales en ejecución. Seguridad, plazos y continuidad operativa.</p>
@@ -133,23 +146,31 @@
     </section>
   </main>
 
-  <footer class="footer">
+ <footer class="footer">
     <div class="container footer-grid">
-      <div>
-        <strong>Ingeniería L&H SRL</strong><br/>
-        <span>Construcciones Industriales</span>
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo-link" aria-label="Ir a Inicio">
+          <img class="footer-logo" src="assets/img/Logo-original-2-blanco-1.png" alt="Ingeniería L&amp;H SRL" loading="lazy">
+        </a>
+
+        <div class="footer-brand-text">
+          
+        </div>
       </div>
-      <div>
+
+      <div class="footer-links">
         <div><a href="servicios.html">Servicios</a></div>
-        <div><a href="obras.html">Obras</a></div>
+        <div><a href="obras.html" aria-current="page">Obras</a></div>
         <div><a href="contacto.html">Contacto</a></div>
       </div>
-      <div>
-        <div>WhatsApp: +5492214616511</div>
+
+      <div class="footer-contact">
+        <div>WhatsApp: +54 9 221 616 8685</div>
         <div>Email: Info@ingenieria.com.ar</div>
       </div>
     </div>
   </footer>
+
 
   <a class="whatsapp-fab" href="https://api.whatsapp.com/send?phone=5492216168685" target="_blank" rel="noopener">WhatsApp</a>
 
